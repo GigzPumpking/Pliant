@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ground
+    uniqueID: 745374749
+    locked: 0
+  - name: Incline
+    uniqueID: 4031755005
+    locked: 0
+  - name: Player
+    uniqueID: 1711257985
+    locked: 0
