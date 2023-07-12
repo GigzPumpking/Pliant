@@ -10,6 +10,7 @@ public class IsometricCharacterController : MonoBehaviour
     private Collider2D collider;
 
     // Animation Variables
+    [SerializeField] Animator animator;
     [SerializeField] Sprite frontSprite;
     [SerializeField] Sprite backSprite;
     [SerializeField] Sprite frogSprite;
@@ -27,6 +28,13 @@ public class IsometricCharacterController : MonoBehaviour
     float timeElapsed = 0f;
     bool isGrounded = true;
     bool jump = false;
+    float lastX = 0f;
+    float lastY = 1f;
+
+    public static readonly string[] staticDirections = { "Idle Front", "Idle Back"};
+    public static readonly string[] staticFrogDirections = { "Idle Front Frog"};
+    public static readonly string[] staticBulldozerDirections = { "Idle Front Bulldozer"};
+    public static readonly string[] runDirections = {"Walk Front"};
 
     // Transformation Variables
     [SerializeField] string transformation = "none";
@@ -36,9 +44,10 @@ public class IsometricCharacterController : MonoBehaviour
     private void Awake()
     {
         rbody = GetComponent<Rigidbody2D>();
-        hitbox = GameObject.Find("Collider");
+        hitbox = GameObject.Find("Collision");
         collider = hitbox.GetComponent<Collider2D>();
         sprite = GameObject.Find("Sprite");
+        animator = sprite.GetComponent<Animator>();
         TerrySprite = sprite.GetComponent<SpriteRenderer>();
         smoke = GameObject.Find("Smoke");
         smoke.SetActive(false);
@@ -88,6 +97,19 @@ public class IsometricCharacterController : MonoBehaviour
 
     void MoveHandler() {
         rbody.MovePosition(rbody.position + movement.normalized * movementSpeed * Time.fixedDeltaTime);
+
+        if (transformation == "none") {
+            if (lastY < 0 && movement.magnitude > 0) animator.Play(runDirections[0]);
+            else if (movement.y > 0) animator.Play(staticDirections[1]);
+            else if (lastY < 0) animator.Play(staticDirections[0]);
+            else if (lastY > 0) animator.Play(staticDirections[1]);
+            if (movement.x != 0) lastX = movement.x;
+            if (movement.y != 0) lastY = movement.y;
+        } else if (transformation == "frog") {
+            animator.Play(staticFrogDirections[0]);
+        } else if (transformation == "bulldozer") {
+            animator.Play(staticBulldozerDirections[0]);
+        }
     }
 
     void InputHandler() {
@@ -111,13 +133,13 @@ public class IsometricCharacterController : MonoBehaviour
     }
 
     bool TransformationHandler() {
-        if (Input.GetKeyDown(KeyCode.F)) {
+        if (transformation != "frog" && Input.GetKeyDown(KeyCode.F)) {
             transformation = "frog";
             TerrySprite.sprite = frogSprite;
-        } else if (Input.GetKeyDown(KeyCode.B)) {
+        } else if (transformation != "bulldozer" && Input.GetKeyDown(KeyCode.B)) {
             transformation = "bulldozer";
             TerrySprite.sprite = bulldozerSprite;
-        } else if (Input.GetKeyDown(KeyCode.Escape)) {
+        } else if (transformation != "none" && Input.GetKeyDown(KeyCode.Escape)) {
             transformation = "none";
             TerrySprite.sprite = frontSprite;
         } else return false;
