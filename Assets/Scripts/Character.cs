@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
     public CharacterForm characterForm;
     public SpriteRenderer formSprite;
+    public Image imageSprite;
 
     private int selectedForm = 0;
 

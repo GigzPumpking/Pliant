@@ -7,6 +7,7 @@ public class FormManager : MonoBehaviour
 {
     public CharacterForm characterForm;
     public SpriteRenderer formSprite;
+    public Image imageSprite;
 
     private int selectedForm = 0;
 
@@ -49,6 +50,7 @@ public class FormManager : MonoBehaviour
     {
         Form form = characterForm.GetForm(selectedForm);
         formSprite.sprite = form.formSprite;
+        imageSprite.sprite = form.formSprite;
     }
 
     private void Load() => selectedForm = PlayerPrefs.GetInt("selectedForm");
