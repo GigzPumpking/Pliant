@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class IsometricCharacterController : MonoBehaviour
 {
+    // Collision Variables
+    private Rigidbody2D rbody;
+    private GameObject hitbox;
+    private Collider2D collider;
 
-    public float movementSpeed = 1f;
-    //IsometricCharacterRenderer isoRenderer;
+    // Animation Variables
+    [SerializeField] Animator animator;
+    [SerializeField] Sprite frontSprite;
+    [SerializeField] Sprite backSprite;
+    [SerializeField] Sprite frogSprite;
+    [SerializeField] Sprite bulldozerSprite;
+    private SpriteRenderer TerrySprite;
+    private GameObject sprite;
+
+    // Jumping and Movement Variables
     [SerializeField] AnimationCurve curveY;
-    Rigidbody2D rbody;
-    [SerializeField] GameObject hitbox;
-    CapsuleCollider2D collider;
+    [SerializeField] float movementSpeed = 1f;
     Vector2 movement;
     Vector2 currPos;
     Vector2 landPos;
@@ -18,17 +28,37 @@ public class IsometricCharacterController : MonoBehaviour
     float timeElapsed = 0f;
     bool isGrounded = true;
     bool jump = false;
+    float lastX = 0f;
+    float lastY = 1f;
 
+    public static readonly string[] staticDirections = { "Idle Front", "Idle Back"};
+    public static readonly string[] staticFrogDirections = { "Idle Front Frog"};
+    public static readonly string[] staticBulldozerDirections = { "Idle Front Bulldozer"};
+    public static readonly string[] runDirections = {"Walk Front"};
+
+    // Transformation Variables
+    [SerializeField] string transformation = "none";
+    [SerializeField] float transformationTime = 1f;
+    private GameObject smoke;
 
     private void Awake()
     {
         rbody = GetComponent<Rigidbody2D>();
-        collider = hitbox.GetComponent<CapsuleCollider2D>();
-        //isoRenderer = GetComponentInChildren<IsometricCharacterRenderer>();
+        hitbox = GameObject.Find("Collision");
+        collider = hitbox.GetComponent<Collider2D>();
+        sprite = GameObject.Find("Sprite");
+        animator = sprite.GetComponent<Animator>();
+        TerrySprite = sprite.GetComponent<SpriteRenderer>();
+        smoke = GameObject.Find("Smoke");
+        smoke.SetActive(false);
     }
 
     void Update() {
         InputHandler();
+        if (TransformationHandler()) {
+            smoke.SetActive(true);
+            StartCoroutine(TransformationTimer());
+        }
     }
 
 
@@ -67,6 +97,19 @@ public class IsometricCharacterController : MonoBehaviour
 
     void MoveHandler() {
         rbody.MovePosition(rbody.position + movement.normalized * movementSpeed * Time.fixedDeltaTime);
+
+        if (transformation == "none") {
+            if (lastY < 0 && movement.magnitude > 0) animator.Play(runDirections[0]);
+            else if (movement.y > 0) animator.Play(staticDirections[1]);
+            else if (lastY < 0) animator.Play(staticDirections[0]);
+            else if (lastY > 0) animator.Play(staticDirections[1]);
+            if (movement.x != 0) lastX = movement.x;
+            if (movement.y != 0) lastY = movement.y;
+        } else if (transformation == "frog") {
+            animator.Play(staticFrogDirections[0]);
+        } else if (transformation == "bulldozer") {
+            animator.Play(staticBulldozerDirections[0]);
+        }
     }
 
     void InputHandler() {
@@ -75,8 +118,38 @@ public class IsometricCharacterController : MonoBehaviour
         movement = new Vector2(horizontal, vertical);
         movement = Vector2.ClampMagnitude(movement, 1);
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        // set sprite according to movement direction
+        if (movement.x > 0) TerrySprite.flipX = true;
+        else if (movement.x < 0) TerrySprite.flipX = false;
+
+        if (transformation == "none") {
+            if (movement.y > 0) TerrySprite.sprite = backSprite;
+            else if (movement.y < 0) TerrySprite.sprite = frontSprite;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && transformation == "frog") {
             jump = true;
         }
+    }
+
+    bool TransformationHandler() {
+        if (transformation != "frog" && Input.GetKeyDown(KeyCode.F)) {
+            transformation = "frog";
+            TerrySprite.sprite = frogSprite;
+        } else if (transformation != "bulldozer" && Input.GetKeyDown(KeyCode.B)) {
+            transformation = "bulldozer";
+            TerrySprite.sprite = bulldozerSprite;
+        } else if (transformation != "none" && Input.GetKeyDown(KeyCode.Escape)) {
+            transformation = "none";
+            TerrySprite.sprite = frontSprite;
+        } else return false;
+
+        smoke.SetActive(true);
+        return true;
+    }
+
+    private IEnumerator TransformationTimer() {
+        yield return new WaitForSeconds(transformationTime);
+        smoke.SetActive(false);
     }
 }

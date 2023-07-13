@@ -6,8 +6,8 @@ using UnityEngine;
 public class IsometricCharacterRenderer : MonoBehaviour
 {
 
-    public static readonly string[] staticDirections = { "Static N", "Static NW", "Static W", "Static SW", "Static S", "Static SE", "Static E", "Static NE" };
-    public static readonly string[] runDirections = {"Run N", "Run NW", "Run W", "Run SW", "Run S", "Run SE", "Run E", "Run NE"};
+    public static readonly string[] staticDirections = { "Idle FrontLeft", "Idle BackRight", "Idle BackLeft" };
+    public static readonly string[] runDirections = {"Walk FrontLeft"};
 
     Animator animator;
     int lastDirection;
@@ -37,7 +37,7 @@ public class IsometricCharacterRenderer : MonoBehaviour
             //use DirectionToIndex to get the index of the slice from the direction vector
             //save the answer to lastDirection
             directionArray = runDirections;
-            lastDirection = DirectionToIndex(direction, 8);
+            lastDirection = DirectionToIndex(direction, 4);
         }
 
         //tell the animator to play the requested state
@@ -70,12 +70,6 @@ public class IsometricCharacterRenderer : MonoBehaviour
         //round it, and we have the answer!
         return Mathf.FloorToInt(stepCount);
     }
-
-
-
-
-
-
 
     //this function converts a string array to a int (animator hash) array.
     public static int[] AnimatorStringArrayToHashArray(string[] animationArray)
