@@ -6,4 +6,5 @@ using UnityEngine;
 public class Form
 {
     public Sprite formSprite;
+    public Sprite imageSprite;
 }
