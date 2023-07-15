@@ -10,7 +10,7 @@ public class IsometricCharacterController : MonoBehaviour
     private Collider2D collider;
 
     // Animation Variables
-    [SerializeField] Animator animator;
+    private Animator animator;
     [SerializeField] Sprite frontSprite;
     [SerializeField] Sprite backSprite;
     [SerializeField] Sprite frogSprite;
@@ -32,9 +32,9 @@ public class IsometricCharacterController : MonoBehaviour
     float lastY = 1f;
 
     public static readonly string[] staticDirections = { "Idle Front", "Idle Back"};
-    public static readonly string[] staticFrogDirections = { "Idle Front Frog"};
-    public static readonly string[] staticBulldozerDirections = { "Idle Front Bulldozer"};
-    public static readonly string[] runDirections = {"Walk Front"};
+    public static readonly string[] staticFrogDirections = { "Idle Front Frog", "Idle Back Frog"};
+    public static readonly string[] staticBulldozerDirections = { "Idle Front Bulldozer", "Idle Back Bulldozer"};
+    public static readonly string[] runDirections = {"Walk Front", "Walk Back"};
 
     // Transformation Variables
     [SerializeField] string transformation = "none";
@@ -100,16 +100,18 @@ public class IsometricCharacterController : MonoBehaviour
 
         if (transformation == "none") {
             if (lastY < 0 && movement.magnitude > 0) animator.Play(runDirections[0]);
-            else if (movement.y > 0) animator.Play(staticDirections[1]);
+            else if (lastY > 0 && movement.magnitude > 0) animator.Play(runDirections[1]);
             else if (lastY < 0) animator.Play(staticDirections[0]);
             else if (lastY > 0) animator.Play(staticDirections[1]);
-            if (movement.x != 0) lastX = movement.x;
-            if (movement.y != 0) lastY = movement.y;
         } else if (transformation == "frog") {
-            animator.Play(staticFrogDirections[0]);
+            if (lastY > 0) animator.Play(staticFrogDirections[1]);
+            else if (lastY < 0) animator.Play(staticFrogDirections[0]);
         } else if (transformation == "bulldozer") {
-            animator.Play(staticBulldozerDirections[0]);
+            if (lastY > 0) animator.Play(staticBulldozerDirections[1]);
+            else if (lastY < 0) animator.Play(staticBulldozerDirections[0]);
         }
+        if (movement.x != 0) lastX = movement.x;
+        if (movement.y != 0) lastY = movement.y;
     }
 
     void InputHandler() {
