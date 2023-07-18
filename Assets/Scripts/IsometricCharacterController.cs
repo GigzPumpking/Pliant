@@ -40,6 +40,7 @@ public class IsometricCharacterController : MonoBehaviour
     // Transformation Variables
     public string transformation = "none";
     private GameObject smoke;
+    private GameObject transformationBubble;
 
     private void Awake()
     {
@@ -52,6 +53,7 @@ public class IsometricCharacterController : MonoBehaviour
         smoke = GameObject.Find("Smoke");
         smokeAnimator = smoke.GetComponent<Animator>();
         smoke.SetActive(false);
+        transformationBubble = GameObject.Find("Transformation Bubble");
     }
 
     void Update() {
@@ -136,6 +138,11 @@ public class IsometricCharacterController : MonoBehaviour
     }
 
     bool TransformationHandler() {
+        if (Input.GetKeyDown(KeyCode.T)) {
+            if (transformationBubble.activeSelf) transformationBubble.SetActive(false);
+            else transformationBubble.SetActive(true);
+        }
+
         if (transformation != "frog" && Input.GetKeyDown(KeyCode.F)) {
             transformation = "frog";
             TerrySprite.sprite = frogSprite;
