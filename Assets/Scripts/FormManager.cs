@@ -105,6 +105,8 @@ public class FormManager : MonoBehaviour
         imageSprite.sprite = form.imageSprite;
         nextSprite.sprite = nform.imageSprite;
         prevSprite.sprite = pform.imageSprite;
+
+        form.transformation = form.transformation;
     }
 
     //Load currently saved form data from when last saved in player's pref when called
