@@ -70,7 +70,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abc0fd777d51644a7a8106a2cd257735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
   frontSprite: {fileID: 21300000, guid: a1fe69a260dbc3d43b44429b1e6d7628, type: 3}
   backSprite: {fileID: 21300000, guid: 6e150dc952b03cd4f9406cb9948a674a, type: 3}
   frogSprite: {fileID: 21300000, guid: 2c960a24931c06442bb61879ee6c05fc, type: 3}
@@ -88,8 +87,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.32776245
-      value: 2
+      time: 0.49350342
+      value: 1.9872017
       inSlope: 0.022469759
       outSlope: 0.022469759
       tangentMode: 0
@@ -110,7 +109,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   movementSpeed: 3
   transformation: none
-  transformationTime: 1
 --- !u!210 &8549448986901220620
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -190,6 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8549448987691299364}
   - component: {fileID: 8549448987691299363}
+  - component: {fileID: 1960879161}
   m_Layer: 0
   m_Name: Smoke
   m_TagString: Untagged
@@ -264,6 +263,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1960879161
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8549448987691299365}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f4d5dc9dfc8294b0d9ca3568f59bdf6c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8549448988210885212
 GameObject:
   m_ObjectHideFlags: 0
