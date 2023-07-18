@@ -122,4 +122,9 @@ public class FormManager : MonoBehaviour
         PlayerPrefs.SetInt("nextForm", nextForm);
         PlayerPrefs.SetInt("prevForm", prevForm);
     }
+
+    public string SelectForm()
+    {
+        return "";
+    }
 }
