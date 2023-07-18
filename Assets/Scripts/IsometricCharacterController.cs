@@ -11,6 +11,7 @@ public class IsometricCharacterController : MonoBehaviour
 
     // Animation Variables
     private Animator animator;
+    private Animator smokeAnimator;
     [SerializeField] Sprite frontSprite;
     [SerializeField] Sprite backSprite;
     [SerializeField] Sprite frogSprite;
@@ -37,8 +38,7 @@ public class IsometricCharacterController : MonoBehaviour
     public static readonly string[] runDirections = {"Walk Front", "Walk Back"};
 
     // Transformation Variables
-    [SerializeField] string transformation = "none";
-    [SerializeField] float transformationTime = 1f;
+    public string transformation = "none";
     private GameObject smoke;
 
     private void Awake()
@@ -50,6 +50,7 @@ public class IsometricCharacterController : MonoBehaviour
         animator = sprite.GetComponent<Animator>();
         TerrySprite = sprite.GetComponent<SpriteRenderer>();
         smoke = GameObject.Find("Smoke");
+        smokeAnimator = smoke.GetComponent<Animator>();
         smoke.SetActive(false);
     }
 
@@ -57,7 +58,7 @@ public class IsometricCharacterController : MonoBehaviour
         InputHandler();
         if (TransformationHandler()) {
             smoke.SetActive(true);
-            StartCoroutine(TransformationTimer());
+            smokeAnimator.Play("Smoke");
         }
     }
 
@@ -148,10 +149,5 @@ public class IsometricCharacterController : MonoBehaviour
 
         smoke.SetActive(true);
         return true;
-    }
-
-    private IEnumerator TransformationTimer() {
-        yield return new WaitForSeconds(transformationTime);
-        smoke.SetActive(false);
     }
 }
