@@ -18,13 +18,16 @@ using UnityEngine.UI; // to make use of UI image class and sprite and make use o
 
 public class FormManager : MonoBehaviour
 {
-    public CharacterForm characterForm; //database of the forms the character will cycle through in the menu
-    public SpriteRenderer formSprite; //the actual sprite for the given form
+    [SerializeField] CharacterForm characterForm; //database of the forms the character will cycle through in the menu
+    [SerializeField] SpriteRenderer formSprite; //the actual sprite for the given form
+    [SerializeField] GameObject thoughtBubble;
+    [SerializeField] GameObject player;
+
     public Image imageSprite; //the icon for the transformation menu icon
     public Image nextSprite; //the icon for the transformation menu icon of next to select
     public Image prevSprite; //the icon for the transformation menu icon of previous select
 
-    private int selectedForm = 0, nextForm = 0, prevForm = 0;
+    private int selectedForm = 0, nextForm = 0, prevForm = 0; //indexes for the selected, next, and previous forms
 
     // Start is called before the first frame update
     void Start()
@@ -41,13 +44,20 @@ public class FormManager : MonoBehaviour
 
         UpdateForm(selectedForm, nextForm, prevForm);
 
-
+        thoughtBubble.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+            PrevChoice();
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+            NextChoice();
+
+        if (Input.GetKeyDown(KeyCode.T))
+            SelectChoice();
     }
 
     //When called will cycle to the next form in the order unless at the end of the form database in which case it loops around to start
@@ -101,12 +111,9 @@ public class FormManager : MonoBehaviour
         Form nform = characterForm.GetForm(nextForm);
         Form pform = characterForm.GetForm(prevForm);
 
-        formSprite.sprite = form.formSprite;
         imageSprite.sprite = form.imageSprite;
         nextSprite.sprite = nform.imageSprite;
         prevSprite.sprite = pform.imageSprite;
-
-        form.transformation = form.transformation;
     }
 
     //Load currently saved form data from when last saved in player's pref when called
@@ -125,8 +132,16 @@ public class FormManager : MonoBehaviour
         PlayerPrefs.SetInt("prevForm", prevForm);
     }
 
-    public string SelectForm()
+    public void SelectChoice()
     {
-        return "";
+        // Set get form variable based off current form index
+        Form form = characterForm.GetForm(selectedForm);
+
+        //Set sprite and transformation corresponding to form information.
+        formSprite.sprite = form.formSprite;
+        player.GetComponent<IsometricCharacterController>().transformation = form.transformation;
+
+        // close thought bubble after selection.
+        thoughtBubble.SetActive(false);
     }
 }
