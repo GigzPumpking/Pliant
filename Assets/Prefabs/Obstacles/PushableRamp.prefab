@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1435202922}
   - component: {fileID: 1435202924}
   - component: {fileID: 1435202923}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ColliderWalkable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 698725408617131690}
   - component: {fileID: 698725408617131701}
   - component: {fileID: 1367067950}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PushableRamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 698725408751259627}
   - component: {fileID: 698725408751259624}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ramp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 698725409128782767}
   - component: {fileID: 698725409128782764}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ColliderPushable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
