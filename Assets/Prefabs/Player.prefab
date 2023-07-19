@@ -402,6 +402,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Transformation Bubble
       objectReference: {fileID: 0}
+    - target: {fileID: 1563640103460233004, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1563640103460233007, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

@@ -6,10 +6,14 @@ public class RampMoveable : MonoBehaviour
 {
     public IsometricCharacterController playerScript;
     private Rigidbody2D rbody;
+    private GameObject colliderWalkable;
+    private GameObject colliderPushable;
 
     void Awake()
     {
         rbody = GetComponent<Rigidbody2D>();
+        colliderWalkable = GameObject.Find("ColliderWalkable");
+        colliderPushable = GameObject.Find("ColliderPushable");
     }
 
     // Update is called once per frame
@@ -17,8 +21,12 @@ public class RampMoveable : MonoBehaviour
     {
         if (playerScript.transformation == "bulldozer") {
             rbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+            colliderWalkable.SetActive(false);
+            colliderPushable.SetActive(true);
         } else {
             rbody.constraints = RigidbodyConstraints2D.FreezeAll;
+            colliderWalkable.SetActive(true);
+            colliderPushable.SetActive(false);
         }
     }
 }
