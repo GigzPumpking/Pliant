@@ -56,7 +56,7 @@ public class FormManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
             NextChoice();
 
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.K))
             SelectChoice();
     }
 
@@ -139,7 +139,8 @@ public class FormManager : MonoBehaviour
 
         //Set sprite and transformation corresponding to form information.
         formSprite.sprite = form.formSprite;
-        player.GetComponent<IsometricCharacterController>().transformation = form.transformation;
+        //uncomment when controller transformation is changed to enum
+        //player.GetComponent<IsometricCharacterController>().transformation = form.transformation;
 
         // close thought bubble after selection.
         thoughtBubble.SetActive(false);
