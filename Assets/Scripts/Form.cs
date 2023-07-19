@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Form
 {
-    public string transformation;
+    public Transformation transformation;
     public Sprite formSprite;
     public Sprite imageSprite;
 }
