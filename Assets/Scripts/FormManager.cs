@@ -22,6 +22,8 @@ public class FormManager : MonoBehaviour
     [SerializeField] SpriteRenderer formSprite; //the actual sprite for the given form
     [SerializeField] GameObject thoughtBubble;
     [SerializeField] GameObject player;
+    private GameObject smoke;
+    private Animator smokeAnimator;
 
     public Image imageSprite; //the icon for the transformation menu icon
     public Image nextSprite; //the icon for the transformation menu icon of next to select
@@ -32,6 +34,8 @@ public class FormManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        smoke = player.transform.Find("Smoke").gameObject;
+        smokeAnimator = smoke.GetComponent<Animator>();
         // If the player had a previous selected previous load that form otherwise restart at the first form.
         if (!PlayerPrefs.HasKey("selectedForm"))
         {
@@ -140,9 +144,11 @@ public class FormManager : MonoBehaviour
         //Set sprite and transformation corresponding to form information.
         formSprite.sprite = form.formSprite;
         //uncomment when controller transformation is changed to enum
-        //player.GetComponent<IsometricCharacterController>().transformation = form.transformation;
+        player.GetComponent<IsometricCharacterController>().transformation = form.transformation;
 
         // close thought bubble after selection.
         thoughtBubble.SetActive(false);
+        smoke.SetActive(true);
+        smokeAnimator.Play("Smoke");
     }
 }

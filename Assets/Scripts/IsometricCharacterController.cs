@@ -38,7 +38,7 @@ public class IsometricCharacterController : MonoBehaviour
     public static readonly string[] runDirections = {"Walk Front", "Walk Back"};
 
     // Transformation Variables
-    public string transformation = "none";
+    public Transformation transformation = Transformation.TERRY;
     private GameObject smoke;
     private GameObject transformationBubble;
 
@@ -63,7 +63,6 @@ public class IsometricCharacterController : MonoBehaviour
             smokeAnimator.Play("Smoke");
         }
     }
-
 
     // Update is called once per frame
     void FixedUpdate()
@@ -101,17 +100,21 @@ public class IsometricCharacterController : MonoBehaviour
     void MoveHandler() {
         rbody.MovePosition(rbody.position + movement.normalized * movementSpeed * Time.fixedDeltaTime);
 
-        if (transformation == "none") {
-            if (lastY < 0 && movement.magnitude > 0) animator.Play(runDirections[0]);
-            else if (lastY > 0 && movement.magnitude > 0) animator.Play(runDirections[1]);
-            else if (lastY < 0) animator.Play(staticDirections[0]);
-            else if (lastY > 0) animator.Play(staticDirections[1]);
-        } else if (transformation == "frog") {
-            if (lastY > 0) animator.Play(staticFrogDirections[1]);
-            else if (lastY < 0) animator.Play(staticFrogDirections[0]);
-        } else if (transformation == "bulldozer") {
-            if (lastY > 0) animator.Play(staticBulldozerDirections[1]);
-            else if (lastY < 0) animator.Play(staticBulldozerDirections[0]);
+        switch(transformation) {
+            case Transformation.TERRY:
+                if (lastY < 0 && movement.magnitude > 0) animator.Play(runDirections[0]);
+                else if (lastY > 0 && movement.magnitude > 0) animator.Play(runDirections[1]);
+                else if (lastY < 0) animator.Play(staticDirections[0]);
+                else if (lastY > 0) animator.Play(staticDirections[1]);
+                break;
+            case Transformation.FROG:
+                if (lastY > 0) animator.Play(staticFrogDirections[1]);
+                else if (lastY < 0) animator.Play(staticFrogDirections[0]);
+                break;
+            case Transformation.BULLDOZER:
+                if (lastY > 0) animator.Play(staticBulldozerDirections[1]);
+                else if (lastY < 0) animator.Play(staticBulldozerDirections[0]);
+                break;
         }
         if (movement.x != 0) lastX = movement.x;
         if (movement.y != 0) lastY = movement.y;
@@ -127,12 +130,12 @@ public class IsometricCharacterController : MonoBehaviour
         if (movement.x > 0) TerrySprite.flipX = true;
         else if (movement.x < 0) TerrySprite.flipX = false;
 
-        if (transformation == "none") {
+        if (transformation == 0) {
             if (movement.y > 0) TerrySprite.sprite = backSprite;
             else if (movement.y < 0) TerrySprite.sprite = frontSprite;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && transformation == "frog") {
+        if (Input.GetKeyDown(KeyCode.Space) && transformation == Transformation.FROG) {
             jump = true;
         }
     }
@@ -143,18 +146,17 @@ public class IsometricCharacterController : MonoBehaviour
             else transformationBubble.SetActive(true);
         }
 
-        if (transformation != "frog" && Input.GetKeyDown(KeyCode.F)) {
-            transformation = "frog";
+        if (transformation != Transformation.FROG && Input.GetKeyDown(KeyCode.F)) {
+            transformation = Transformation.FROG;
             TerrySprite.sprite = frogSprite;
-        } else if (transformation != "bulldozer" && Input.GetKeyDown(KeyCode.B)) {
-            transformation = "bulldozer";
+        } else if (transformation != Transformation.BULLDOZER && Input.GetKeyDown(KeyCode.B)) {
+            transformation = Transformation.BULLDOZER;
             TerrySprite.sprite = bulldozerSprite;
-        } else if (transformation != "none" && Input.GetKeyDown(KeyCode.Escape)) {
-            transformation = "none";
+        } else if (transformation != Transformation.TERRY && Input.GetKeyDown(KeyCode.Escape)) {
+            transformation = Transformation.TERRY;
             TerrySprite.sprite = frontSprite;
         } else return false;
 
-        smoke.SetActive(true);
         return true;
     }
 }

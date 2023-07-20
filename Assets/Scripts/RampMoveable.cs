@@ -19,7 +19,7 @@ public class RampMoveable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerScript.transformation == "bulldozer") {
+        if (playerScript.transformation == Transformation.BULLDOZER) {
             rbody.constraints = RigidbodyConstraints2D.FreezeRotation;
             colliderWalkable.SetActive(false);
             colliderPushable.SetActive(true);
