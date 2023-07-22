@@ -10,6 +10,7 @@ public class RampTriggerDetection : MonoBehaviour
         if (other.gameObject.layer == 6) {
             playerScript.onRamp = true;
             Physics2D.IgnoreLayerCollision(6, 7, true);
+            Physics2D.IgnoreLayerCollision(6, 10, true);
         }
     }
 
@@ -17,6 +18,7 @@ public class RampTriggerDetection : MonoBehaviour
         if (other.gameObject.layer == 6) {
             playerScript.onRamp = false;
             Physics2D.IgnoreLayerCollision(6, 7, false);
+            Physics2D.IgnoreLayerCollision(6, 10, false);
         }
     }
 }
