@@ -31,6 +31,7 @@ public class IsometricCharacterController : MonoBehaviour
     bool jump = false;
     float lastX = 0f;
     float lastY = 1f;
+    public bool onRamp = false;
 
     public static readonly string[] staticDirections = { "Idle Front", "Idle Back"};
     public static readonly string[] staticFrogDirections = { "Idle Front Frog", "Idle Back Frog"};
@@ -58,10 +59,7 @@ public class IsometricCharacterController : MonoBehaviour
 
     void Update() {
         InputHandler();
-        if (TransformationHandler()) {
-            smoke.SetActive(true);
-            smokeAnimator.Play("Smoke");
-        }
+        TransformationHandler();
     }
 
     // Update is called once per frame
@@ -83,14 +81,14 @@ public class IsometricCharacterController : MonoBehaviour
             isGrounded = false;
         } else {
             timeElapsed += Time.deltaTime * movementSpeed / landDis;
-            if (timeElapsed <= 1f) {
-                // turn off character collider
-                collider.enabled = false;
+            if (timeElapsed <= 0.75f) {
+                // turn off collision between player layer and world layer
+                Physics2D.IgnoreLayerCollision(6, 7, true);
                 currPos = Vector2.MoveTowards(currPos, landPos, Time.fixedDeltaTime*movementSpeed);
                 rbody.MovePosition(new Vector2(currPos.x, currPos.y + curveY.Evaluate(timeElapsed)));
             } else {
-                // turn on character collider
-                collider.enabled = true;
+                // turn on collision between player layer and world layer
+                Physics2D.IgnoreLayerCollision(6, 7, false);
                 jump = false;
                 isGrounded = true;
             }
@@ -140,23 +138,10 @@ public class IsometricCharacterController : MonoBehaviour
         }
     }
 
-    bool TransformationHandler() {
+    void TransformationHandler() {
         if (Input.GetKeyDown(KeyCode.T)) {
             if (transformationBubble.activeSelf) transformationBubble.SetActive(false);
             else transformationBubble.SetActive(true);
         }
-
-        if (transformation != Transformation.FROG && Input.GetKeyDown(KeyCode.F)) {
-            transformation = Transformation.FROG;
-            TerrySprite.sprite = frogSprite;
-        } else if (transformation != Transformation.BULLDOZER && Input.GetKeyDown(KeyCode.B)) {
-            transformation = Transformation.BULLDOZER;
-            TerrySprite.sprite = bulldozerSprite;
-        } else if (transformation != Transformation.TERRY && Input.GetKeyDown(KeyCode.Escape)) {
-            transformation = Transformation.TERRY;
-            TerrySprite.sprite = frontSprite;
-        } else return false;
-
-        return true;
     }
 }
