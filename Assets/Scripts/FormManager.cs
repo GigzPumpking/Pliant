@@ -60,8 +60,12 @@ public class FormManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
             NextChoice();
 
-        if (Input.GetKeyDown(KeyCode.K))
-            SelectChoice();
+        if (Input.GetKeyDown(KeyCode.K)) {
+            // if player is on top of a ramp, do not allow transformation
+            Debug.Log(player.GetComponent<IsometricCharacterController>().onRamp);
+            if (!player.GetComponent<IsometricCharacterController>().onRamp)
+                SelectChoice();
+        }
     }
 
     //When called will cycle to the next form in the order unless at the end of the form database in which case it loops around to start
@@ -148,6 +152,7 @@ public class FormManager : MonoBehaviour
 
         // close thought bubble after selection.
         thoughtBubble.SetActive(false);
+
         smoke.SetActive(true);
         smokeAnimator.Play("Smoke");
     }

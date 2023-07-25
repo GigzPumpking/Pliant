@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8549448986901220618}
   - component: {fileID: 8549448986901220619}
   - component: {fileID: 8549448986901220620}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   movementSpeed: 3
-  transformation: none
+  onRamp: 0
+  transformation: 0
 --- !u!210 &8549448986901220620
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -131,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8549448987052045256}
   - component: {fileID: 8549448987052045255}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +191,7 @@ GameObject:
   - component: {fileID: 8549448987691299364}
   - component: {fileID: 8549448987691299363}
   - component: {fileID: 1960879161}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +297,7 @@ GameObject:
   - component: {fileID: 8549448988210885211}
   - component: {fileID: 8549448988210885208}
   - component: {fileID: 4351185935797541288}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -398,13 +399,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8549448986901220621}
     m_Modifications:
+    - target: {fileID: 446667534765291401, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563640102576214246, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563640103160813091, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1563640103460233004, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
       propertyPath: m_Name
       value: Transformation Bubble
       objectReference: {fileID: 0}
     - target: {fileID: 1563640103460233004, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563640103460233004, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1563640103460233007, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
       propertyPath: m_Pivot.x
@@ -443,6 +460,14 @@ PrefabInstance:
       value: 795.4714
       objectReference: {fileID: 0}
     - target: {fileID: 1563640103460233007, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563640103460233007, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563640103460233007, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -472,11 +497,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1563640103460233007, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 7.4037
+      value: 4.21
       objectReference: {fileID: 0}
     - target: {fileID: 1563640103460233007, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 5.4181
+      value: 2.59
       objectReference: {fileID: 0}
     - target: {fileID: 1563640103460233007, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -489,6 +514,30 @@ PrefabInstance:
     - target: {fileID: 1563640103460233007, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563640103460233009, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293371583994528124, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8549448986901220622}
+    - target: {fileID: 2293371583994528124, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
+      propertyPath: formSprite
+      value: 
+      objectReference: {fileID: 8549448988210885208}
+    - target: {fileID: 2573682522098568760, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123592447701391183, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734313892731301303, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
