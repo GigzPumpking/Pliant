@@ -8,7 +8,7 @@ public class RechargeStation : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.layer == 6) {
-            GameManager.GetComponent<GameManager>().health = 4;
+            GameManager.GetComponent<GameManager>().GainHealth(4);
         }
     }
 }

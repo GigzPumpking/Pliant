@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] static int startingHealth = 4;
-    public int health = startingHealth;
+    [SerializeField] int health = startingHealth;
     [SerializeField] GameObject player;
     [SerializeField] Transform lastSpawnPoint;
 
