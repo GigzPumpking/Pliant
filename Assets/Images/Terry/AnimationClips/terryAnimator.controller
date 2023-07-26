@@ -26,6 +26,32 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &-2981456524806418379
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Jump Front Frog
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: e885f44849dfc4de6943c47fbc521286, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-2799666485172652098
 AnimatorState:
   serializedVersion: 6
@@ -204,7 +230,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 5afdd339d93914542b69f7d2fb4a55c2, type: 2}
+  m_Motion: {fileID: 7400000, guid: 4d62be4aabe384578aa5656792adf98e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -246,6 +272,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -1913800196553142612}
     m_Position: {x: -250, y: 250, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -2981456524806418379}
+    m_Position: {x: 60, y: 460, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -302,7 +331,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1ed3565624aa942e3bd16645aa750690, type: 2}
+  m_Motion: {fileID: 7400000, guid: 5a664a47f52724126bad8589791246e8, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
