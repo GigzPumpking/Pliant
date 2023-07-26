@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class RechargeStation : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject GameManager;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.layer == 6) {
+            GameManager.GetComponent<GameManager>().GainHealth(4);
+        }
     }
 }
