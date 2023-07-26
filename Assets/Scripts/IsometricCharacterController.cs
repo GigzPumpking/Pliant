@@ -102,16 +102,21 @@ public class IsometricCharacterController : MonoBehaviour
             isMoving = true;
             if (direction == Direction.DOWN) {
                 animator.Play(jumpFrogDirections[0]);
+                // set scale of sprite to 0.6
+                TerrySprite.transform.localScale = new Vector3(0.6f, 0.6f, 1f);
+
             }
             else animator.Play(staticFrogDirections[1]);
         } else {
             timeElapsed += Time.deltaTime * movementSpeed / landDis;
-            if (timeElapsed <= 0.75f) {
+            if (timeElapsed <= 1.2f) {
                 // turn off collision between player layer and world layer
                 Physics2D.IgnoreLayerCollision(6, 7, true);
                 currPos = Vector2.MoveTowards(currPos, landPos, Time.fixedDeltaTime*movementSpeed);
                 rbody.MovePosition(new Vector2(currPos.x, currPos.y + curveY.Evaluate(timeElapsed)));
             } else {
+                // set back scale of sprite to 1
+                TerrySprite.transform.localScale = new Vector3(1f, 1f, 1f);
                 // turn on collision between player layer and world layer
                 Physics2D.IgnoreLayerCollision(6, 7, false);
                 jump = false;

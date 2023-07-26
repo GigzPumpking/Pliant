@@ -17196,11 +17196,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 44705f90a9453c94ba74dd7a2c33102a, type: 3}
     - target: {fileID: 8549448986901220619, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
       propertyPath: curveY.m_Curve.Array.data[1].time
-      value: 0.375
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8549448986901220619, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
       propertyPath: curveY.m_Curve.Array.data[2].time
-      value: 0.75
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8549448986901220619, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
       propertyPath: curveY.m_Curve.Array.data[1].value
