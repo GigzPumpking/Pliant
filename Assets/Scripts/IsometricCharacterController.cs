@@ -136,8 +136,14 @@ public class IsometricCharacterController : MonoBehaviour
     }
 
     void InputHandler() {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = 0f;
+        float vertical = 0f;
+        
+        if (Input.GetKey(KeyCode.A)) horizontal = -1f;
+        else if (Input.GetKey(KeyCode.D)) horizontal = 1f;
+        if (Input.GetKey(KeyCode.W)) vertical = 1f;
+        else if (Input.GetKey(KeyCode.S)) vertical = -1f;
+        
         movement = new Vector2(horizontal, vertical);
         movement = Vector2.ClampMagnitude(movement, 1);
 
