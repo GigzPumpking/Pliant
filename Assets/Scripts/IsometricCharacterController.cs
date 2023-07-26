@@ -25,6 +25,7 @@ public class IsometricCharacterController : MonoBehaviour
     Vector2 movement;
     Vector2 currPos;
     Vector2 landPos;
+    private Vector2 jumpStartPos;
     float landDis;
     float timeElapsed = 0f;
     bool isGrounded = true;
@@ -72,6 +73,19 @@ public class IsometricCharacterController : MonoBehaviour
         }
     }
 
+
+    void OnDrawGizmos() {
+        Gizmos.color = Color.red;
+        int numSpheres = 20;
+        float radius = 0.1f;
+        for (int i = 0; i < numSpheres; i++)
+        {
+            float t = (1f / (float)numSpheres) * (float)i;
+            Vector3 pos = new Vector2(Mathf.Lerp(jumpStartPos.x, landPos.x, t), jumpStartPos.y + curveY.Evaluate(t));
+            Gizmos.DrawSphere(pos, radius);
+        }
+    }
+
     void JumpHandler() {
         if (isGrounded) {
             currPos = rbody.position;
@@ -97,6 +111,9 @@ public class IsometricCharacterController : MonoBehaviour
 
     void MoveHandler() {
         rbody.MovePosition(rbody.position + movement.normalized * movementSpeed * Time.fixedDeltaTime);
+        currPos = rbody.position;
+        landPos = currPos + movement.normalized * movementSpeed;
+	    jumpStartPos = currPos;
 
         switch(transformation) {
             case Transformation.TERRY:
