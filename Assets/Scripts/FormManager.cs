@@ -158,6 +158,7 @@ public class FormManager : MonoBehaviour
 
         smoke.SetActive(true);
         smokeAnimator.Play("Smoke");
+        FindAnyObjectByType<AudioManager>().Play("Transformation Poof");
 
         // close thought bubble after selection.
         thoughtBubble.SetActive(false);

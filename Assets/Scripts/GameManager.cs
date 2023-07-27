@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         NewGame();
+
+        FindAnyObjectByType<AudioManager>().Play("Ambience");
     }
 
     private void Update()
@@ -45,6 +47,11 @@ public class GameManager : MonoBehaviour
         if (health > maxHealth)
             health = maxHealth;
         UpdateHealth();
+    }
+
+    public int GetHealth()
+    {
+        return health;
     }
 
     private void UpdateHealth()
