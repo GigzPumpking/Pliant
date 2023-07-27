@@ -48,6 +48,7 @@ public class IsometricCharacterController : MonoBehaviour
     public Transformation transformation = Transformation.TERRY;
     private GameObject smoke;
     private GameObject transformationBubble;
+    private GameObject shadow;
 
     private void Awake()
     {
@@ -60,6 +61,7 @@ public class IsometricCharacterController : MonoBehaviour
         smoke = GameObject.Find("Smoke");
         smokeAnimator = smoke.GetComponent<Animator>();
         smoke.SetActive(false);
+        shadow = GameObject.Find("Shadow");
         transformationBubble = GameObject.Find("Transformation Bubble");
     }
 
@@ -114,6 +116,9 @@ public class IsometricCharacterController : MonoBehaviour
                 Physics2D.IgnoreLayerCollision(6, 7, true);
                 currPos = Vector2.MoveTowards(currPos, landPos, Time.fixedDeltaTime*movementSpeed);
                 rbody.MovePosition(new Vector2(currPos.x, currPos.y + curveY.Evaluate(timeElapsed)));
+                // keep shadow's y position at jumpStartPos.y
+                if (landPos.y == jumpStartPos.y) shadow.transform.position = new Vector2(shadow.transform.position.x, jumpStartPos.y);
+                else shadow.transform.position = new Vector2(shadow.transform.position.x, currPos.y);
             } else {
                 // set back scale of sprite to 1
                 TerrySprite.transform.localScale = new Vector3(1f, 1f, 1f);

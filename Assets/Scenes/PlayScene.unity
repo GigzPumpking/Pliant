@@ -17186,29 +17186,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8549448986901220619, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
-      propertyPath: frogSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: b90bf49e69da3104fa0cb89344830ca3, type: 3}
-    - target: {fileID: 8549448986901220619, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
-      propertyPath: bulldozerSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 44705f90a9453c94ba74dd7a2c33102a, type: 3}
-    - target: {fileID: 8549448986901220619, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
-      propertyPath: curveY.m_Curve.Array.data[1].time
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549448986901220619, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
-      propertyPath: curveY.m_Curve.Array.data[2].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549448986901220619, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
-      propertyPath: curveY.m_Curve.Array.data[1].value
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549448986901220619, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
-      propertyPath: curveY.m_Curve.Array.data[2].value
-      value: 0
+    - target: {fileID: 1138594140, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8549448986901220621, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
       propertyPath: m_RootOrder
