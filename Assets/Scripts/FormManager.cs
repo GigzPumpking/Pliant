@@ -20,6 +20,7 @@ public class FormManager : MonoBehaviour
 {
     [SerializeField] CharacterForm characterForm; //database of the forms the character will cycle through in the menu
     [SerializeField] SpriteRenderer formSprite; //the actual sprite for the given form
+    [SerializeField] GameObject gameManager;
     [SerializeField] GameObject thoughtBubble;
     [SerializeField] GameObject player;
     private GameObject smoke;
