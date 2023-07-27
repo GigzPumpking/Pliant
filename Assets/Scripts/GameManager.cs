@@ -12,8 +12,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform lastSpawnPoint;
     [SerializeField] private Image[] healthSprites = new Image[maxHealth];
 
-
-
     public void LoseHealth(int amount) => SetHealth(health - amount);
 
     public void GainHealth(int amount) => SetHealth(health + amount);

@@ -151,13 +151,15 @@ public class FormManager : MonoBehaviour
         //uncomment when controller transformation is changed to enum
         player.GetComponent<IsometricCharacterController>().transformation = form.transformation;
 
-        if (form.transformation != Transformation.TERRY)
-            gameManager.LoseHealth(1);
-
-        // close thought bubble after selection.
-        thoughtBubble.SetActive(false);
+        /*if (form.transformation != Transformation.TERRY)
+            gameManager.LoseHealth(1);*/
+        
+        Debug.Log("Selected Form: " + form.transformation);
 
         smoke.SetActive(true);
         smokeAnimator.Play("Smoke");
+
+        // close thought bubble after selection.
+        thoughtBubble.SetActive(false);
     }
 }
