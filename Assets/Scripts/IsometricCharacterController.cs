@@ -98,6 +98,7 @@ public class IsometricCharacterController : MonoBehaviour
         if (isGrounded) {
             currPos = rbody.position;
             landPos = currPos + movement.normalized * movementSpeed;
+            // if 
             landDis = Vector2.Distance(currPos, landPos);
             timeElapsed = 0f;
             isGrounded = false;
@@ -117,8 +118,11 @@ public class IsometricCharacterController : MonoBehaviour
                 currPos = Vector2.MoveTowards(currPos, landPos, Time.fixedDeltaTime*movementSpeed);
                 rbody.MovePosition(new Vector2(currPos.x, currPos.y + curveY.Evaluate(timeElapsed)));
                 // keep shadow's y position at jumpStartPos.y
-                if (landPos.y == jumpStartPos.y) shadow.transform.position = new Vector2(shadow.transform.position.x, jumpStartPos.y);
-                else shadow.transform.position = new Vector2(shadow.transform.position.x, currPos.y);
+                if (landPos.y == jumpStartPos.y) shadow.transform.position = new Vector2(sprite.transform.position.x, jumpStartPos.y);
+                else {
+                    shadow.transform.position = new Vector2(sprite.transform.position.x, sprite.transform.position.y - curveY.Evaluate(timeElapsed));
+                    
+                }
             } else {
                 // set back scale of sprite to 1
                 TerrySprite.transform.localScale = new Vector3(1f, 1f, 1f);
