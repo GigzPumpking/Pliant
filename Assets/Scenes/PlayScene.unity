@@ -17584,6 +17584,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8549448986901220619, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
+      propertyPath: curveY.m_Curve.Array.data[1].time
+      value: 0.3333
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549448986901220619, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
+      propertyPath: curveY.m_Curve.Array.data[2].time
+      value: 0.66667
+      objectReference: {fileID: 0}
     - target: {fileID: 8549448986901220621, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
       propertyPath: m_RootOrder
       value: 7
