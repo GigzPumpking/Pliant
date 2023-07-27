@@ -3513,9 +3513,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1412651579564344237, guid: 48c89ef1cca50429ba2e97d7a3edc5a4, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 1412651579746608720, guid: 48c89ef1cca50429ba2e97d7a3edc5a4, type: 3}
       propertyPath: m_Name
       value: tapeDispenser
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412651579746608720, guid: 48c89ef1cca50429ba2e97d7a3edc5a4, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1412651579746609071, guid: 48c89ef1cca50429ba2e97d7a3edc5a4, type: 3}
       propertyPath: m_RootOrder
@@ -5290,7 +5298,7 @@ GameObject:
   - component: {fileID: 371292702}
   - component: {fileID: 371292701}
   - component: {fileID: 371292700}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: rechargeBook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17403,6 +17411,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 353785467, guid: 40fb92f07a303495ca33b78581bfecb8, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 353785470, guid: 40fb92f07a303495ca33b78581bfecb8, type: 3}
       propertyPath: playerScript
       value: 
@@ -17449,7 +17461,7 @@ PrefabInstance:
       objectReference: {fileID: 1679531260}
     - target: {fileID: 1435202921, guid: 40fb92f07a303495ca33b78581bfecb8, type: 3}
       propertyPath: m_Layer
-      value: 11
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1435202923, guid: 40fb92f07a303495ca33b78581bfecb8, type: 3}
       propertyPath: m_Points.Array.size
@@ -17531,6 +17543,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PushableRamp
       objectReference: {fileID: 0}
+    - target: {fileID: 698725408617131703, guid: 40fb92f07a303495ca33b78581bfecb8, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 698725408751259626, guid: 40fb92f07a303495ca33b78581bfecb8, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 698725409128782764, guid: 40fb92f07a303495ca33b78581bfecb8, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size
       value: 4
@@ -17566,6 +17586,10 @@ PrefabInstance:
     - target: {fileID: 698725409128782764, guid: 40fb92f07a303495ca33b78581bfecb8, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
       value: -1.264545
+      objectReference: {fileID: 0}
+    - target: {fileID: 698725409128782766, guid: 40fb92f07a303495ca33b78581bfecb8, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40fb92f07a303495ca33b78581bfecb8, type: 3}
@@ -17649,6 +17673,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3758114904364941580, guid: c7524a5b87fb744f3bac885ee0ed581d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3758114904456917844, guid: c7524a5b87fb744f3bac885ee0ed581d, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -17696,6 +17724,10 @@ PrefabInstance:
     - target: {fileID: 3758114904456917845, guid: c7524a5b87fb744f3bac885ee0ed581d, type: 3}
       propertyPath: m_Name
       value: deskLamp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3758114904456917845, guid: c7524a5b87fb744f3bac885ee0ed581d, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7524a5b87fb744f3bac885ee0ed581d, type: 3}
@@ -17995,6 +18027,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fileBox
       objectReference: {fileID: 0}
+    - target: {fileID: 3871987979731802100, guid: 0cb5e4c4c2c05483b9b2faf84ac8e370, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3871987979731802101, guid: 0cb5e4c4c2c05483b9b2faf84ac8e370, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -18038,6 +18074,10 @@ PrefabInstance:
     - target: {fileID: 3871987979731802101, guid: 0cb5e4c4c2c05483b9b2faf84ac8e370, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3871987980306352928, guid: 0cb5e4c4c2c05483b9b2faf84ac8e370, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3871987980306352929, guid: 0cb5e4c4c2c05483b9b2faf84ac8e370, type: 3}
       propertyPath: m_LocalPosition.y
@@ -20874,7 +20914,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1126228872}
   - component: {fileID: 1126228873}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24578,7 +24618,7 @@ GameObject:
   - component: {fileID: 1350517542}
   - component: {fileID: 1350517544}
   - component: {fileID: 1350517543}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TriggerDetection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25281,6 +25321,14 @@ PrefabInstance:
     - target: {fileID: 290046312638790721, guid: 93fee468ba5794857a660b279833f8b8, type: 3}
       propertyPath: m_Name
       value: pencilHolder
+      objectReference: {fileID: 0}
+    - target: {fileID: 290046312638790721, guid: 93fee468ba5794857a660b279833f8b8, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 290046312919247539, guid: 93fee468ba5794857a660b279833f8b8, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93fee468ba5794857a660b279833f8b8, type: 3}
