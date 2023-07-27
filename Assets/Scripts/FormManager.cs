@@ -20,7 +20,7 @@ public class FormManager : MonoBehaviour
 {
     [SerializeField] CharacterForm characterForm; //database of the forms the character will cycle through in the menu
     [SerializeField] SpriteRenderer formSprite; //the actual sprite for the given form
-    [SerializeField] GameObject gameManager;
+    [SerializeField] GameManager gameManager;
     [SerializeField] GameObject thoughtBubble;
     [SerializeField] GameObject player;
     private GameObject smoke;
@@ -150,6 +150,9 @@ public class FormManager : MonoBehaviour
         formSprite.sprite = form.formSprite;
         //uncomment when controller transformation is changed to enum
         player.GetComponent<IsometricCharacterController>().transformation = form.transformation;
+
+        if (form.transformation != Transformation.TERRY)
+            gameManager.LoseHealth(1);
 
         // close thought bubble after selection.
         thoughtBubble.SetActive(false);
