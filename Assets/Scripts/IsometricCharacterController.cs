@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class IsometricCharacterController : MonoBehaviour
 {
+    public GameManager gameManager;
+
     // Collision Variables
     private Rigidbody2D rbody;
     private GameObject hitbox;
@@ -38,7 +40,7 @@ public class IsometricCharacterController : MonoBehaviour
     float lastY = 1f;
     public bool onRamp = false;
 
-    public static readonly string[] staticDirections = { "Idle Front", "Idle Back"};
+    public static readonly string[] staticDirections = { "Idle Front", "Hurt Idle Front 1", "Hurt Idle Front 2", "Hurt Idle Front 3", "Idle Back"};
     public static readonly string[] staticFrogDirections = { "Idle Front Frog", "Idle Back Frog"};
     public static readonly string[] jumpFrogDirections = { "Jump Front Frog", "Walk Front Frog"};
     public static readonly string[] staticBulldozerDirections = { "Idle Front Bulldozer", "Idle Back Bulldozer"};
@@ -196,8 +198,23 @@ public class IsometricCharacterController : MonoBehaviour
                     else animator.Play(runDirections[1]);
                 }
                 else {
-                    if (direction == Direction.DOWN) animator.Play(staticDirections[0]);
-                    else animator.Play(staticDirections[1]);
+                    if (direction == Direction.DOWN) {
+                        switch(gameManager.GetHealth()) {
+                            case 4:
+                                animator.Play(staticDirections[0]);
+                                break;
+                            case 3:
+                                animator.Play(staticDirections[1]);
+                                break;
+                            case 2:
+                                animator.Play(staticDirections[2]);
+                                break;
+                            case 1:
+                                animator.Play(staticDirections[3]);
+                                break;
+                        }
+                    }
+                    else animator.Play(staticDirections[4]);
                 }
                 break;
             case Transformation.FROG:
