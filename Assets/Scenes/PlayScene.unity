@@ -5793,7 +5793,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -306.76, y: 265}
+  m_AnchoredPosition: {x: -640, y: 338}
   m_SizeDelta: {x: 429.4831, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &423929626
@@ -17616,6 +17616,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1607441236}
+    - target: {fileID: 8549448986901220619, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
+      propertyPath: curveY.m_Curve.Array.data[1].time
+      value: 0.3333
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549448986901220619, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
+      propertyPath: curveY.m_Curve.Array.data[2].time
+      value: 0.66667
+      objectReference: {fileID: 0}
     - target: {fileID: 8549448986901220621, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
       propertyPath: m_RootOrder
       value: 9
