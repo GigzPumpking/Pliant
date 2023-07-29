@@ -146,6 +146,8 @@ public class FormManager : MonoBehaviour
         // Set get form variable based off current form index
         Form form = characterForm.GetForm(selectedForm);
 
+        if (form.transformation != Transformation.TERRY)
+            gameManager.LoseHealth(1);
         //Set sprite and transformation corresponding to form information.
         formSprite.sprite = form.formSprite;
         //uncomment when controller transformation is changed to enum
