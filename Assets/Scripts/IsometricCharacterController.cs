@@ -40,7 +40,7 @@ public class IsometricCharacterController : MonoBehaviour
 
     public static readonly string[] staticDirections = { "Idle Front", "Idle Back"};
     public static readonly string[] staticFrogDirections = { "Idle Front Frog", "Idle Back Frog"};
-    public static readonly string[] jumpFrogDirections = { "Jump Front Frog"};
+    public static readonly string[] jumpFrogDirections = { "Jump Front Frog", "Walk Front Frog"};
     public static readonly string[] staticBulldozerDirections = { "Idle Front Bulldozer", "Idle Back Bulldozer"};
     public static readonly string[] runDirections = {"Walk Front", "Walk Back"};
 
@@ -130,6 +130,19 @@ public class IsometricCharacterController : MonoBehaviour
     }
 
     void MoveHandler() {
+        switch (transformation) {
+            case(Transformation.TERRY):
+                shadow.transform.position = new Vector2(sprite.transform.position.x, sprite.transform.position.y - 0.8f);
+                break;
+            case(Transformation.FROG):
+                Debug.Log("Frog shadow");
+                shadow.transform.position = new Vector2(sprite.transform.position.x, (sprite.transform.position.y - 0.2f));
+                break;
+            case(Transformation.BULLDOZER):
+                shadow.transform.position = new Vector2(sprite.transform.position.x, sprite.transform.position.y - 0.4f);
+                break;
+        }
+
         rbody.MovePosition(rbody.position + movement.normalized * movementSpeed * Time.fixedDeltaTime);
         currPos = rbody.position;
         landPos = currPos + movement.normalized * movementSpeed;
@@ -168,7 +181,9 @@ public class IsometricCharacterController : MonoBehaviour
 
     void TransformationHandler() {
         if (Input.GetKeyDown(KeyCode.T)) {
-            if (transformationBubble.activeSelf) transformationBubble.SetActive(false);
+            if (transformationBubble.activeSelf) {
+                transformationBubble.SetActive(false);
+            }
             else transformationBubble.SetActive(true);
         }
     }
@@ -186,10 +201,17 @@ public class IsometricCharacterController : MonoBehaviour
                 }
                 break;
             case Transformation.FROG:
-                if (direction == Direction.DOWN) {
-                    animator.Play(staticFrogDirections[0]);
+                if (isMoving) {
+                    if (direction == Direction.DOWN) {
+                        animator.Play(jumpFrogDirections[1]);
+                    }
+                    else animator.Play(staticFrogDirections[1]);
+                } else {
+                    if (direction == Direction.DOWN) {
+                        animator.Play(staticFrogDirections[0]);
+                    }
+                    else animator.Play(staticFrogDirections[1]);
                 }
-                else animator.Play(staticFrogDirections[1]);
                 break;
             case Transformation.BULLDOZER:
                 if (direction == Direction.DOWN) animator.Play(staticBulldozerDirections[0]);
