@@ -14,19 +14,29 @@ public class RampMoveable : MonoBehaviour
         rbody = GetComponent<Rigidbody2D>();
         colliderWalkable = GameObject.Find("ColliderWalkable");
         colliderPushable = GameObject.Find("ColliderPushable");
+
+        if (gameObject.layer == 7) pushableState();
+        else if (gameObject.layer == 8) walkableState();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (playerScript.transformation == Transformation.BULLDOZER) {
             rbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-            colliderWalkable.SetActive(false);
-            colliderPushable.SetActive(true);
+            if (gameObject.layer == 8) pushableState();
         } else {
             rbody.constraints = RigidbodyConstraints2D.FreezeAll;
-            colliderWalkable.SetActive(true);
-            if (colliderPushable.tag != "Floor") colliderPushable.SetActive(false);
+            if (gameObject.layer == 8) walkableState();
         }
+    }
+
+    public void pushableState() {
+        colliderWalkable.SetActive(false);
+        colliderPushable.SetActive(true);
+    }
+
+    public void walkableState() {
+        colliderWalkable.SetActive(true);
+        colliderPushable.SetActive(false);
     }
 }

@@ -193,7 +193,7 @@ public class IsometricCharacterController : MonoBehaviour
                 currPos = Vector2.MoveTowards(currPos, landPos, Time.fixedDeltaTime*movementSpeed);
                 nextPos = new Vector2(currPos.x, currPos.y + curveY.Evaluate(timeElapsed));
 
-                
+                /*
                 // if collider is touching any layer other than world layer, then fall
                 if (collider.IsTouchingLayers(~(1 << LayerMask.GetMask("World")))) {
                     fall = true;
@@ -204,6 +204,7 @@ public class IsometricCharacterController : MonoBehaviour
                     // check the layer of the collider that the player is touching
                     return;
                 }
+                */
 
                 rbody.MovePosition(nextPos);
                 // keep shadow's y position at jumpStartPos.y
