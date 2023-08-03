@@ -9,36 +9,62 @@ public class GameManager : MonoBehaviour
     [SerializeField] private static int maxHealth = 4;
     [SerializeField] private int health = maxHealth;
     [SerializeField] private GameObject player;
-    [SerializeField] private Transform lastSpawnPoint;
     [SerializeField] private Image[] healthSprites = new Image[maxHealth];
+
+    private static GameManager instance;
+
+    private bool gameOver = false;
+
+    public float resetDelay = 1f;
+
+    public CheckPoint lastCheckPoint;
 
     public void LoseHealth(int amount) => SetHealth(health - amount);
 
     public void GainHealth(int amount) => SetHealth(health + amount);
 
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(this);
+    }
     private void Start()
     {
-        NewGame();
-
+        SetHealth(maxHealth);
         FindAnyObjectByType<AudioManager>().Play("Ambience");
     }
 
     private void Update()
     {
         if (health <= 0)
-            NewGame();
+            Death();
     }
 
-    private void NewGame()
+    private void Respawn()
     {
-        SetHealth(maxHealth);
-        ResetState();
+        player.transform.position = lastCheckPoint.transform.position;
+
+        Debug.Log("Player Respawned");
     }
 
-    private void ResetState()
+    private void ResetGame()
     {
         Debug.Log("Game Restarted");
-      //  player.transform = lastSpawnPoint;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+    }
+
+    private void Death()
+    {
+        if(lastCheckPoint == null)
+        {
+            gameOver = true;
+            Invoke("ResetGame", resetDelay);
+        }
+        else
+            Invoke("Respawn", resetDelay);
+        
     }
 
     private void SetHealth(int value)
