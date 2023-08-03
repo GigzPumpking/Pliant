@@ -56,7 +56,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -71,8 +71,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.2449379, y: -0.86151767}
-      - {x: -2.7390928, y: 0.5784471}
+    - - {x: 0.004638672, y: -0.7575276}
+      - {x: -2.8846807, y: 0.80722547}
       - {x: -3.6249976, y: -1.1274344}
       - {x: -0.955315, y: -2.4745853}
 --- !u!1 &1435202921
@@ -124,7 +124,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.98156047, y: 1.1149209}
+  - {x: -1.1479442, y: 1.0733249}
+  - {x: -2.1899376, y: -0.81452465}
   - {x: -2.2731307, y: -0.81452465}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
@@ -146,8 +147,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 0.79816246, y: -2.6208205}
-  - {x: 1.8226585, y: -0.41639185}
+  - {x: 0.756567, y: -2.329648}
+  - {x: 1.6562748, y: -0.43719006}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -376,8 +377,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1.0172813, y: -2.9395995}
-      - {x: 0.14092255, y: -2.240901}
-      - {x: -0.32875097, y: -1.4662565}
-      - {x: -3.274458, y: -0.034709275}
-      - {x: -4.121359, y: -1.3307308}
+    - - {x: -1.2252624, y: -2.8356092}
+      - {x: -0.0046634674, y: -2.261699}
+      - {x: -2.8785748, y: -0.914852}
+      - {x: -4.1359406, y: -1.264545}
