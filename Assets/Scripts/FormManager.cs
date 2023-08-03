@@ -146,6 +146,7 @@ public class FormManager : MonoBehaviour
         // Set get form variable based off current form index
         Form form = characterForm.GetForm(selectedForm);
 
+        //Apply 1 damage to player if transformation isn't base Terry form
         if (form.transformation != Transformation.TERRY)
             gameManager.LoseHealth(1);
         //Set sprite and transformation corresponding to form information.
