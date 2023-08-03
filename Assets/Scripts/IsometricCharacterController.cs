@@ -23,17 +23,36 @@ public class IsometricCharacterController : MonoBehaviour
     }
     private Direction direction = Direction.DOWN;
 
+    enum JumpDirection {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT,
+        NONE
+    }
+    
+    private JumpDirection[] jumpDirection = new JumpDirection[2];
+
     bool isMoving = false;
 
     // Jumping and Movement Variables
     [SerializeField] AnimationCurve curveY;
+    private Vector3 curvePos;
     [SerializeField] float movementSpeed = 1f;
     Vector2 movement;
     Vector2 currPos;
+    Vector2 prevPos;
+    Vector2 nextPos;
     Vector2 landPos;
+    RaycastHit2D landBox;
+    Vector2 fallPos;
+    float fallDist;
+    bool fall = false;
+    
     private Vector2 jumpStartPos;
     float landDis;
     float timeElapsed = 0f;
+    float fallTimeElapsed = 0f;
     bool isGrounded = true;
     bool jump = false;
     float lastX = 0f;
@@ -76,11 +95,14 @@ public class IsometricCharacterController : MonoBehaviour
     void FixedUpdate()
     {
         if (jump) {
-            JumpHandler();
+            if (!fall) JumpHandler();
+            else FallHandler();
         } else {
             MoveHandler();
             AnimationHandler();
         }
+
+        CollisionHandler();
     }
 
 
@@ -90,32 +112,100 @@ public class IsometricCharacterController : MonoBehaviour
         float radius = 0.1f;
         for (int i = 0; i < numSpheres; i++)
         {
-            float t = (1f / (float)numSpheres) * (float)i;
-            Vector3 pos = new Vector2(Mathf.Lerp(jumpStartPos.x, landPos.x, t), jumpStartPos.y + curveY.Evaluate(t));
-            Gizmos.DrawSphere(pos, radius);
+            float t = (1f / (float) numSpheres) * (float)i;
+            curvePos = new Vector2(Mathf.Lerp(jumpStartPos.x, landPos.x, t), jumpStartPos.y + curveY.Evaluate(t));
+            Gizmos.DrawSphere(curvePos, radius);
         }
+        Gizmos.color = Color.blue;
+        // Draw a Sphere representing the position of the shadow
+        // set radius to width of collider
+        radius = collider.bounds.extents.x;
+        Vector2 colliderPos = new Vector2(collider.transform.position.x, collider.transform.position.y);
+        Gizmos.DrawSphere(colliderPos, radius);
+
+        // Draw a rectangle representing the collider at the landing position
+        // log landBox position
+        
+        if (landBox != null) Gizmos.DrawWireCube(new Vector2(landPos.x, landPos.y + 0.5f), collider.bounds.size);
     }
 
     void JumpHandler() {
         if (isGrounded) {
             currPos = rbody.position;
             landPos = currPos + movement.normalized * movementSpeed;
-            // if 
+
+            if (movement.x != 0) {
+                if (movement.x > 0) {
+                    jumpDirection[1] = JumpDirection.RIGHT;
+                    landBox = Physics2D.BoxCast(new Vector2(landPos.x - 0.5f, landPos.y), collider.bounds.size*1.1f, 0f, Vector2.zero, 0f);
+                } else {
+                    jumpDirection[1] = JumpDirection.LEFT;
+                    landBox = Physics2D.BoxCast(new Vector2(landPos.x + 0.5f, landPos.y), collider.bounds.size*1.1f, 0f, Vector2.zero, 0f);
+                }
+            } else jumpDirection[1] = JumpDirection.NONE;
+
+            if (movement.y != 0) {
+                if (movement.y > 0) {
+                    jumpDirection[0] = JumpDirection.UP;
+                    landBox = Physics2D.BoxCast(new Vector2(landPos.x, landPos.y - 0.5f), collider.bounds.size*1.1f, 0f, Vector2.zero, 0f);
+                } else {
+                    jumpDirection[0] = JumpDirection.DOWN;
+                    landBox = Physics2D.BoxCast(new Vector2(landPos.x, landPos.y + 0.5f), collider.bounds.size*1.1f, 0f, Vector2.zero, 0f);
+                }
+            }
+            else jumpDirection[0] = JumpDirection.NONE;
+
             landDis = Vector2.Distance(currPos, landPos);
             timeElapsed = 0f;
             isGrounded = false;
             isMoving = true;
+            // turn off collision between player layer and world layer
+            Physics2D.IgnoreLayerCollision(6, 7, true);
             if (direction == Direction.DOWN) {
                 animator.Play(jumpFrogDirections[0]);
             }
             else animator.Play(staticFrogDirections[1]);
         } else {
             timeElapsed += Time.deltaTime * movementSpeed / landDis;
-            if (timeElapsed <= 0.66667f) {
-                // turn off collision between player layer and world layer
-                Physics2D.IgnoreLayerCollision(6, 7, true);
+            if (landBox.collider != null && landBox.collider.gameObject.layer == 7) {
+                Debug.Log("Hit a wall");
+                switch (jumpDirection[1]) {
+                    case(JumpDirection.LEFT):
+                        landPos = new Vector2(landPos.x * 1.1f, landPos.y);
+                        break;
+                    case(JumpDirection.RIGHT):
+                        landPos = new Vector2(landPos.x * 0.9f, landPos.y);
+                        break;
+                }
+                switch (jumpDirection[0]) {
+                    case(JumpDirection.UP):
+                        landPos = new Vector2(landPos.x, landPos.y * 0.9f);
+                        break;
+                    case(JumpDirection.DOWN):
+                        landPos = new Vector2(landPos.x, landPos.y * 1.1f);
+                        break;
+                }
+                
+                landBox = Physics2D.BoxCast(landPos, collider.bounds.size*1.1f, 0f, Vector2.zero, 0f);
+            }
+            if (timeElapsed <= 0.666f) {
+                prevPos = currPos;
                 currPos = Vector2.MoveTowards(currPos, landPos, Time.fixedDeltaTime*movementSpeed);
-                rbody.MovePosition(new Vector2(currPos.x, currPos.y + curveY.Evaluate(timeElapsed)));
+                nextPos = new Vector2(currPos.x, currPos.y + curveY.Evaluate(timeElapsed));
+
+                
+                // if collider is touching any layer other than world layer, then fall
+                if (collider.IsTouchingLayers(~(1 << LayerMask.GetMask("World")))) {
+                    fall = true;
+                    fallPos = new Vector2(shadow.transform.position.x, shadow.transform.position.y);
+                    fallDist = Vector2.Distance(currPos, fallPos);
+                    fallTimeElapsed = 0f;
+                    currPos = rbody.position;
+                    // check the layer of the collider that the player is touching
+                    return;
+                }
+
+                rbody.MovePosition(nextPos);
                 // keep shadow's y position at jumpStartPos.y
                 if (landPos.y == jumpStartPos.y) shadow.transform.position = new Vector2(sprite.transform.position.x, jumpStartPos.y);
                 else {
@@ -131,13 +221,29 @@ public class IsometricCharacterController : MonoBehaviour
         }
     }
 
+    void FallHandler() {
+        fallTimeElapsed += Time.deltaTime * movementSpeed / fallDist;
+        if (fallTimeElapsed <= (1f + fallDist)) {
+            currPos = Vector2.MoveTowards(currPos, fallPos, Time.fixedDeltaTime*movementSpeed / fallDist);
+            rbody.MovePosition(currPos);
+            shadow.transform.position = fallPos;
+        } else {
+            // turn on collision between player layer and world layer
+            Physics2D.IgnoreLayerCollision(6, 7, false);
+            jump = false;
+            isGrounded = true;
+            isMoving = false;
+            fall = false;
+            fallTimeElapsed = 0f;
+        }
+    }
+
     void MoveHandler() {
         switch (transformation) {
             case(Transformation.TERRY):
                 shadow.transform.position = new Vector2(sprite.transform.position.x, sprite.transform.position.y - 0.8f);
                 break;
             case(Transformation.FROG):
-                Debug.Log("Frog shadow");
                 shadow.transform.position = new Vector2(sprite.transform.position.x, (sprite.transform.position.y - 0.2f));
                 break;
             case(Transformation.BULLDOZER):
@@ -148,6 +254,7 @@ public class IsometricCharacterController : MonoBehaviour
         rbody.MovePosition(rbody.position + movement.normalized * movementSpeed * Time.fixedDeltaTime);
         currPos = rbody.position;
         landPos = currPos + movement.normalized * movementSpeed;
+
 	    jumpStartPos = currPos;
 
         if (lastY < 0) direction = Direction.DOWN;
@@ -183,10 +290,9 @@ public class IsometricCharacterController : MonoBehaviour
 
     void TransformationHandler() {
         if (Input.GetKeyDown(KeyCode.T)) {
-            if (transformationBubble.activeSelf) {
-                transformationBubble.SetActive(false);
+            if (!transformationBubble.activeSelf) {
+                transformationBubble.SetActive(true);
             }
-            else transformationBubble.SetActive(true);
         }
     }
 
@@ -235,5 +341,11 @@ public class IsometricCharacterController : MonoBehaviour
                 else animator.Play(staticBulldozerDirections[1]);
                 break;
         }
+    }
+    void CollisionHandler() {
+        // Raycast a line projected from the player's position and direction
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, movement, 0.5f, LayerMask.GetMask("World"));
+        Debug.DrawRay(transform.position, movement, Color.red, 0.5f);
+        
     }
 }

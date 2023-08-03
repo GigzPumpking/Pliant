@@ -26,7 +26,7 @@ public class RampMoveable : MonoBehaviour
         } else {
             rbody.constraints = RigidbodyConstraints2D.FreezeAll;
             colliderWalkable.SetActive(true);
-            colliderPushable.SetActive(false);
+            if (colliderPushable.tag != "Floor") colliderPushable.SetActive(false);
         }
     }
 }

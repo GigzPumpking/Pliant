@@ -61,11 +61,13 @@ public class FormManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
             NextChoice();
 
-        if (Input.GetKeyDown(KeyCode.K)) {
+        if (Input.GetKeyDown(KeyCode.T)) {
             // if player is on top of a ramp, do not allow transformation
-            Debug.Log(player.GetComponent<IsometricCharacterController>().onRamp);
             if (!player.GetComponent<IsometricCharacterController>().onRamp)
                 SelectChoice();
+            else {
+                thoughtBubble.SetActive(false);
+            }
         }
     }
 
@@ -146,21 +148,18 @@ public class FormManager : MonoBehaviour
         // Set get form variable based off current form index
         Form form = characterForm.GetForm(selectedForm);
 
-        if (form.transformation != Transformation.TERRY)
-            gameManager.LoseHealth(1);
         //Set sprite and transformation corresponding to form information.
         formSprite.sprite = form.formSprite;
-        //uncomment when controller transformation is changed to enum
+
+        if (player.GetComponent<IsometricCharacterController>().transformation != form.transformation) {
+            smoke.SetActive(true);
+            smokeAnimator.Play("Smoke");
+            FindAnyObjectByType<AudioManager>().Play("Transformation Poof");
+            if (form.transformation != Transformation.TERRY)
+                gameManager.LoseHealth(1);
+        }
+
         player.GetComponent<IsometricCharacterController>().transformation = form.transformation;
-
-        /*if (form.transformation != Transformation.TERRY)
-            gameManager.LoseHealth(1);*/
-        
-        Debug.Log("Selected Form: " + form.transformation);
-
-        smoke.SetActive(true);
-        smokeAnimator.Play("Smoke");
-        FindAnyObjectByType<AudioManager>().Play("Transformation Poof");
 
         // close thought bubble after selection.
         thoughtBubble.SetActive(false);
