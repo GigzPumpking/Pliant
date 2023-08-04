@@ -44,8 +44,8 @@ public class GameManager : MonoBehaviour
 
     private void Respawn()
     {
+        SetHealth(maxHealth);
         player.transform.position = lastCheckPoint.transform.position;
-
         Debug.Log("Player Respawned");
     }
 
