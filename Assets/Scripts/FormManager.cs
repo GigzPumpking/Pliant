@@ -29,6 +29,7 @@ public class FormManager : MonoBehaviour
     public Image imageSprite; //the icon for the transformation menu icon
     public Image nextSprite; //the icon for the transformation menu icon of next to select
     public Image prevSprite; //the icon for the transformation menu icon of previous select
+    public PlayerColliderScript playerColliderScript;
 
     private int selectedForm = 0, nextForm = 0, prevForm = 0; //indexes for the selected, next, and previous forms
 
@@ -157,6 +158,18 @@ public class FormManager : MonoBehaviour
             FindAnyObjectByType<AudioManager>().Play("Transformation Poof");
             if (form.transformation != Transformation.TERRY)
                 gameManager.LoseHealth(1);
+
+            switch(form.transformation) {
+                case Transformation.TERRY:
+                    playerColliderScript.SetTerryCollider();
+                    break;
+                case Transformation.FROG:
+                    playerColliderScript.SetFrogCollider();
+                    break;
+                case Transformation.BULLDOZER:
+                    playerColliderScript.SetBulldozerCollider();
+                    break;
+            }
         }
 
         player.GetComponent<IsometricCharacterController>().transformation = form.transformation;

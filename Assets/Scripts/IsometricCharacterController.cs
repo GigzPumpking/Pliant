@@ -8,8 +8,6 @@ public class IsometricCharacterController : MonoBehaviour
 
     // Collision Variables
     private Rigidbody2D rbody;
-    private GameObject hitbox;
-    private Collider2D collider;
 
     // Animation Variables
     private Animator animator;
@@ -44,7 +42,6 @@ public class IsometricCharacterController : MonoBehaviour
     Vector2 prevPos;
     Vector2 nextPos;
     Vector2 landPos;
-    RaycastHit2D landBox;
     Vector2 fallPos;
     float fallDist;
     bool fall = false;
@@ -61,7 +58,7 @@ public class IsometricCharacterController : MonoBehaviour
 
     public static readonly string[] staticDirections = { "Idle Front", "Hurt Idle Front 1", "Hurt Idle Front 2", "Hurt Idle Front 3", "Idle Back"};
     public static readonly string[] staticFrogDirections = { "Idle Front Frog", "Idle Back Frog"};
-    public static readonly string[] jumpFrogDirections = { "Jump Front Frog", "Walk Front Frog"};
+    public static readonly string[] jumpFrogDirections = { "Jump Front Frog", "Walk Front Frog", "Jump Back Frog", "Walk Back Frog"};
     public static readonly string[] staticBulldozerDirections = { "Idle Front Bulldozer", "Idle Back Bulldozer"};
     public static readonly string[] runDirections = {"Walk Front", "Walk Back"};
 
@@ -74,8 +71,6 @@ public class IsometricCharacterController : MonoBehaviour
     private void Awake()
     {
         rbody = GetComponent<Rigidbody2D>();
-        hitbox = GameObject.Find("Collision");
-        collider = hitbox.GetComponent<Collider2D>();
         sprite = GameObject.Find("Sprite");
         animator = sprite.GetComponent<Animator>();
         TerrySprite = sprite.GetComponent<SpriteRenderer>();
@@ -116,17 +111,6 @@ public class IsometricCharacterController : MonoBehaviour
             curvePos = new Vector2(Mathf.Lerp(jumpStartPos.x, landPos.x, t), jumpStartPos.y + curveY.Evaluate(t));
             Gizmos.DrawSphere(curvePos, radius);
         }
-        Gizmos.color = Color.blue;
-        // Draw a Sphere representing the position of the shadow
-        // set radius to width of collider
-        radius = collider.bounds.extents.x;
-        Vector2 colliderPos = new Vector2(collider.transform.position.x, collider.transform.position.y);
-        Gizmos.DrawSphere(colliderPos, radius);
-
-        // Draw a rectangle representing the collider at the landing position
-        // log landBox position
-        
-        if (landBox != null) Gizmos.DrawWireCube(new Vector2(landPos.x, landPos.y + 0.5f), collider.bounds.size);
     }
 
     void JumpHandler() {
@@ -137,20 +121,16 @@ public class IsometricCharacterController : MonoBehaviour
             if (movement.x != 0) {
                 if (movement.x > 0) {
                     jumpDirection[1] = JumpDirection.RIGHT;
-                    landBox = Physics2D.BoxCast(new Vector2(landPos.x - 0.5f, landPos.y), collider.bounds.size*1.1f, 0f, Vector2.zero, 0f);
                 } else {
                     jumpDirection[1] = JumpDirection.LEFT;
-                    landBox = Physics2D.BoxCast(new Vector2(landPos.x + 0.5f, landPos.y), collider.bounds.size*1.1f, 0f, Vector2.zero, 0f);
                 }
             } else jumpDirection[1] = JumpDirection.NONE;
 
             if (movement.y != 0) {
                 if (movement.y > 0) {
                     jumpDirection[0] = JumpDirection.UP;
-                    landBox = Physics2D.BoxCast(new Vector2(landPos.x, landPos.y - 0.5f), collider.bounds.size*1.1f, 0f, Vector2.zero, 0f);
                 } else {
                     jumpDirection[0] = JumpDirection.DOWN;
-                    landBox = Physics2D.BoxCast(new Vector2(landPos.x, landPos.y + 0.5f), collider.bounds.size*1.1f, 0f, Vector2.zero, 0f);
                 }
             }
             else jumpDirection[0] = JumpDirection.NONE;
@@ -164,35 +144,16 @@ public class IsometricCharacterController : MonoBehaviour
             if (direction == Direction.DOWN) {
                 animator.Play(jumpFrogDirections[0]);
             }
-            else animator.Play(staticFrogDirections[1]);
+            else animator.Play(jumpFrogDirections[2]);
         } else {
             timeElapsed += Time.deltaTime * movementSpeed / landDis;
-            if (landBox.collider != null && landBox.collider.gameObject.layer == 7) {
-                Debug.Log("Hit a wall");
-                switch (jumpDirection[1]) {
-                    case(JumpDirection.LEFT):
-                        landPos = new Vector2(landPos.x * 1.1f, landPos.y);
-                        break;
-                    case(JumpDirection.RIGHT):
-                        landPos = new Vector2(landPos.x * 0.9f, landPos.y);
-                        break;
-                }
-                switch (jumpDirection[0]) {
-                    case(JumpDirection.UP):
-                        landPos = new Vector2(landPos.x, landPos.y * 0.9f);
-                        break;
-                    case(JumpDirection.DOWN):
-                        landPos = new Vector2(landPos.x, landPos.y * 1.1f);
-                        break;
-                }
-                
-                landBox = Physics2D.BoxCast(landPos, collider.bounds.size*1.1f, 0f, Vector2.zero, 0f);
-            }
+
             if (timeElapsed <= 0.666f) {
                 prevPos = currPos;
                 currPos = Vector2.MoveTowards(currPos, landPos, Time.fixedDeltaTime*movementSpeed);
                 nextPos = new Vector2(currPos.x, currPos.y + curveY.Evaluate(timeElapsed));
 
+                
                 /*
                 // if collider is touching any layer other than world layer, then fall
                 if (collider.IsTouchingLayers(~(1 << LayerMask.GetMask("World")))) {
@@ -205,6 +166,7 @@ public class IsometricCharacterController : MonoBehaviour
                     return;
                 }
                 */
+                
 
                 rbody.MovePosition(nextPos);
                 // keep shadow's y position at jumpStartPos.y
@@ -329,7 +291,7 @@ public class IsometricCharacterController : MonoBehaviour
                     if (direction == Direction.DOWN) {
                         animator.Play(jumpFrogDirections[1]);
                     }
-                    else animator.Play(staticFrogDirections[1]);
+                    else animator.Play(jumpFrogDirections[3]);
                 } else {
                     if (direction == Direction.DOWN) {
                         animator.Play(staticFrogDirections[0]);
