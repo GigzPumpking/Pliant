@@ -7,11 +7,14 @@ public class PlayerColliderScript : MonoBehaviour
     private Collider2D terryCollider;
     private Collider2D frogCollider;
     private Collider2D bulldozerCollider;
+    public Collider2D activeCollider;
 
     void Awake() {
         terryCollider = transform.Find("TerryCollider").GetComponent<Collider2D>();
         frogCollider = transform.Find("FrogCollider").GetComponent<Collider2D>();
         bulldozerCollider = transform.Find("BulldozerCollider").GetComponent<Collider2D>();
+
+        SetTerryCollider();
     }
 
     // Update is called once per frame
@@ -36,17 +39,20 @@ public class PlayerColliderScript : MonoBehaviour
         terryCollider.enabled = true;
         frogCollider.enabled = false;
         bulldozerCollider.enabled = false;
+        activeCollider = terryCollider;
     }
 
     public void SetFrogCollider() {
         frogCollider.enabled = true;
         terryCollider.enabled = false;
         bulldozerCollider.enabled = false;
+        activeCollider = frogCollider;
     }
 
     public void SetBulldozerCollider() {
         bulldozerCollider.enabled = true;
         terryCollider.enabled = false;
         frogCollider.enabled = false;
+        activeCollider = bulldozerCollider;
     }
 }

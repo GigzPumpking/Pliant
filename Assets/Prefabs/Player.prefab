@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1138594142}
   m_Layer: 6
   m_Name: Shadow
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,9 +93,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4083299678539234426}
-  m_Layer: 0
+  - component: {fileID: 636562317}
+  m_Layer: 6
   m_Name: BulldozerCollider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,6 +116,32 @@ Transform:
   m_Father: {fileID: 1199593779026140129}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &636562317
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5369449431952696440}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 21.76144, y: -3.2747598}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9947567, y: 0.594573}
+  m_EdgeRadius: 0
 --- !u!1 &7403027065926537483
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,9 +151,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1199593779026140129}
-  m_Layer: 0
+  - component: {fileID: 636562319}
+  m_Layer: 6
   m_Name: Colliders
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,8 +175,20 @@ Transform:
   - {fileID: 3277803366365318424}
   - {fileID: 4083299678539234426}
   m_Father: {fileID: 8549448986901220621}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &636562319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7403027065926537483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28f2da573aca846379076377da696dcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8549448986901220622
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +203,7 @@ GameObject:
   - component: {fileID: 8549448986901220620}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,9 +221,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1138594140}
-  - {fileID: 1199593779026140129}
   - {fileID: 8549448988210885211}
   - {fileID: 8549448987691299364}
+  - {fileID: 1199593779026140129}
   - {fileID: 184795284100557302}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -281,7 +321,7 @@ GameObject:
   - component: {fileID: 8549448987052045255}
   m_Layer: 6
   m_Name: TerryCollider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -314,7 +354,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.09578705}
+  m_Offset: {x: 0.0000011920929, y: 0.19438887}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -325,7 +365,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.8084259}
+  m_Size: {x: 0.5179467, y: 0.61122227}
   m_EdgeRadius: 0
 --- !u!1 &8549448987691299365
 GameObject:
@@ -340,7 +380,7 @@ GameObject:
   - component: {fileID: 1960879161}
   m_Layer: 6
   m_Name: Smoke
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -358,7 +398,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8549448986901220621}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8549448987691299363
 SpriteRenderer:
@@ -446,7 +486,7 @@ GameObject:
   - component: {fileID: 4351185935797541288}
   m_Layer: 6
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -464,7 +504,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8549448986901220621}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8549448988210885208
 SpriteRenderer:
@@ -548,9 +588,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3277803366365318424}
-  m_Layer: 0
+  - component: {fileID: 636562318}
+  m_Layer: 6
   m_Name: FrogCollider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -570,6 +611,32 @@ Transform:
   m_Father: {fileID: 1199593779026140129}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &636562318
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8886775896052393499}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 21.64948, y: -3.111443}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.85775375, y: 0.4303007}
+  m_EdgeRadius: 0
 --- !u!1001 &1667365640550643417
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -600,6 +667,10 @@ PrefabInstance:
     - target: {fileID: 1563640103460233004, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563640103460233004, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1563640103460233007, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
       propertyPath: m_Pivot.x
@@ -721,6 +792,10 @@ PrefabInstance:
       propertyPath: formSprite
       value: 
       objectReference: {fileID: 8549448988210885208}
+    - target: {fileID: 5562715278581058783, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
+      propertyPath: playerColliderScript
+      value: 
+      objectReference: {fileID: 636562319}
     - target: {fileID: 8734313892731301303, guid: 5f6fd5c8093f90a448008f31836e86b8, type: 3}
       propertyPath: m_Layer
       value: 6

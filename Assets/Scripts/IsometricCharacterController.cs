@@ -5,6 +5,7 @@ using UnityEngine;
 public class IsometricCharacterController : MonoBehaviour
 {
     public GameManager gameManager;
+    public PlayerColliderScript playerColliderScript;
 
     // Collision Variables
     private Rigidbody2D rbody;
@@ -13,7 +14,7 @@ public class IsometricCharacterController : MonoBehaviour
     private Animator animator;
     private Animator smokeAnimator;
     private SpriteRenderer TerrySprite;
-    private GameObject sprite;
+    private Transform sprite;
 
     enum Direction {
         UP,
@@ -55,6 +56,7 @@ public class IsometricCharacterController : MonoBehaviour
     float lastX = 0f;
     float lastY = 1f;
     public bool onRamp = false;
+    public bool onPlatform = false;
 
     public static readonly string[] staticDirections = { "Idle Front", "Hurt Idle Front 1", "Hurt Idle Front 2", "Hurt Idle Front 3", "Idle Back"};
     public static readonly string[] staticFrogDirections = { "Idle Front Frog", "Idle Back Frog"};
@@ -64,21 +66,21 @@ public class IsometricCharacterController : MonoBehaviour
 
     // Transformation Variables
     public Transformation transformation = Transformation.TERRY;
-    private GameObject smoke;
-    private GameObject transformationBubble;
-    private GameObject shadow;
+    private Transform smoke;
+    private Transform transformationBubble;
+    private Transform shadow;
 
     private void Awake()
     {
         rbody = GetComponent<Rigidbody2D>();
-        sprite = GameObject.Find("Sprite");
+        sprite = transform.Find("Sprite");
         animator = sprite.GetComponent<Animator>();
         TerrySprite = sprite.GetComponent<SpriteRenderer>();
-        smoke = GameObject.Find("Smoke");
+        smoke = transform.Find("Smoke");
         smokeAnimator = smoke.GetComponent<Animator>();
-        smoke.SetActive(false);
-        shadow = GameObject.Find("Shadow");
-        transformationBubble = GameObject.Find("Transformation Bubble");
+        smoke.gameObject.SetActive(false);
+        shadow = transform.Find("Shadow");
+        transformationBubble = transform.Find("Transformation Bubble");
     }
 
     void Update() {
@@ -139,12 +141,12 @@ public class IsometricCharacterController : MonoBehaviour
             timeElapsed = 0f;
             isGrounded = false;
             isMoving = true;
-            // turn off collision between player layer and world layer
-            Physics2D.IgnoreLayerCollision(6, 7, true);
-            if (direction == Direction.DOWN) {
-                animator.Play(jumpFrogDirections[0]);
-            }
+            if (direction == Direction.DOWN) animator.Play(jumpFrogDirections[0]);
             else animator.Play(jumpFrogDirections[2]);
+
+            Physics2D.IgnoreLayerCollision(6, 7, true);
+            Physics2D.IgnoreLayerCollision(6, 13, true);
+            Physics2D.IgnoreLayerCollision(6, 14, true);
         } else {
             timeElapsed += Time.deltaTime * movementSpeed / landDis;
 
@@ -152,22 +154,6 @@ public class IsometricCharacterController : MonoBehaviour
                 prevPos = currPos;
                 currPos = Vector2.MoveTowards(currPos, landPos, Time.fixedDeltaTime*movementSpeed);
                 nextPos = new Vector2(currPos.x, currPos.y + curveY.Evaluate(timeElapsed));
-
-                
-                /*
-                // if collider is touching any layer other than world layer, then fall
-                if (collider.IsTouchingLayers(~(1 << LayerMask.GetMask("World")))) {
-                    fall = true;
-                    fallPos = new Vector2(shadow.transform.position.x, shadow.transform.position.y);
-                    fallDist = Vector2.Distance(currPos, fallPos);
-                    fallTimeElapsed = 0f;
-                    currPos = rbody.position;
-                    // check the layer of the collider that the player is touching
-                    return;
-                }
-                */
-                
-
                 rbody.MovePosition(nextPos);
                 // keep shadow's y position at jumpStartPos.y
                 if (landPos.y == jumpStartPos.y) shadow.transform.position = new Vector2(sprite.transform.position.x, jumpStartPos.y);
@@ -175,8 +161,11 @@ public class IsometricCharacterController : MonoBehaviour
                     shadow.transform.position = new Vector2(sprite.transform.position.x, sprite.transform.position.y - curveY.Evaluate(timeElapsed));
                 }
             } else {
+                Debug.Log("landed");
                 // turn on collision between player layer and world layer
                 Physics2D.IgnoreLayerCollision(6, 7, false);
+                Physics2D.IgnoreLayerCollision(6, 13, false);
+                Physics2D.IgnoreLayerCollision(6, 14, false);
                 jump = false;
                 isGrounded = true;
                 isMoving = false;
@@ -253,8 +242,8 @@ public class IsometricCharacterController : MonoBehaviour
 
     void TransformationHandler() {
         if (Input.GetKeyDown(KeyCode.T)) {
-            if (!transformationBubble.activeSelf) {
-                transformationBubble.SetActive(true);
+            if (!transformationBubble.gameObject.activeSelf) {
+                transformationBubble.gameObject.SetActive(true);
             }
         }
     }
@@ -306,9 +295,18 @@ public class IsometricCharacterController : MonoBehaviour
         }
     }
     void CollisionHandler() {
-        // Raycast a line projected from the player's position and direction
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, movement, 0.5f, LayerMask.GetMask("World"));
-        Debug.DrawRay(transform.position, movement, Color.red, 0.5f);
+        Vector2 lastMovement = new Vector2(lastX, lastY);
         
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -lastMovement, 0.1f);
+
+        Debug.DrawRay(transform.position, -lastMovement, Color.red, 0.1f);
+
+        if (!jump) {
+            if (onPlatform) {
+                Physics2D.IgnoreLayerCollision(6, 7, true);
+            } else {
+                Physics2D.IgnoreLayerCollision(6, 7, false);
+            }
+        }
     }
 }
