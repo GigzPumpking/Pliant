@@ -5,17 +5,16 @@ using UnityEngine;
 public class IsometricCharacterController : MonoBehaviour
 {
     public GameManager gameManager;
+    public PlayerColliderScript playerColliderScript;
 
     // Collision Variables
     private Rigidbody2D rbody;
-    private GameObject hitbox;
-    private Collider2D collider;
 
     // Animation Variables
     private Animator animator;
     private Animator smokeAnimator;
     private SpriteRenderer TerrySprite;
-    private GameObject sprite;
+    private Transform sprite;
 
     enum Direction {
         UP,
@@ -44,7 +43,6 @@ public class IsometricCharacterController : MonoBehaviour
     Vector2 prevPos;
     Vector2 nextPos;
     Vector2 landPos;
-    RaycastHit2D landBox;
     Vector2 fallPos;
     float fallDist;
     bool fall = false;
@@ -58,32 +56,31 @@ public class IsometricCharacterController : MonoBehaviour
     float lastX = 0f;
     float lastY = 1f;
     public bool onRamp = false;
+    public bool onPlatform = false;
 
     public static readonly string[] staticDirections = { "Idle Front", "Hurt Idle Front 1", "Hurt Idle Front 2", "Hurt Idle Front 3", "Idle Back"};
     public static readonly string[] staticFrogDirections = { "Idle Front Frog", "Idle Back Frog"};
-    public static readonly string[] jumpFrogDirections = { "Jump Front Frog", "Walk Front Frog"};
+    public static readonly string[] jumpFrogDirections = { "Jump Front Frog", "Walk Front Frog", "Jump Back Frog", "Walk Back Frog"};
     public static readonly string[] staticBulldozerDirections = { "Idle Front Bulldozer", "Idle Back Bulldozer"};
     public static readonly string[] runDirections = {"Walk Front", "Walk Back"};
 
     // Transformation Variables
     public Transformation transformation = Transformation.TERRY;
-    private GameObject smoke;
-    private GameObject transformationBubble;
-    private GameObject shadow;
+    private Transform smoke;
+    private Transform transformationBubble;
+    private Transform shadow;
 
     private void Awake()
     {
         rbody = GetComponent<Rigidbody2D>();
-        hitbox = GameObject.Find("Collision");
-        collider = hitbox.GetComponent<Collider2D>();
-        sprite = GameObject.Find("Sprite");
+        sprite = transform.Find("Sprite");
         animator = sprite.GetComponent<Animator>();
         TerrySprite = sprite.GetComponent<SpriteRenderer>();
-        smoke = GameObject.Find("Smoke");
+        smoke = transform.Find("Smoke");
         smokeAnimator = smoke.GetComponent<Animator>();
-        smoke.SetActive(false);
-        shadow = GameObject.Find("Shadow");
-        transformationBubble = GameObject.Find("Transformation Bubble");
+        smoke.gameObject.SetActive(false);
+        shadow = transform.Find("Shadow");
+        transformationBubble = transform.Find("Transformation Bubble");
     }
 
     void Update() {
@@ -116,17 +113,6 @@ public class IsometricCharacterController : MonoBehaviour
             curvePos = new Vector2(Mathf.Lerp(jumpStartPos.x, landPos.x, t), jumpStartPos.y + curveY.Evaluate(t));
             Gizmos.DrawSphere(curvePos, radius);
         }
-        Gizmos.color = Color.blue;
-        // Draw a Sphere representing the position of the shadow
-        // set radius to width of collider
-        radius = collider.bounds.extents.x;
-        Vector2 colliderPos = new Vector2(collider.transform.position.x, collider.transform.position.y);
-        Gizmos.DrawSphere(colliderPos, radius);
-
-        // Draw a rectangle representing the collider at the landing position
-        // log landBox position
-        
-        if (landBox != null) Gizmos.DrawWireCube(new Vector2(landPos.x, landPos.y + 0.5f), collider.bounds.size);
     }
 
     void JumpHandler() {
@@ -137,20 +123,16 @@ public class IsometricCharacterController : MonoBehaviour
             if (movement.x != 0) {
                 if (movement.x > 0) {
                     jumpDirection[1] = JumpDirection.RIGHT;
-                    landBox = Physics2D.BoxCast(new Vector2(landPos.x - 0.5f, landPos.y), collider.bounds.size*1.1f, 0f, Vector2.zero, 0f);
                 } else {
                     jumpDirection[1] = JumpDirection.LEFT;
-                    landBox = Physics2D.BoxCast(new Vector2(landPos.x + 0.5f, landPos.y), collider.bounds.size*1.1f, 0f, Vector2.zero, 0f);
                 }
             } else jumpDirection[1] = JumpDirection.NONE;
 
             if (movement.y != 0) {
                 if (movement.y > 0) {
                     jumpDirection[0] = JumpDirection.UP;
-                    landBox = Physics2D.BoxCast(new Vector2(landPos.x, landPos.y - 0.5f), collider.bounds.size*1.1f, 0f, Vector2.zero, 0f);
                 } else {
                     jumpDirection[0] = JumpDirection.DOWN;
-                    landBox = Physics2D.BoxCast(new Vector2(landPos.x, landPos.y + 0.5f), collider.bounds.size*1.1f, 0f, Vector2.zero, 0f);
                 }
             }
             else jumpDirection[0] = JumpDirection.NONE;
@@ -159,53 +141,19 @@ public class IsometricCharacterController : MonoBehaviour
             timeElapsed = 0f;
             isGrounded = false;
             isMoving = true;
-            // turn off collision between player layer and world layer
+            if (direction == Direction.DOWN) animator.Play(jumpFrogDirections[0]);
+            else animator.Play(jumpFrogDirections[2]);
+
             Physics2D.IgnoreLayerCollision(6, 7, true);
-            if (direction == Direction.DOWN) {
-                animator.Play(jumpFrogDirections[0]);
-            }
-            else animator.Play(staticFrogDirections[1]);
+            Physics2D.IgnoreLayerCollision(6, 13, true);
+            Physics2D.IgnoreLayerCollision(6, 14, true);
         } else {
             timeElapsed += Time.deltaTime * movementSpeed / landDis;
-            if (landBox.collider != null && landBox.collider.gameObject.layer == 7) {
-                Debug.Log("Hit a wall");
-                switch (jumpDirection[1]) {
-                    case(JumpDirection.LEFT):
-                        landPos = new Vector2(landPos.x * 1.1f, landPos.y);
-                        break;
-                    case(JumpDirection.RIGHT):
-                        landPos = new Vector2(landPos.x * 0.9f, landPos.y);
-                        break;
-                }
-                switch (jumpDirection[0]) {
-                    case(JumpDirection.UP):
-                        landPos = new Vector2(landPos.x, landPos.y * 0.9f);
-                        break;
-                    case(JumpDirection.DOWN):
-                        landPos = new Vector2(landPos.x, landPos.y * 1.1f);
-                        break;
-                }
-                
-                landBox = Physics2D.BoxCast(landPos, collider.bounds.size*1.1f, 0f, Vector2.zero, 0f);
-            }
+
             if (timeElapsed <= 0.666f) {
                 prevPos = currPos;
                 currPos = Vector2.MoveTowards(currPos, landPos, Time.fixedDeltaTime*movementSpeed);
                 nextPos = new Vector2(currPos.x, currPos.y + curveY.Evaluate(timeElapsed));
-
-                /*
-                // if collider is touching any layer other than world layer, then fall
-                if (collider.IsTouchingLayers(~(1 << LayerMask.GetMask("World")))) {
-                    fall = true;
-                    fallPos = new Vector2(shadow.transform.position.x, shadow.transform.position.y);
-                    fallDist = Vector2.Distance(currPos, fallPos);
-                    fallTimeElapsed = 0f;
-                    currPos = rbody.position;
-                    // check the layer of the collider that the player is touching
-                    return;
-                }
-                */
-
                 rbody.MovePosition(nextPos);
                 // keep shadow's y position at jumpStartPos.y
                 if (landPos.y == jumpStartPos.y) shadow.transform.position = new Vector2(sprite.transform.position.x, jumpStartPos.y);
@@ -213,8 +161,11 @@ public class IsometricCharacterController : MonoBehaviour
                     shadow.transform.position = new Vector2(sprite.transform.position.x, sprite.transform.position.y - curveY.Evaluate(timeElapsed));
                 }
             } else {
+                Debug.Log("landed");
                 // turn on collision between player layer and world layer
                 Physics2D.IgnoreLayerCollision(6, 7, false);
+                Physics2D.IgnoreLayerCollision(6, 13, false);
+                Physics2D.IgnoreLayerCollision(6, 14, false);
                 jump = false;
                 isGrounded = true;
                 isMoving = false;
@@ -291,8 +242,8 @@ public class IsometricCharacterController : MonoBehaviour
 
     void TransformationHandler() {
         if (Input.GetKeyDown(KeyCode.T)) {
-            if (!transformationBubble.activeSelf) {
-                transformationBubble.SetActive(true);
+            if (!transformationBubble.gameObject.activeSelf) {
+                transformationBubble.gameObject.SetActive(true);
             }
         }
     }
@@ -329,7 +280,7 @@ public class IsometricCharacterController : MonoBehaviour
                     if (direction == Direction.DOWN) {
                         animator.Play(jumpFrogDirections[1]);
                     }
-                    else animator.Play(staticFrogDirections[1]);
+                    else animator.Play(jumpFrogDirections[3]);
                 } else {
                     if (direction == Direction.DOWN) {
                         animator.Play(staticFrogDirections[0]);
@@ -344,9 +295,18 @@ public class IsometricCharacterController : MonoBehaviour
         }
     }
     void CollisionHandler() {
-        // Raycast a line projected from the player's position and direction
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, movement, 0.5f, LayerMask.GetMask("World"));
-        Debug.DrawRay(transform.position, movement, Color.red, 0.5f);
+        Vector2 lastMovement = new Vector2(lastX, lastY);
         
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -lastMovement, 0.1f);
+
+        Debug.DrawRay(transform.position, -lastMovement, Color.red, 0.1f);
+
+        if (!jump) {
+            if (onPlatform) {
+                Physics2D.IgnoreLayerCollision(6, 7, true);
+            } else {
+                Physics2D.IgnoreLayerCollision(6, 7, false);
+            }
+        }
     }
 }
