@@ -6,27 +6,36 @@ public class RampMoveable : MonoBehaviour
 {
     public IsometricCharacterController playerScript;
     private Rigidbody2D rbody;
-    private GameObject colliderWalkable;
-    private GameObject colliderPushable;
+    private Transform colliderWalkable;
+    private Transform colliderPushable;
 
     void Awake()
     {
         rbody = GetComponent<Rigidbody2D>();
-        colliderWalkable = GameObject.Find("ColliderWalkable");
-        colliderPushable = GameObject.Find("ColliderPushable");
+        colliderWalkable = transform.Find("ColliderWalkable");
+        colliderPushable = transform.Find("ColliderPushable");
+
+        walkableState();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (playerScript.transformation == Transformation.BULLDOZER) {
             rbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-            colliderWalkable.SetActive(false);
-            colliderPushable.SetActive(true);
+            pushableState();
         } else {
             rbody.constraints = RigidbodyConstraints2D.FreezeAll;
-            colliderWalkable.SetActive(true);
-            if (colliderPushable.tag != "Floor") colliderPushable.SetActive(false);
+            walkableState();
         }
+    }
+
+    public void pushableState() {
+        colliderWalkable.gameObject.SetActive(false);
+        colliderPushable.gameObject.SetActive(true);
+    }
+
+    public void walkableState() {
+        colliderWalkable.gameObject.SetActive(true);
+        colliderPushable.gameObject.SetActive(false);
     }
 }
