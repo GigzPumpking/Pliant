@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1051820589429844918}
   m_Layer: 0
   m_Name: Game Manager
-  m_TagString: Untagged
+  m_TagString: GM
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  startingHealth: 4
+  player: {fileID: 0}
+  healthSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  resetDelay: 1
+  lastCheckPoint: {fileID: 0}
 --- !u!114 &1051820589429844918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,4 +67,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 0}
-  isPaused: 0

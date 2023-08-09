@@ -28,9 +28,12 @@ public class EdgeColliderDetection : MonoBehaviour
         // log if any of the colliders hit the world
         foreach (Collider2D tilemapCollider in tilemapColliders) {
             if (tilemapCollider.IsTouchingLayers(LayerMask.GetMask("World"))) {
+                Debug.Log(tilemapCollider.name + " is touching world");
                 tilemapCollider.enabled = false;
                 if (tilemapCollider == tilemapCollider4b) tilemapCollider4a.enabled = false;
                 if (tilemapCollider == tilemapCollider3b) tilemapCollider3a.enabled = false;
+            } else if (playerScript.transformation == Transformation.BULLDOZER) {
+                tilemapCollider.enabled = true;
             }
         }
 

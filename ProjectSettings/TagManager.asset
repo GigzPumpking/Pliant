@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Floor
+  - GM
   layers:
   - Default
   - TransparentFX
@@ -19,9 +20,9 @@ TagManager:
   - Border
   - Test
   - Decoration
-  - 
-  - 
-  - 
+  - PlatformEdge
+  - Platform
+  - PlatformDetection
   - 
   - 
   - 

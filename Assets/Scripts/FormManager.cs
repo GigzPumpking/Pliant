@@ -63,12 +63,7 @@ public class FormManager : MonoBehaviour
             NextChoice();
 
         if (Input.GetKeyDown(KeyCode.T)) {
-            // if player is on top of a ramp, do not allow transformation
-            if (!player.GetComponent<IsometricCharacterController>().onRamp)
-                SelectChoice();
-            else {
-                thoughtBubble.SetActive(false);
-            }
+            SelectChoice();
         }
     }
 
@@ -172,7 +167,11 @@ public class FormManager : MonoBehaviour
             }
         }
 
-        player.GetComponent<IsometricCharacterController>().transformation = form.transformation;
+        if (!player.GetComponent<IsometricCharacterController>().onRamp || form.transformation != Transformation.BULLDOZER) {
+            player.GetComponent<IsometricCharacterController>().transformation = form.transformation;
+        } else {
+            Debug.Log("Player cannot transform into Bulldozer while on ramp");
+        }
 
         // close thought bubble after selection.
         thoughtBubble.SetActive(false);
