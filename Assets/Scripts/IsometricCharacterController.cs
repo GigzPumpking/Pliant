@@ -39,6 +39,7 @@ public class IsometricCharacterController : MonoBehaviour
     private Vector3 curvePos;
     [SerializeField] float movementSpeed = 1f;
     Vector2 movement;
+    Vector2 gamepadMovement;
     Vector2 currPos;
     Vector2 prevPos;
     Vector2 nextPos;
@@ -85,7 +86,7 @@ public class IsometricCharacterController : MonoBehaviour
 
     void Update() {
         InputHandler();
-        TransformationHandler();
+        if (Input.GetKeyDown(KeyCode.T)) TransformationHandler();
     }
 
     // Update is called once per frame
@@ -102,6 +103,13 @@ public class IsometricCharacterController : MonoBehaviour
         CollisionHandler();
     }
 
+    public void setMovement(Vector2 mov) {
+        gamepadMovement = mov;
+    }
+
+    public void setJump() {
+        jump = true;
+    }
 
     void OnDrawGizmos() {
         Gizmos.color = Color.red;
@@ -225,7 +233,8 @@ public class IsometricCharacterController : MonoBehaviour
         if (Input.GetKey(KeyCode.W)) vertical = 1f;
         else if (Input.GetKey(KeyCode.S)) vertical = -1f;
         
-        movement = new Vector2(horizontal, vertical);
+        if (gamepadMovement.magnitude == 0) movement = new Vector2(horizontal, vertical);
+        else movement = gamepadMovement;
         movement = Vector2.ClampMagnitude(movement, 1);
 
         if (movement.magnitude > 0) isMoving = true;
@@ -240,12 +249,14 @@ public class IsometricCharacterController : MonoBehaviour
         }
     }
 
-    void TransformationHandler() {
-        if (Input.GetKeyDown(KeyCode.T)) {
-            if (!transformationBubble.gameObject.activeSelf) {
-                transformationBubble.gameObject.SetActive(true);
-            }
+    public void TransformationHandler() {
+        if (!transformationBubble.gameObject.activeSelf) {
+            transformationBubble.gameObject.SetActive(true);
         }
+    }
+
+    public bool TransformationChecker() {
+        return (transformationBubble.gameObject.activeSelf);
     }
 
     void AnimationHandler() {
