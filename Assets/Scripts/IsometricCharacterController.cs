@@ -315,8 +315,10 @@ public class IsometricCharacterController : MonoBehaviour
         if (!jump) {
             if (onPlatform) {
                 Physics2D.IgnoreLayerCollision(6, 7, true);
+                Physics2D.IgnoreLayerCollision(6, 10, true);
             } else {
                 Physics2D.IgnoreLayerCollision(6, 7, false);
+                Physics2D.IgnoreLayerCollision(6, 10, false);
             }
         }
     }
