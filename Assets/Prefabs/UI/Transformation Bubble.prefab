@@ -469,6 +469,7 @@ MonoBehaviour:
   imageSprite: {fileID: 8254555084559826906}
   nextSprite: {fileID: 5053350378246094626}
   prevSprite: {fileID: 2659138798645095157}
+  playerColliderScript: {fileID: 0}
 --- !u!1 &2573682522098568760
 GameObject:
   m_ObjectHideFlags: 0
