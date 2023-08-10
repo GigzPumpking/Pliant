@@ -313,7 +313,7 @@ public class IsometricCharacterController : MonoBehaviour
         Debug.DrawRay(transform.position, -lastMovement, Color.red, 0.1f);
 
         if (!jump) {
-            if (onPlatform) {
+            if (onPlatform || onRamp) {
                 Physics2D.IgnoreLayerCollision(6, 7, true);
                 Physics2D.IgnoreLayerCollision(6, 10, true);
             } else {
