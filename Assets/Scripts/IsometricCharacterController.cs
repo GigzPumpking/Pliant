@@ -202,12 +202,15 @@ public class IsometricCharacterController : MonoBehaviour
         switch (transformation) {
             case(Transformation.TERRY):
                 shadow.transform.position = new Vector2(sprite.transform.position.x, sprite.transform.position.y - 0.8f);
+                movementSpeed = 3f;
                 break;
             case(Transformation.FROG):
                 shadow.transform.position = new Vector2(sprite.transform.position.x, (sprite.transform.position.y - 0.2f));
+                movementSpeed = 3.5f;
                 break;
             case(Transformation.BULLDOZER):
                 shadow.transform.position = new Vector2(sprite.transform.position.x, sprite.transform.position.y - 0.4f);
+                movementSpeed = 2f;
                 break;
         }
 
