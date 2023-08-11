@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
 
     private bool gameOver = false;
+    private bool death = false;
 
     public float resetDelay = 1f;
 
@@ -33,17 +34,22 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SetHealth(maxHealth);
+        death = false;
         FindAnyObjectByType<AudioManager>().Play("Ambience");
+        Debug.Log(player);
     }
 
     private void Update()
     {
-        if (health <= 0)
-            Death();
+        if (health <= 0 && !death) {
+            death = true;
+            player.GetComponent<IsometricCharacterController>().Die();
+        }
     }
 
     private void Respawn()
     {
+        death = false;
         SetHealth(maxHealth);
         player.transform.position = lastCheckPoint.transform.position;
         Debug.Log("Player Respawned");
@@ -55,7 +61,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
     }
 
-    private void Death()
+    public void Death()
     {
         if(lastCheckPoint == null)
         {
@@ -64,7 +70,6 @@ public class GameManager : MonoBehaviour
         }
         else
             Invoke("Respawn", resetDelay);
-        
     }
 
     private void SetHealth(int value)
