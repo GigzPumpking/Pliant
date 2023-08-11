@@ -30,12 +30,14 @@ public class FormManager : MonoBehaviour
     public Image nextSprite; //the icon for the transformation menu icon of next to select
     public Image prevSprite; //the icon for the transformation menu icon of previous select
     public PlayerColliderScript playerColliderScript;
+    [SerializeField] IsometricCharacterController playerScript;
 
     private int selectedForm = 0, nextForm = 0, prevForm = 0; //indexes for the selected, next, and previous forms
 
     // Start is called before the first frame update
     void Start()
     {
+        playerScript = player.GetComponent<IsometricCharacterController>();
         smoke = player.transform.Find("Smoke").gameObject;
         smokeAnimator = smoke.GetComponent<Animator>();
         // If the player had a previous selected previous load that form otherwise restart at the first form.
@@ -151,8 +153,12 @@ public class FormManager : MonoBehaviour
             smoke.SetActive(true);
             smokeAnimator.Play("Smoke");
             FindAnyObjectByType<AudioManager>().Play("Transformation Poof");
-            if (form.transformation != Transformation.TERRY)
+            if (form.transformation != Transformation.TERRY) {
                 gameManager.LoseHealth(1);
+                if (gameManager.GetHealth() <= 0) {
+                    playerScript.Die();
+                }
+            }
 
             switch(form.transformation) {
                 case Transformation.TERRY:
@@ -167,8 +173,8 @@ public class FormManager : MonoBehaviour
             }
         }
 
-        if (!player.GetComponent<IsometricCharacterController>().onRamp || form.transformation != Transformation.BULLDOZER) {
-            player.GetComponent<IsometricCharacterController>().transformation = form.transformation;
+        if (!playerScript.onRamp || form.transformation != Transformation.BULLDOZER) {
+            playerScript.transformation = form.transformation;
         } else {
             Debug.Log("Player cannot transform into Bulldozer while on ramp");
         }
