@@ -96,8 +96,10 @@ public class IsometricCharacterController : MonoBehaviour
             if (!fall) JumpHandler();
             else FallHandler();
         } else {
-            MoveHandler();
-            if (gameManager.GetHealth() > 0) AnimationHandler();
+            if (gameManager.GetHealth() > 0) {
+                MoveHandler();
+                AnimationHandler();
+            }
         }
 
         CollisionHandler();
@@ -372,14 +374,10 @@ public class IsometricCharacterController : MonoBehaviour
     }
 
     public void Die() {
-        Invoke("DeathAnim", 0.2f);
+        Invoke("DeathAnim", 0.3f);
     }
 
     private void DeathAnim() {
         animator.Play("Death Animation");
-    }
-
-    public void callDeath() {
-        gameManager.Death();
     }
 }
