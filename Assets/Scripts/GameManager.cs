@@ -38,8 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (health <= 0)
-            Death();
+
     }
 
     private void Respawn()
@@ -55,7 +54,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
     }
 
-    private void Death()
+    public void Death()
     {
         if(lastCheckPoint == null)
         {
@@ -64,7 +63,6 @@ public class GameManager : MonoBehaviour
         }
         else
             Invoke("Respawn", resetDelay);
-        
     }
 
     private void SetHealth(int value)

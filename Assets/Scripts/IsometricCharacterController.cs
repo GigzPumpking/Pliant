@@ -59,11 +59,11 @@ public class IsometricCharacterController : MonoBehaviour
     public bool onRamp = false;
     public bool onPlatform = false;
 
-    public static readonly string[] staticDirections = { "Idle Front", "Hurt Idle Front 1", "Hurt Idle Front 2", "Hurt Idle Front 3", "Idle Back"};
+    public static readonly string[] staticDirections = { "Idle Front", "Hurt Idle Front 1", "Hurt Idle Front 2", "Hurt Idle Front 3", "Idle Back", "Hurt Idle Back 1", "Hurt Idle Back 2", "Hurt Idle Back 3"};
     public static readonly string[] staticFrogDirections = { "Idle Front Frog", "Idle Back Frog"};
     public static readonly string[] jumpFrogDirections = { "Jump Front Frog", "Walk Front Frog", "Jump Back Frog", "Walk Back Frog"};
     public static readonly string[] staticBulldozerDirections = { "Idle Front Bulldozer", "Idle Back Bulldozer"};
-    public static readonly string[] runDirections = {"Walk Front", "Walk Back"};
+    public static readonly string[] runDirections = {"Walk Front", "Hurt Walk Front 1", "Hurt Walk Front 2", "Hurt Walk Front 3", "Walk Back", "Hurt Walk Back 1", "Hurt Walk Back 2", "Hurt Walk Back 3"};
 
     // Transformation Variables
     public Transformation transformation = Transformation.TERRY;
@@ -96,8 +96,10 @@ public class IsometricCharacterController : MonoBehaviour
             if (!fall) JumpHandler();
             else FallHandler();
         } else {
-            MoveHandler();
-            AnimationHandler();
+            if (gameManager.GetHealth() > 0) {
+                MoveHandler();
+                AnimationHandler();
+            }
         }
 
         CollisionHandler();
@@ -202,12 +204,15 @@ public class IsometricCharacterController : MonoBehaviour
         switch (transformation) {
             case(Transformation.TERRY):
                 shadow.transform.position = new Vector2(sprite.transform.position.x, sprite.transform.position.y - 0.8f);
+                movementSpeed = 3f;
                 break;
             case(Transformation.FROG):
                 shadow.transform.position = new Vector2(sprite.transform.position.x, (sprite.transform.position.y - 0.2f));
+                movementSpeed = 3.5f;
                 break;
             case(Transformation.BULLDOZER):
                 shadow.transform.position = new Vector2(sprite.transform.position.x, sprite.transform.position.y - 0.4f);
+                movementSpeed = 2f;
                 break;
         }
 
@@ -263,8 +268,38 @@ public class IsometricCharacterController : MonoBehaviour
         switch(transformation) {
             case Transformation.TERRY:
                 if (isMoving) {
-                    if (direction == Direction.DOWN) animator.Play(runDirections[0]);
-                    else animator.Play(runDirections[1]);
+                    if (direction == Direction.DOWN) {
+                        switch(gameManager.GetHealth()) {
+                            case 4:
+                                animator.Play(runDirections[0]);
+                                break;
+                            case 3:
+                                animator.Play(runDirections[1]);
+                                break;
+                            case 2:
+                                animator.Play(runDirections[2]);
+                                break;
+                            case 1:
+                                animator.Play(runDirections[3]);
+                                break;
+                        }
+                    }
+                    else {
+                        switch(gameManager.GetHealth()) {
+                            case 4:
+                                animator.Play(runDirections[4]);
+                                break;
+                            case 3:
+                                animator.Play(runDirections[5]);
+                                break;
+                            case 2:
+                                animator.Play(runDirections[6]);
+                                break;
+                            case 1:
+                                animator.Play(runDirections[7]);
+                                break;
+                        }
+                    }
                 }
                 else {
                     if (direction == Direction.DOWN) {
@@ -283,7 +318,22 @@ public class IsometricCharacterController : MonoBehaviour
                                 break;
                         }
                     }
-                    else animator.Play(staticDirections[4]);
+                    else {
+                        switch(gameManager.GetHealth()) {
+                        case 4:
+                            animator.Play(staticDirections[4]);
+                            break;
+                        case 3:
+                            animator.Play(staticDirections[5]);
+                            break;
+                        case 2:
+                            animator.Play(staticDirections[6]);
+                            break;
+                        case 1:
+                            animator.Play(staticDirections[7]);
+                            break;
+                        }
+                    }
                 }
                 break;
             case Transformation.FROG:
@@ -321,5 +371,13 @@ public class IsometricCharacterController : MonoBehaviour
                 Physics2D.IgnoreLayerCollision(6, 10, false);
             }
         }
+    }
+
+    public void Die() {
+        Invoke("DeathAnim", 0.3f);
+    }
+
+    private void DeathAnim() {
+        animator.Play("Death Animation");
     }
 }
