@@ -153,12 +153,6 @@ public class FormManager : MonoBehaviour
             smoke.SetActive(true);
             smokeAnimator.Play("Smoke");
             FindAnyObjectByType<AudioManager>().Play("Transformation Poof");
-            if (form.transformation != Transformation.TERRY) {
-                gameManager.LoseHealth(1);
-                if (gameManager.GetHealth() <= 0) {
-                    playerScript.Die();
-                }
-            }
 
             switch(form.transformation) {
                 case Transformation.TERRY:

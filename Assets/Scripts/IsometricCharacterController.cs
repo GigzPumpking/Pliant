@@ -277,33 +277,33 @@ public class IsometricCharacterController : MonoBehaviour
             case Transformation.TERRY:
                 if (isMoving) {
                     if (direction == Direction.DOWN) {
-                        switch(gameManager.GetHealth()) {
-                            case 4:
+                        switch(gameManager.hState) {
+                            case HealthState.FULL:
                                 animator.Play(runDirections[0]);
                                 break;
-                            case 3:
+                            case HealthState.THREEQUART:
                                 animator.Play(runDirections[1]);
                                 break;
-                            case 2:
+                            case HealthState.HALF:
                                 animator.Play(runDirections[2]);
                                 break;
-                            case 1:
+                            case HealthState.QUART:
                                 animator.Play(runDirections[3]);
                                 break;
                         }
                     }
                     else {
-                        switch(gameManager.GetHealth()) {
-                            case 4:
+                        switch(gameManager.hState) {
+                            case HealthState.FULL:
                                 animator.Play(runDirections[4]);
                                 break;
-                            case 3:
+                            case HealthState.THREEQUART:
                                 animator.Play(runDirections[5]);
                                 break;
-                            case 2:
+                            case HealthState.HALF:
                                 animator.Play(runDirections[6]);
                                 break;
-                            case 1:
+                            case HealthState.QUART:
                                 animator.Play(runDirections[7]);
                                 break;
                         }
@@ -311,33 +311,33 @@ public class IsometricCharacterController : MonoBehaviour
                 }
                 else {
                     if (direction == Direction.DOWN) {
-                        switch(gameManager.GetHealth()) {
-                            case 4:
+                        switch(gameManager.hState) {
+                            case HealthState.FULL:
                                 animator.Play(staticDirections[0]);
                                 break;
-                            case 3:
+                            case HealthState.THREEQUART:
                                 animator.Play(staticDirections[1]);
                                 break;
-                            case 2:
+                            case HealthState.HALF:
                                 animator.Play(staticDirections[2]);
                                 break;
-                            case 1:
+                            case HealthState.QUART:
                                 animator.Play(staticDirections[3]);
                                 break;
                         }
                     }
                     else {
-                        switch(gameManager.GetHealth()) {
-                        case 4:
+                        switch(gameManager.hState) {
+                        case HealthState.FULL:
                             animator.Play(staticDirections[4]);
                             break;
-                        case 3:
+                        case HealthState.THREEQUART:
                             animator.Play(staticDirections[5]);
                             break;
-                        case 2:
+                        case HealthState.HALF:
                             animator.Play(staticDirections[6]);
                             break;
-                        case 1:
+                        case HealthState.QUART:
                             animator.Play(staticDirections[7]);
                             break;
                         }
@@ -375,7 +375,7 @@ public class IsometricCharacterController : MonoBehaviour
                 Physics2D.IgnoreLayerCollision(6, 7, true);
                 Physics2D.IgnoreLayerCollision(6, 10, true);
             } else {
-                Debug.Log("not on platform");
+                //Debug.Log("not on platform");
                 Physics2D.IgnoreLayerCollision(6, 7, false);
                 Physics2D.IgnoreLayerCollision(6, 10, false);
             }

@@ -17,8 +17,8 @@ MonoBehaviour:
     formSprite: {fileID: 21300000, guid: a1fe69a260dbc3d43b44429b1e6d7628, type: 3}
     imageSprite: {fileID: 21300000, guid: f403ecc66288b4769bc28504776085c7, type: 3}
   - transformation: 1
-    formSprite: {fileID: 21300000, guid: 2c960a24931c06442bb61879ee6c05fc, type: 3}
+    formSprite: {fileID: 21300000, guid: b90bf49e69da3104fa0cb89344830ca3, type: 3}
     imageSprite: {fileID: 21300000, guid: c431ba3838d194b1eb51c24025c9df94, type: 3}
   - transformation: 2
-    formSprite: {fileID: 21300000, guid: 93de837b243f93349b90d80562b66537, type: 3}
-    imageSprite: {fileID: 21300000, guid: e0e20f8def96d44cea324b7dee842a9a, type: 3}
+    formSprite: {fileID: 21300000, guid: 44705f90a9453c94ba74dd7a2c33102a, type: 3}
+    imageSprite: {fileID: 21300000, guid: c17dc9c8032f81d40aada192e1992fc0, type: 3}
