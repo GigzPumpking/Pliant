@@ -237,7 +237,7 @@ public class IsometricCharacterController : MonoBehaviour
         float vertical = 0f;
 
         // if m key is pressed, set dialogue to active
-        if (Input.GetKeyDown(KeyCode.M) && dialogue.validSentences() && !dialogue.isActive() && couldTalk) {
+        if (Input.GetKeyDown(KeyCode.Return) && dialogue.validSentences() && !dialogue.isActive() && couldTalk) {
             dialogue.Appear();
         }
         
