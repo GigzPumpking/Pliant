@@ -12,7 +12,6 @@ public class GamepadCharacterController : MonoBehaviour
     void Awake()
     {
         controls = new ControllerInputs();
-        Debug.Log(controls);
 
         controls.Gameplay.Move.performed += ctx => playerScript.setMovement(ctx.ReadValue<Vector2>());
         controls.Gameplay.Move.canceled += ctx => playerScript.setMovement(Vector2.zero);

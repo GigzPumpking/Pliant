@@ -16,6 +16,9 @@ public class IsometricCharacterController : MonoBehaviour
     private SpriteRenderer TerrySprite;
     private Transform sprite;
 
+    public Dialogue dialogue;
+    public bool couldTalk = false;
+
     enum Direction {
         UP,
         DOWN
@@ -232,6 +235,11 @@ public class IsometricCharacterController : MonoBehaviour
     void InputHandler() {
         float horizontal = 0f;
         float vertical = 0f;
+
+        // if m key is pressed, set dialogue to active
+        if (Input.GetKeyDown(KeyCode.M) && dialogue.validSentences() && !dialogue.isActive() && couldTalk) {
+            dialogue.Appear();
+        }
         
         if (Input.GetKey(KeyCode.A)) horizontal = -1f;
         else if (Input.GetKey(KeyCode.D)) horizontal = 1f;
@@ -367,6 +375,7 @@ public class IsometricCharacterController : MonoBehaviour
                 Physics2D.IgnoreLayerCollision(6, 7, true);
                 Physics2D.IgnoreLayerCollision(6, 10, true);
             } else {
+                Debug.Log("not on platform");
                 Physics2D.IgnoreLayerCollision(6, 7, false);
                 Physics2D.IgnoreLayerCollision(6, 10, false);
             }
@@ -379,5 +388,13 @@ public class IsometricCharacterController : MonoBehaviour
 
     private void DeathAnim() {
         animator.Play("Death Animation");
+    }
+
+    public void canTalk() {
+        couldTalk = true;
+    }
+
+    public void cannotTalk() {
+        couldTalk = false;
     }
 }
