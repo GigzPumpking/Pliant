@@ -48,20 +48,20 @@ MonoBehaviour:
   - name: Theme
     clip: {fileID: 0}
     volume: 0
-    pitch: 0
+    pitch: 0.1
     loop: 0
     source: {fileID: 0}
   - name: Ambience
     clip: {fileID: 8300000, guid: 7a90df5e9daa445349e8dcc6a64c018a, type: 3}
     volume: 0.724
     pitch: 1
-    loop: 0
+    loop: 1
     source: {fileID: 0}
   - name: Radio
     clip: {fileID: 8300000, guid: 3ca5de335088c44659b52992b23e96c6, type: 3}
-    volume: 0
-    pitch: 0
-    loop: 0
+    volume: 0.807
+    pitch: 1
+    loop: 1
     source: {fileID: 0}
   - name: Ambience Radio
     clip: {fileID: 8300000, guid: a22fea4cf8d6b4b459543be6901bf9cf, type: 3}
