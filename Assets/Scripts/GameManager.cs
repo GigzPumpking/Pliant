@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool isTerry = true;
     [SerializeField] private bool formDamage = false;
 
+    [SerializeField] private GameObject deathUI;
+
     private IsometricCharacterController playerScript;
 
     private static GameManager instance;
@@ -44,6 +46,8 @@ public class GameManager : MonoBehaviour
 
         playerScript = player.GetComponent<IsometricCharacterController>();
 
+        deathUI.SetActive(false);
+
         hstage1 = maxHealth;
         hstage2 = 3 * (maxHealth / 4);
         hstage3 = maxHealth / 2;
@@ -59,7 +63,8 @@ public class GameManager : MonoBehaviour
     {
         if (health <= 0)
         {
-            Death();
+            playerScript.Die();
+            Invoke(nameof(Death), resetDelay);
         }
 
         if (playerScript.transformation != Transformation.TERRY)
@@ -94,14 +99,26 @@ public class GameManager : MonoBehaviour
 
     public void Death()
     {
-        if(lastCheckPoint == null)
-        {
-            playerScript.Die();
+        deathUI.SetActive(true);
+    }
 
-            Invoke("ResetGame", resetDelay);
+    public void Retry()
+    {
+        deathUI.SetActive(false);
+
+        if (lastCheckPoint == null)
+        {
+            ResetGame();
         }
         else
-            Invoke("Respawn", resetDelay);
+            Respawn();
+    }
+
+    public void Quit()
+    {
+        deathUI.SetActive(false);
+
+        SceneManager.LoadScene("Main Menu");
     }
 
     private void SetHealth(float value)
@@ -112,7 +129,7 @@ public class GameManager : MonoBehaviour
         if (health < 0)
             health = 0;
 
-        //healthText.text = "Health: " + health.ToString();
+        healthText.text = "Health: " + health.ToString();
 
         UpdateHealth();
     }
