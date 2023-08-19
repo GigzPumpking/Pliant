@@ -14,7 +14,6 @@ public class DefaultButtonSelect : MonoBehaviour
     void Awake() 
     {
         controls = new ControllerInputs();
-        Debug.Log(controls);
 
         controls.Gameplay.Interact.performed += ctx => Click();
     }
