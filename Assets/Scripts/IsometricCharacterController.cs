@@ -236,10 +236,9 @@ public class IsometricCharacterController : MonoBehaviour
         float horizontal = 0f;
         float vertical = 0f;
 
-        // if m key is pressed, set dialogue to active
-        if (Input.GetKeyDown(KeyCode.Return) && dialogue.validSentences() && !dialogue.isActive() && couldTalk) {
-            dialogue.Appear();
-        }
+        if (Input.GetKeyDown(KeyCode.Return)) {
+            Interact();
+        };
         
         if (Input.GetKey(KeyCode.A)) horizontal = -1f;
         else if (Input.GetKey(KeyCode.D)) horizontal = 1f;
@@ -396,5 +395,11 @@ public class IsometricCharacterController : MonoBehaviour
 
     public void cannotTalk() {
         couldTalk = false;
+    }
+
+    public void Interact() {
+        if (dialogue.validSentences() && !dialogue.isActive() && couldTalk) {
+            dialogue.Appear();
+        }
     }
 }

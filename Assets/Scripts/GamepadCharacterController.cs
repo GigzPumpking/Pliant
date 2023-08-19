@@ -8,6 +8,7 @@ public class GamepadCharacterController : MonoBehaviour
     ControllerInputs controls;
     public IsometricCharacterController playerScript;
     public FormManager formScript;
+    public Dialogue dialogueScript;
 
     void Awake()
     {
@@ -20,6 +21,7 @@ public class GamepadCharacterController : MonoBehaviour
         controls.Gameplay.CycleRight.performed += ctx => formScript.NextChoice();
         controls.Gameplay.CycleLeft.performed += ctx => formScript.PrevChoice();
         controls.Gameplay.Jump.performed += ctx => Jump();
+        controls.Gameplay.Interact.performed += ctx => gamepadInteract();
 
     }
 
@@ -40,6 +42,15 @@ public class GamepadCharacterController : MonoBehaviour
     void Jump() {
         if (playerScript.transformation == Transformation.FROG) {
             playerScript.setJump();
+        }
+    }
+
+    void gamepadInteract() 
+    {
+        if (dialogueScript.gameObject.activeSelf) {
+            dialogueScript.checkNext();
+        } else {
+            playerScript.Interact();
         }
     }
 }
