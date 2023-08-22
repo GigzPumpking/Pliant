@@ -20,9 +20,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject deathUI;
 
+    private static GameManager instance;
+
     private IsometricCharacterController playerScript;
 
-    private static GameManager instance;
+    private AudioManager am;
+
+    private bool dead = false;
 
     private float hstage1, hstage2, hstage3, hstage4;
 
@@ -46,8 +50,6 @@ public class GameManager : MonoBehaviour
 
         playerScript = player.GetComponent<IsometricCharacterController>();
 
-        deathUI.SetActive(false);
-
         hstage1 = maxHealth;
         hstage2 = 3 * (maxHealth / 4);
         hstage3 = maxHealth / 2;
@@ -55,16 +57,22 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        deathUI.SetActive(false);
+
         SetHealth(maxHealth);
-        FindAnyObjectByType<AudioManager>().Play("Ambience");
+
+        PlayBGSound();
     }
 
     private void Update()
     {
         if (health <= 0)
         {
-            playerScript.Die();
-            Invoke(nameof(Death), resetDelay);
+            if (!dead)
+            {
+                playerScript.Die();
+                Invoke(nameof(Death), resetDelay);
+            }
         }
 
         if (playerScript.transformation != Transformation.TERRY)
@@ -84,11 +92,25 @@ public class GameManager : MonoBehaviour
 
     }
 
+    private void PlayBGSound()
+    {
+        FindAnyObjectByType<AudioManager>().Play("Ambience");
+        FindAnyObjectByType<AudioManager>().Play("Radio");
+    }
+
+    private void StopBGSound()
+    {
+        FindAnyObjectByType<AudioManager>().Stop("Ambience");
+        FindAnyObjectByType<AudioManager>().Stop("Radio");
+    }
+
     private void Respawn()
     {
         SetHealth(maxHealth);
         player.transform.position = lastCheckPoint.transform.position;
         Debug.Log("Player Respawned");
+
+        deathUI.SetActive(false);
     }
 
     private void ResetGame()
@@ -99,24 +121,32 @@ public class GameManager : MonoBehaviour
 
     public void Death()
     {
+        dead = true;
+
         deathUI.SetActive(true);
+        playerScript.transformation = Transformation.TERRY;
     }
 
     public void Retry()
     {
-        deathUI.SetActive(false);
-
         if (lastCheckPoint == null)
         {
             ResetGame();
         }
         else
+        {
             Respawn();
+
+            dead = false;
+        }
+
     }
 
     public void Quit()
     {
         deathUI.SetActive(false);
+
+        StopBGSound();
 
         SceneManager.LoadScene("Main Menu");
     }
@@ -186,6 +216,15 @@ public class GameManager : MonoBehaviour
         }
         else
             CancelInvoke(nameof(FormDamage));
+    }
+
+    public void EndPoint() => Win();
+
+    private void Win()
+    {
+        StopBGSound();
+
+        SceneManager.LoadScene("Win Screen");
     }
 
 }
