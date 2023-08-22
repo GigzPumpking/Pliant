@@ -392,6 +392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultButton: {fileID: 1060753787}
+  eventSystem: {fileID: 507219064}
 --- !u!1 &230427838
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,6 +781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultButton: {fileID: 601387968}
+  eventSystem: {fileID: 507219064}
 --- !u!1 &2066319526
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,3 +1427,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultButton: {fileID: 1631534449}
+  eventSystem: {fileID: 507219064}

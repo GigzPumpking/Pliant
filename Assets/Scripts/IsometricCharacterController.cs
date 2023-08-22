@@ -398,7 +398,7 @@ public class IsometricCharacterController : MonoBehaviour
     }
 
     public void Interact() {
-        if (dialogue.validSentences() && !dialogue.isActive() && couldTalk) {
+        if (gameManager.GetHealth() > 0 && dialogue.validSentences() && !dialogue.isActive() && couldTalk) {
             dialogue.Appear();
         }
     }
