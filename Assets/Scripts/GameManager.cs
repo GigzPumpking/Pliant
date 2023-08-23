@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
         {
             if (!dead)
             {
+                dead = true;
                 playerScript.Die();
                 Invoke(nameof(Death), resetDelay);
             }
@@ -119,10 +120,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
     }
 
+    public void delayDeath() {
+        Invoke(nameof(Death), 50f);
+    }
+
     public void Death()
     {
-        dead = true;
-
         deathUI.SetActive(true);
         playerScript.transformation = Transformation.TERRY;
     }

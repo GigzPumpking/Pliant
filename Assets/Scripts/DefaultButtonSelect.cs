@@ -18,10 +18,6 @@ public class DefaultButtonSelect : MonoBehaviour
         controls.Gameplay.Interact.performed += ctx => Click();
     }
 
-    void Update() {
-        Debug.Log(eventSystem.currentSelectedGameObject);
-    }
-
     void OnEnable()
     {
         controls.Gameplay.Enable();

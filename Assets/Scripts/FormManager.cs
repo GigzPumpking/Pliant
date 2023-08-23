@@ -150,9 +150,7 @@ public class FormManager : MonoBehaviour
         formSprite.sprite = form.formSprite;
 
         if (player.GetComponent<IsometricCharacterController>().transformation != form.transformation) {
-            smoke.SetActive(true);
-            smokeAnimator.Play("Smoke");
-            FindAnyObjectByType<AudioManager>().Play("Transformation Poof");
+            playerScript.Smoke();
 
             switch(form.transformation) {
                 case Transformation.TERRY:

@@ -382,10 +382,12 @@ public class IsometricCharacterController : MonoBehaviour
     }
 
     public void Die() {
-        Invoke("DeathAnim", 0.3f);
+        Invoke("DeathAnim", 0.5f);
     }
 
     private void DeathAnim() {
+        Smoke();
+        transformation = Transformation.TERRY;
         animator.Play("Death Animation");
     }
 
@@ -401,5 +403,11 @@ public class IsometricCharacterController : MonoBehaviour
         if (gameManager.GetHealth() > 0 && dialogue.validSentences() && !dialogue.isActive() && couldTalk) {
             dialogue.Appear();
         }
+    }
+
+    public void Smoke() {
+        smoke.gameObject.SetActive(true);
+        smokeAnimator.Play("Smoke");
+        FindAnyObjectByType<AudioManager>().Play("Transformation Poof");
     }
 }
