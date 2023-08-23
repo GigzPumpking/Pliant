@@ -382,13 +382,19 @@ public class IsometricCharacterController : MonoBehaviour
     }
 
     public void Die() {
-        Invoke("DeathAnim", 0.5f);
+        transformation = Transformation.TERRY;
+        AnimationHandler();
+        Smoke();
+        Invoke("DeathAnim", 1.5f);
     }
 
     private void DeathAnim() {
-        Smoke();
-        transformation = Transformation.TERRY;
         animator.Play("Death Animation");
+        Invoke(nameof(DeathScreen), 2.5f);
+    }
+
+    private void DeathScreen() {
+        gameManager.Death();
     }
 
     public void canTalk() {

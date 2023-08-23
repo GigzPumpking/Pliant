@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
             {
                 dead = true;
                 playerScript.Die();
-                Invoke(nameof(Death), resetDelay);
+                //Invoke(nameof(Death), resetDelay);
             }
         }
 
