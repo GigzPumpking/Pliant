@@ -21,4 +21,4 @@ MonoBehaviour:
     imageSprite: {fileID: 21300000, guid: c431ba3838d194b1eb51c24025c9df94, type: 3}
   - transformation: 2
     formSprite: {fileID: 21300000, guid: 44705f90a9453c94ba74dd7a2c33102a, type: 3}
-    imageSprite: {fileID: 21300000, guid: c17dc9c8032f81d40aada192e1992fc0, type: 3}
+    imageSprite: {fileID: 21300000, guid: 501bf1527cd2740d3ab51b3d321af03a, type: 3}
