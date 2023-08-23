@@ -38896,6 +38896,11 @@ Transform:
   m_Father: {fileID: 1838824623}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &765354060 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9115923086759976319, guid: 97454659db5a24bb0bafe95cbac3212c, type: 3}
+  m_PrefabInstance: {fileID: 9115923086748774311}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &768496292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71361,7 +71366,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1423146525
 GameObject:
@@ -124185,12 +124190,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9115923086001576285, guid: 97454659db5a24bb0bafe95cbac3212c, type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 84
       objectReference: {fileID: 0}
     - target: {fileID: 9115923086001576285, guid: 97454659db5a24bb0bafe95cbac3212c, type: 3}
       propertyPath: m_FillRect
       value: 
-      objectReference: {fileID: 1335675067}
+      objectReference: {fileID: 765354060}
     - target: {fileID: 9115923086001576286, guid: 97454659db5a24bb0bafe95cbac3212c, type: 3}
       propertyPath: gameManager
       value: 
