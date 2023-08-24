@@ -17,7 +17,6 @@ public class RampEdgeCollider : MonoBehaviour
     void FixedUpdate()
     {
         if (polyCol.IsTouchingLayers(LayerMask.GetMask("World")) || polyCol.IsTouchingLayers(LayerMask.GetMask("Border"))) {
-            Debug.Log("RampEdgeCollider is touching world or border");
             col.enabled = false;
         } else {
             col.enabled = true;

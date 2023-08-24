@@ -9,7 +9,7 @@ public class triggerDialogue : MonoBehaviour
     public GameObject interactButton;
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Player")) {
+        if (other.CompareTag("Player") && playerScript.transformation == Transformation.TERRY) {
             dialogue.setSentences(dialogueLines);
             playerScript.canTalk();
             interactButton.SetActive(true);

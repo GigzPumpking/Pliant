@@ -5,15 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class WinScreen : MonoBehaviour
 {
-    public float transitionWaitTime = 7f;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject loader;
+
+    private SceneLoader sceneLoader;
+
+    private void Awake()
     {
-        Invoke(nameof(Transition), transitionWaitTime);
+        sceneLoader = loader.GetComponent<SceneLoader>();
     }
 
-    void Transition()
+    public void Transition()
     {
-        SceneManager.LoadScene("Main Menu");
+        sceneLoader.LoadNextScene("Main Menu");
     }
 }
