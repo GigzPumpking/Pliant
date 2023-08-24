@@ -5,15 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private string sceneName = "Level";
+    [SerializeField] private GameObject loader;
+
+    [SerializeField] private string levelSceneName;
+
+    private SceneLoader sceneLoader;
+
+    private void Awake()
+    {
+        sceneLoader = loader.GetComponent<SceneLoader>();
+    }
 
     public void PlayGame()
     {
-        SceneManager.LoadScene(sceneName);
+        sceneLoader.LoadNextScene(levelSceneName);
     }
 
     public void QuitGame()
     {
-        Application.Quit();
+        sceneLoader.QuitFade();
     }
 }
