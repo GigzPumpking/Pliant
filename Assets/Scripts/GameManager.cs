@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject deathUI;
 
+    [SerializeField] private GameObject loader;
+
+    private SceneLoader sceneLoader;
+
     private static GameManager instance;
 
     private IsometricCharacterController playerScript;
@@ -47,6 +51,8 @@ public class GameManager : MonoBehaviour
             instance = this;
         else
             Destroy(this);
+
+        sceneLoader = loader.GetComponent<SceneLoader>();
 
         playerScript = player.GetComponent<IsometricCharacterController>();
 
@@ -227,7 +233,7 @@ public class GameManager : MonoBehaviour
     {
         StopBGSound();
 
-        SceneManager.LoadScene("Win Screen");
+        sceneLoader.LoadNextScene("WinScene");
     }
 
 }

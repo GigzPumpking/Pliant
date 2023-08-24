@@ -12,9 +12,16 @@ public class SceneLoader : MonoBehaviour
     public float transitionTimer = 1f;
    
 
-    public void LoadNextScene()
+    public void LoadNextScene(string newScene)
     {
+        nextScene = newScene;
+
         StartCoroutine(LoadScene());
+    }
+
+    public void QuitFade()
+    {
+        StartCoroutine(QuitTransition());
     }
 
     IEnumerator LoadScene()
@@ -24,6 +31,15 @@ public class SceneLoader : MonoBehaviour
         yield return new WaitForSeconds(transitionTimer);
 
         SceneManager.LoadScene(nextScene);
+    }
+
+    IEnumerator QuitTransition()
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTimer);
+
+        Application.Quit();
     }
 
 }
