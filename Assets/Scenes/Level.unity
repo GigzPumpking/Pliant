@@ -6881,6 +6881,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TextGuide (Push Box)
       objectReference: {fileID: 0}
+    - target: {fileID: 3836850179107581428, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836850179107581428, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1561152835
+      objectReference: {fileID: 0}
     - target: {fileID: 3836850179107581429, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -12682,11 +12690,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8549448986901220621, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.73
+      value: -6.33
       objectReference: {fileID: 0}
     - target: {fileID: 8549448986901220621, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 42.09
+      value: -13.54
       objectReference: {fileID: 0}
     - target: {fileID: 8549448986901220621, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -24103,6 +24111,14 @@ PrefabInstance:
     - target: {fileID: 3836850179107581195, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: m_Name
       value: TextGuide (Transform)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836850179107581428, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836850179107581428, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1561152835
       objectReference: {fileID: 0}
     - target: {fileID: 3836850179107581429, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: m_RootOrder
@@ -48733,6 +48749,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TextGuide (Health1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3836850179107581428, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836850179107581428, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1561152835
+      objectReference: {fileID: 0}
     - target: {fileID: 3836850179107581429, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -53441,6 +53465,14 @@ PrefabInstance:
     - target: {fileID: 3836850179107581195, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: m_Name
       value: TextGuide (Last)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836850179107581428, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836850179107581428, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1561152835
       objectReference: {fileID: 0}
     - target: {fileID: 3836850179107581429, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: m_RootOrder
@@ -109313,6 +109345,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TextGuide (Push Ramp)
       objectReference: {fileID: 0}
+    - target: {fileID: 3836850179107581428, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836850179107581428, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1561152835
+      objectReference: {fileID: 0}
     - target: {fileID: 3836850179107581429, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -109563,6 +109603,14 @@ PrefabInstance:
     - target: {fileID: 3836850179107581195, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: m_Name
       value: TextGuide (Health2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836850179107581428, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836850179107581428, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1561152835
       objectReference: {fileID: 0}
     - target: {fileID: 3836850179107581429, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: m_RootOrder
@@ -121121,6 +121169,14 @@ PrefabInstance:
     - target: {fileID: 3836850179107581195, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: m_Name
       value: TextGuide (Jump)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836850179107581428, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836850179107581428, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1561152835
       objectReference: {fileID: 0}
     - target: {fileID: 3836850179107581429, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: m_RootOrder
