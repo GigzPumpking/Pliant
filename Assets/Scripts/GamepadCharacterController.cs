@@ -57,7 +57,7 @@ public class GamepadCharacterController : MonoBehaviour
 
     void gamepadPause() 
     {
-        if (pauseMenu.isPaused)
+        if (pauseMenu.checkPause())
             pauseMenu.ResumeGame();
         else
             pauseMenu.PauseGame();
