@@ -28,13 +28,7 @@ public class Dialogue : MonoBehaviour
         // if mouse button is pressed, go to next line
         if (Input.GetMouseButtonDown(0)) 
         {
-            if (textDisplay.text == sentences[index]) 
-            {
-                NextLine();
-            } else {
-                StopAllCoroutines();
-                textDisplay.text = sentences[index];
-            }
+            checkNext();
         }
     }
 
@@ -88,5 +82,16 @@ public class Dialogue : MonoBehaviour
     public bool validSentences() 
     {
         return !(sentences == null || sentences.Length == 0);
+    }
+
+    public void checkNext() 
+    {
+        if (textDisplay.text == sentences[index]) 
+        {
+            NextLine();
+        } else {
+            StopAllCoroutines();
+            textDisplay.text = sentences[index];
+        }
     }
 }

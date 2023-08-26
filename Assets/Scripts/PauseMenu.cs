@@ -5,11 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    private SceneLoader sceneloader;
 
     public GameObject pauseMenu;
 
+    public GameObject loader;
+
     public static bool isPaused;
 
+    private void Awake()
+    {
+        sceneloader = loader.GetComponent<SceneLoader>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -47,11 +54,21 @@ public class PauseMenu : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("Main Menu");
+        FindAnyObjectByType<AudioManager>().Stop("Ambience");
+        FindAnyObjectByType<AudioManager>().Stop("Radio");
+
+        Time.timeScale = 1f;
+
+        sceneloader.LoadNextScene("Main Menu");
     }
 
     public void QuitGame()
     {
-        Application.Quit();
+        sceneloader.QuitFade();
+    }
+
+    public bool checkPause() 
+    {
+        return isPaused;
     }
 }

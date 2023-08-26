@@ -236,10 +236,9 @@ public class IsometricCharacterController : MonoBehaviour
         float horizontal = 0f;
         float vertical = 0f;
 
-        // if m key is pressed, set dialogue to active
-        if (Input.GetKeyDown(KeyCode.Return) && dialogue.validSentences() && !dialogue.isActive() && couldTalk) {
-            dialogue.Appear();
-        }
+        if (Input.GetKeyDown(KeyCode.Return)) {
+            Interact();
+        };
         
         if (Input.GetKey(KeyCode.A)) horizontal = -1f;
         else if (Input.GetKey(KeyCode.D)) horizontal = 1f;
@@ -383,11 +382,19 @@ public class IsometricCharacterController : MonoBehaviour
     }
 
     public void Die() {
-        Invoke("DeathAnim", 0.3f);
+        transformation = Transformation.TERRY;
+        AnimationHandler();
+        Smoke();
+        Invoke("DeathAnim", 1.5f);
     }
 
     private void DeathAnim() {
         animator.Play("Death Animation");
+        Invoke(nameof(DeathScreen), 2.5f);
+    }
+
+    private void DeathScreen() {
+        gameManager.Death();
     }
 
     public void canTalk() {
@@ -396,5 +403,17 @@ public class IsometricCharacterController : MonoBehaviour
 
     public void cannotTalk() {
         couldTalk = false;
+    }
+
+    public void Interact() {
+        if (transformation == Transformation.TERRY && gameManager.GetHealth() > 0 && dialogue.validSentences() && !dialogue.isActive() && couldTalk) {
+            dialogue.Appear();
+        }
+    }
+
+    public void Smoke() {
+        smoke.gameObject.SetActive(true);
+        smokeAnimator.Play("Smoke");
+        FindAnyObjectByType<AudioManager>().Play("Transformation Poof");
     }
 }
