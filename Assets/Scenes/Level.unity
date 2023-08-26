@@ -14113,6 +14113,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1679531263, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
+      propertyPath: introText
+      value: 
+      objectReference: {fileID: 692226973}
+    - target: {fileID: 1679531263, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
+      propertyPath: pauseMenu
+      value: 
+      objectReference: {fileID: 1885121217}
+    - target: {fileID: 1679531263, guid: 49587122051d641e2b6ccb884a4d49e6, type: 3}
       propertyPath: dialogueScript
       value: 
       objectReference: {fileID: 1604430978}

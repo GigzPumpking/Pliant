@@ -10,6 +10,7 @@ public class GamepadCharacterController : MonoBehaviour
     public FormManager formScript;
     public Dialogue dialogueScript;
     public PauseMenu pauseMenu;
+    public GameObject introText;
 
     void Awake()
     {
@@ -48,6 +49,11 @@ public class GamepadCharacterController : MonoBehaviour
 
     void gamepadInteract() 
     {
+        if (introText.gameObject.activeSelf) {
+            introText.gameObject.SetActive(false);
+            return;
+        }
+
         if (dialogueScript.gameObject.activeSelf) {
             dialogueScript.checkNext();
         } else {
