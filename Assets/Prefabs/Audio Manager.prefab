@@ -87,3 +87,9 @@ MonoBehaviour:
     pitch: 0
     loop: 0
     source: {fileID: 0}
+  - name: Main MenuBGM
+    clip: {fileID: 8300000, guid: f3dd51f21d7284980b8a46f82b1e1758, type: 3}
+    volume: 0.807
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
