@@ -73,3 +73,5 @@ crashlytics-build.properties
 
 # Mac File DS Store
 .DS_Store
+
+.fake

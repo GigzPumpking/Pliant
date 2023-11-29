@@ -137,6 +137,7 @@ public class IsometricCharacterController : MonoBehaviour
 
     void JumpHandler() {
         if (isGrounded) {
+            FindAnyObjectByType<AudioManager>().Play("Jump");
             currPos = rbody.position;
             landPos = currPos + movement.normalized * movementSpeed;
 
@@ -281,6 +282,7 @@ public class IsometricCharacterController : MonoBehaviour
         switch(transformation) {
             case Transformation.TERRY:
                 if (isMoving) {
+                    FindAnyObjectByType<AudioManager>().Play("Walk");
                     if (direction == Direction.DOWN) {
                         switch(gameManager.hState) {
                             case HealthState.FULL:
@@ -351,6 +353,7 @@ public class IsometricCharacterController : MonoBehaviour
                 break;
             case Transformation.FROG:
                 if (isMoving) {
+                    FindAnyObjectByType<AudioManager>().Play("Walk");
                     if (direction == Direction.DOWN) {
                         animator.Play(jumpFrogDirections[1]);
                     }
@@ -363,6 +366,7 @@ public class IsometricCharacterController : MonoBehaviour
                 }
                 break;
             case Transformation.BULLDOZER:
+                FindAnyObjectByType<AudioManager>().Play("Bulldozer Walk");
                 if (isMoving) {
                     if (direction == Direction.DOWN) {
                         animator.Play(walkBulldozerDirections[0]);
@@ -403,6 +407,7 @@ public class IsometricCharacterController : MonoBehaviour
 
     private void DeathAnim() {
         animator.Play("Death Animation");
+        FindAnyObjectByType<AudioManager>().Play("Death");
         Invoke(nameof(DeathScreen), 2.5f);
     }
 
@@ -433,5 +438,6 @@ public class IsometricCharacterController : MonoBehaviour
     public void HealAnim() {
         sparkles.gameObject.SetActive(true);
         sparklesAnimator.Play("Heal Anim");
+        FindAnyObjectByType<AudioManager>().Play("Heal");
     }
 }

@@ -60387,11 +60387,83 @@ PrefabInstance:
       value: Audio Manager
       objectReference: {fileID: 0}
     - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
       propertyPath: sounds.Array.data[1].loop
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9455992d30553445dbc3ca96fb7221de, type: 3}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[6].name
+      value: Bulldozer Walk
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[7].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: fe702f81c907f45339f7f5d71d1eaa5e, type: 3}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[7].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[7].name
+      value: Transformation Poof
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4916cdd6205d7408c846a2814279d798, type: 3}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[8].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[8].name
+      value: Heal
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[9].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: d50a74866f1994d6398a56cf9b65a1f2, type: 3}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[9].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[9].name
+      value: Death
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[10].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: f3dd51f21d7284980b8a46f82b1e1758, type: 3}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[10].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[10].name
+      value: Main MenuBGM
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
       propertyPath: sounds.Array.data[6].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[8].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[9].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[10].pitch
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
@@ -60408,7 +60480,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
       propertyPath: sounds.Array.data[6].volume
+      value: 0.807
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[7].volume
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[8].volume
+      value: 0.807
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[9].volume
+      value: 0.807
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573068608414637599, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
+      propertyPath: sounds.Array.data[10].volume
+      value: 0.807
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e33bf64478c2ae4aa075aa9d6bef480, type: 3}
@@ -122527,7 +122615,15 @@ PrefabInstance:
     - target: {fileID: 6018095705231203770, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1623096792}
+      objectReference: {fileID: 1885121217}
+    - target: {fileID: 6018095705231203770, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 6018095705231203770, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6018095705277812560, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
       propertyPath: m_Name
       value: PauseMenu

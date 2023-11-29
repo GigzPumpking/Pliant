@@ -64,6 +64,7 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame()
     {
+        Time.timeScale = 1f;
         sceneloader.QuitFade();
     }
 
