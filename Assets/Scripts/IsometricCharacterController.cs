@@ -282,7 +282,6 @@ public class IsometricCharacterController : MonoBehaviour
         switch(transformation) {
             case Transformation.TERRY:
                 if (isMoving) {
-                    FindAnyObjectByType<AudioManager>().Play("Walk");
                     if (direction == Direction.DOWN) {
                         switch(gameManager.hState) {
                             case HealthState.FULL:
@@ -315,6 +314,9 @@ public class IsometricCharacterController : MonoBehaviour
                                 break;
                         }
                     }
+
+                    if (!FindAnyObjectByType<AudioManager>().IsPlaying("Walk"))
+                        FindAnyObjectByType<AudioManager>().Play("Walk");
                 }
                 else {
                     if (direction == Direction.DOWN) {
@@ -349,32 +351,43 @@ public class IsometricCharacterController : MonoBehaviour
                             break;
                         }
                     }
+                    if (FindAnyObjectByType<AudioManager>().IsPlaying("Walk"))
+                        FindAnyObjectByType<AudioManager>().Pause("Walk");
                 }
                 break;
             case Transformation.FROG:
                 if (isMoving) {
-                    FindAnyObjectByType<AudioManager>().Play("Walk");
                     if (direction == Direction.DOWN) {
                         animator.Play(jumpFrogDirections[1]);
                     }
                     else animator.Play(jumpFrogDirections[3]);
+
+                    if (!FindAnyObjectByType<AudioManager>().IsPlaying("Walk"))
+                        FindAnyObjectByType<AudioManager>().Play("Walk");
                 } else {
                     if (direction == Direction.DOWN) {
                         animator.Play(staticFrogDirections[0]);
                     }
                     else animator.Play(staticFrogDirections[1]);
+                    if (FindAnyObjectByType<AudioManager>().IsPlaying("Walk"))
+                        FindAnyObjectByType<AudioManager>().Pause("Walk");
                 }
                 break;
             case Transformation.BULLDOZER:
-                FindAnyObjectByType<AudioManager>().Play("Bulldozer Walk");
                 if (isMoving) {
                     if (direction == Direction.DOWN) {
                         animator.Play(walkBulldozerDirections[0]);
                     }
                     else animator.Play(walkBulldozerDirections[1]);
+
+                    if (!FindAnyObjectByType<AudioManager>().IsPlaying("Bulldozer Walk"))
+                        FindAnyObjectByType<AudioManager>().Play("Bulldozer Walk");
                 } else {
                     if (direction == Direction.DOWN) animator.Play(staticBulldozerDirections[0]);
                     else animator.Play(staticBulldozerDirections[1]);
+
+                    if (FindAnyObjectByType<AudioManager>().IsPlaying("Bulldozer Walk"))
+                        FindAnyObjectByType<AudioManager>().Pause("Bulldozer Walk");
                 }
                 break;
         }
