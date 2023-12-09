@@ -39,6 +39,7 @@ public class SceneLoader : MonoBehaviour
 
         yield return new WaitForSeconds(transitionTimer);
 
+        Debug.Log("Application ended");
         Application.Quit();
     }
 

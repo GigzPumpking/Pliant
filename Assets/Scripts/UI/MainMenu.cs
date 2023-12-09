@@ -16,8 +16,14 @@ public class MainMenu : MonoBehaviour
         sceneLoader = loader.GetComponent<SceneLoader>();
     }
 
+    private void Start()
+    {
+        FindAnyObjectByType<AudioManager>().Play("Main Menu BGM");
+    }
+
     public void PlayGame()
     {
+        FindAnyObjectByType<AudioManager>().Stop("Main Menu BGM");
         sceneLoader.LoadNextScene(levelSceneName);
     }
 

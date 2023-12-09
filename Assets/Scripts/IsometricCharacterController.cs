@@ -137,6 +137,7 @@ public class IsometricCharacterController : MonoBehaviour
 
     void JumpHandler() {
         if (isGrounded) {
+            FindAnyObjectByType<AudioManager>().Play("Jump");
             currPos = rbody.position;
             landPos = currPos + movement.normalized * movementSpeed;
 
@@ -313,6 +314,9 @@ public class IsometricCharacterController : MonoBehaviour
                                 break;
                         }
                     }
+
+                    if (!FindAnyObjectByType<AudioManager>().IsPlaying("Walk"))
+                        FindAnyObjectByType<AudioManager>().Play("Walk");
                 }
                 else {
                     if (direction == Direction.DOWN) {
@@ -347,6 +351,8 @@ public class IsometricCharacterController : MonoBehaviour
                             break;
                         }
                     }
+                    if (FindAnyObjectByType<AudioManager>().IsPlaying("Walk"))
+                        FindAnyObjectByType<AudioManager>().Pause("Walk");
                 }
                 break;
             case Transformation.FROG:
@@ -355,11 +361,16 @@ public class IsometricCharacterController : MonoBehaviour
                         animator.Play(jumpFrogDirections[1]);
                     }
                     else animator.Play(jumpFrogDirections[3]);
+
+                    if (!FindAnyObjectByType<AudioManager>().IsPlaying("Walk"))
+                        FindAnyObjectByType<AudioManager>().Play("Walk");
                 } else {
                     if (direction == Direction.DOWN) {
                         animator.Play(staticFrogDirections[0]);
                     }
                     else animator.Play(staticFrogDirections[1]);
+                    if (FindAnyObjectByType<AudioManager>().IsPlaying("Walk"))
+                        FindAnyObjectByType<AudioManager>().Pause("Walk");
                 }
                 break;
             case Transformation.BULLDOZER:
@@ -368,9 +379,15 @@ public class IsometricCharacterController : MonoBehaviour
                         animator.Play(walkBulldozerDirections[0]);
                     }
                     else animator.Play(walkBulldozerDirections[1]);
+
+                    if (!FindAnyObjectByType<AudioManager>().IsPlaying("Bulldozer Walk"))
+                        FindAnyObjectByType<AudioManager>().Play("Bulldozer Walk");
                 } else {
                     if (direction == Direction.DOWN) animator.Play(staticBulldozerDirections[0]);
                     else animator.Play(staticBulldozerDirections[1]);
+
+                    if (FindAnyObjectByType<AudioManager>().IsPlaying("Bulldozer Walk"))
+                        FindAnyObjectByType<AudioManager>().Pause("Bulldozer Walk");
                 }
                 break;
         }
@@ -403,6 +420,7 @@ public class IsometricCharacterController : MonoBehaviour
 
     private void DeathAnim() {
         animator.Play("Death Animation");
+        FindAnyObjectByType<AudioManager>().Play("Death");
         Invoke(nameof(DeathScreen), 2.5f);
     }
 
@@ -433,5 +451,6 @@ public class IsometricCharacterController : MonoBehaviour
     public void HealAnim() {
         sparkles.gameObject.SetActive(true);
         sparklesAnimator.Play("Heal Anim");
+        FindAnyObjectByType<AudioManager>().Play("Heal");
     }
 }
