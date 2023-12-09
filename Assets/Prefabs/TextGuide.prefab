@@ -80,6 +80,8 @@ MonoBehaviour:
   - Good luck
   playerScript: {fileID: 0}
   interactButton: {fileID: 5202061853069194321}
+  keyboardSprite: {fileID: 21300000, guid: fc7bb22339e9e4dc1a918c75a23f2ae1, type: 3}
+  gamepadSprite: {fileID: 21300000, guid: 3c7d6f7eb8f28964fa7c6de79561d380, type: 3}
 --- !u!1 &3836850178124477001
 GameObject:
   m_ObjectHideFlags: 0

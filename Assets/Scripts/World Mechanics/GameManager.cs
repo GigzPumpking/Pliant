@@ -100,12 +100,16 @@ public class GameManager : MonoBehaviour
 
     private void PlayBGSound()
     {
+        if (FindAnyObjectByType<AudioManager>() == null)
+            return;
         FindAnyObjectByType<AudioManager>().Play("Ambience");
         FindAnyObjectByType<AudioManager>().Play("Radio");
     }
 
     private void StopBGSound()
     {
+        if (FindAnyObjectByType<AudioManager>() == null)
+            return;
         FindAnyObjectByType<AudioManager>().Stop("Ambience");
         FindAnyObjectByType<AudioManager>().Stop("Radio");
     }

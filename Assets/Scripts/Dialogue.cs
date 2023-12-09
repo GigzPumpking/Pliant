@@ -25,8 +25,8 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if mouse button is pressed, go to next line
-        if (Input.GetMouseButtonDown(0)) 
+        // if E is pressed, check if the text is done typing
+        if (Input.GetKeyDown(KeyCode.E) && isActive()) 
         {
             checkNext();
         }

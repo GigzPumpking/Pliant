@@ -28,6 +28,13 @@ public class IsometricCharacterController : MonoBehaviour
     }
     private Direction direction = Direction.DOWN;
 
+    enum LastInputDevice {
+        KEYBOARD,
+        GAMEPAD
+    }
+
+    private LastInputDevice lastInputDevice = LastInputDevice.KEYBOARD;
+
     enum JumpDirection {
         UP,
         DOWN,
@@ -243,9 +250,12 @@ public class IsometricCharacterController : MonoBehaviour
         float horizontal = 0f;
         float vertical = 0f;
 
-        if (Input.GetKeyDown(KeyCode.Return)) {
+        if (Input.GetKeyDown(KeyCode.E)) {
             Interact();
         };
+
+        // if any key is pressed, set lastInputDevice to keyboard
+        if (Input.anyKey) lastInputDevice = LastInputDevice.KEYBOARD;
         
         if (Input.GetKey(KeyCode.A)) horizontal = -1f;
         else if (Input.GetKey(KeyCode.D)) horizontal = 1f;
@@ -452,5 +462,13 @@ public class IsometricCharacterController : MonoBehaviour
         sparkles.gameObject.SetActive(true);
         sparklesAnimator.Play("Heal Anim");
         FindAnyObjectByType<AudioManager>().Play("Heal");
+    }
+
+    public void SetLastInputDevice(int device) {
+        lastInputDevice = (LastInputDevice) device;
+    }
+
+    public int GetLastInputDevice() {
+        return (int) lastInputDevice;
     }
 }
