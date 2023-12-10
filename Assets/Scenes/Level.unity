@@ -136462,27 +136462,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3337999609609219904, guid: 2caab1ea16eee41fbabd3c8481780450, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3337999609609219904, guid: 2caab1ea16eee41fbabd3c8481780450, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3337999609609219904, guid: 2caab1ea16eee41fbabd3c8481780450, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3337999609609219904, guid: 2caab1ea16eee41fbabd3c8481780450, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3337999609609219904, guid: 2caab1ea16eee41fbabd3c8481780450, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -200
+      value: 1616
       objectReference: {fileID: 0}
     - target: {fileID: 3337999609609219904, guid: 2caab1ea16eee41fbabd3c8481780450, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -700
+      value: 442
       objectReference: {fileID: 0}
     - target: {fileID: 3337999609609219904, guid: 2caab1ea16eee41fbabd3c8481780450, type: 3}
       propertyPath: m_LocalPosition.x
@@ -136535,22 +136535,6 @@ PrefabInstance:
     - target: {fileID: 3337999609609219905, guid: 2caab1ea16eee41fbabd3c8481780450, type: 3}
       propertyPath: m_Name
       value: DialogueBox
-      objectReference: {fileID: 0}
-    - target: {fileID: 3337999609944160410, guid: 2caab1ea16eee41fbabd3c8481780450, type: 3}
-      propertyPath: m_fontSize
-      value: 48
-      objectReference: {fileID: 0}
-    - target: {fileID: 3337999609944160410, guid: 2caab1ea16eee41fbabd3c8481780450, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 48
-      objectReference: {fileID: 0}
-    - target: {fileID: 3337999609944160411, guid: 2caab1ea16eee41fbabd3c8481780450, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -13
-      objectReference: {fileID: 0}
-    - target: {fileID: 3337999609944160411, guid: 2caab1ea16eee41fbabd3c8481780450, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 86
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2caab1ea16eee41fbabd3c8481780450, type: 3}
