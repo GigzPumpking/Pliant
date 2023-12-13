@@ -6,6 +6,7 @@ public class RechargeStation : MonoBehaviour
 {
     public GameObject GameManager;
     public GameManager gm;
+    public IsometricCharacterController playerScript;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class RechargeStation : MonoBehaviour
             other.GetComponentInParent<IsometricCharacterController>().transformation == Transformation.TERRY) 
         {
             gm.GainHealth(gm.GetMaxHealth());
+            playerScript.HealAnim();
         }
     }
 }

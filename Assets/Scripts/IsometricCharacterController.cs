@@ -16,6 +16,9 @@ public class IsometricCharacterController : MonoBehaviour
     private SpriteRenderer TerrySprite;
     private Transform sprite;
 
+    private Transform sparkles;
+    private Animator sparklesAnimator;
+
     public Dialogue dialogue;
     public bool couldTalk = false;
 
@@ -24,6 +27,13 @@ public class IsometricCharacterController : MonoBehaviour
         DOWN
     }
     private Direction direction = Direction.DOWN;
+
+    enum LastInputDevice {
+        KEYBOARD,
+        GAMEPAD
+    }
+
+    private LastInputDevice lastInputDevice = LastInputDevice.KEYBOARD;
 
     enum JumpDirection {
         UP,
@@ -66,6 +76,7 @@ public class IsometricCharacterController : MonoBehaviour
     public static readonly string[] staticFrogDirections = { "Idle Front Frog", "Idle Back Frog"};
     public static readonly string[] jumpFrogDirections = { "Jump Front Frog", "Walk Front Frog", "Jump Back Frog", "Walk Back Frog"};
     public static readonly string[] staticBulldozerDirections = { "Idle Front Bulldozer", "Idle Back Bulldozer"};
+    public static readonly string[] walkBulldozerDirections = { "Walk Front Bulldozer", "Walk Back Bulldozer"};
     public static readonly string[] runDirections = {"Walk Front", "Hurt Walk Front 1", "Hurt Walk Front 2", "Hurt Walk Front 3", "Walk Back", "Hurt Walk Back 1", "Hurt Walk Back 2", "Hurt Walk Back 3"};
 
     // Transformation Variables
@@ -82,6 +93,9 @@ public class IsometricCharacterController : MonoBehaviour
         TerrySprite = sprite.GetComponent<SpriteRenderer>();
         smoke = transform.Find("Smoke");
         smokeAnimator = smoke.GetComponent<Animator>();
+        sparkles = transform.Find("Sparkles");
+        sparklesAnimator = sparkles.GetComponent<Animator>();
+        sparkles.gameObject.SetActive(false);
         smoke.gameObject.SetActive(false);
         shadow = transform.Find("Shadow");
         transformationBubble = transform.Find("Transformation Bubble");
@@ -130,6 +144,7 @@ public class IsometricCharacterController : MonoBehaviour
 
     void JumpHandler() {
         if (isGrounded) {
+            FindAnyObjectByType<AudioManager>().Play("Jump");
             currPos = rbody.position;
             landPos = currPos + movement.normalized * movementSpeed;
 
@@ -174,7 +189,6 @@ public class IsometricCharacterController : MonoBehaviour
                     shadow.transform.position = new Vector2(sprite.transform.position.x, sprite.transform.position.y - curveY.Evaluate(timeElapsed));
                 }
             } else {
-                Debug.Log("landed");
                 // turn on collision between player layer and world layer
                 Physics2D.IgnoreLayerCollision(6, 7, false);
                 Physics2D.IgnoreLayerCollision(6, 13, false);
@@ -236,9 +250,12 @@ public class IsometricCharacterController : MonoBehaviour
         float horizontal = 0f;
         float vertical = 0f;
 
-        if (Input.GetKeyDown(KeyCode.Return)) {
+        if (Input.GetKeyDown(KeyCode.E)) {
             Interact();
         };
+
+        // if any key is pressed, set lastInputDevice to keyboard
+        if (Input.anyKey) lastInputDevice = LastInputDevice.KEYBOARD;
         
         if (Input.GetKey(KeyCode.A)) horizontal = -1f;
         else if (Input.GetKey(KeyCode.D)) horizontal = 1f;
@@ -307,6 +324,9 @@ public class IsometricCharacterController : MonoBehaviour
                                 break;
                         }
                     }
+
+                    if (!FindAnyObjectByType<AudioManager>().IsPlaying("Walk"))
+                        FindAnyObjectByType<AudioManager>().Play("Walk");
                 }
                 else {
                     if (direction == Direction.DOWN) {
@@ -341,6 +361,8 @@ public class IsometricCharacterController : MonoBehaviour
                             break;
                         }
                     }
+                    if (FindAnyObjectByType<AudioManager>().IsPlaying("Walk"))
+                        FindAnyObjectByType<AudioManager>().Pause("Walk");
                 }
                 break;
             case Transformation.FROG:
@@ -349,16 +371,34 @@ public class IsometricCharacterController : MonoBehaviour
                         animator.Play(jumpFrogDirections[1]);
                     }
                     else animator.Play(jumpFrogDirections[3]);
+
+                    if (!FindAnyObjectByType<AudioManager>().IsPlaying("Walk"))
+                        FindAnyObjectByType<AudioManager>().Play("Walk");
                 } else {
                     if (direction == Direction.DOWN) {
                         animator.Play(staticFrogDirections[0]);
                     }
                     else animator.Play(staticFrogDirections[1]);
+                    if (FindAnyObjectByType<AudioManager>().IsPlaying("Walk"))
+                        FindAnyObjectByType<AudioManager>().Pause("Walk");
                 }
                 break;
             case Transformation.BULLDOZER:
-                if (direction == Direction.DOWN) animator.Play(staticBulldozerDirections[0]);
-                else animator.Play(staticBulldozerDirections[1]);
+                if (isMoving) {
+                    if (direction == Direction.DOWN) {
+                        animator.Play(walkBulldozerDirections[0]);
+                    }
+                    else animator.Play(walkBulldozerDirections[1]);
+
+                    if (!FindAnyObjectByType<AudioManager>().IsPlaying("Bulldozer Walk"))
+                        FindAnyObjectByType<AudioManager>().Play("Bulldozer Walk");
+                } else {
+                    if (direction == Direction.DOWN) animator.Play(staticBulldozerDirections[0]);
+                    else animator.Play(staticBulldozerDirections[1]);
+
+                    if (FindAnyObjectByType<AudioManager>().IsPlaying("Bulldozer Walk"))
+                        FindAnyObjectByType<AudioManager>().Pause("Bulldozer Walk");
+                }
                 break;
         }
     }
@@ -390,6 +430,7 @@ public class IsometricCharacterController : MonoBehaviour
 
     private void DeathAnim() {
         animator.Play("Death Animation");
+        FindAnyObjectByType<AudioManager>().Play("Death");
         Invoke(nameof(DeathScreen), 2.5f);
     }
 
@@ -415,5 +456,19 @@ public class IsometricCharacterController : MonoBehaviour
         smoke.gameObject.SetActive(true);
         smokeAnimator.Play("Smoke");
         FindAnyObjectByType<AudioManager>().Play("Transformation Poof");
+    }
+
+    public void HealAnim() {
+        sparkles.gameObject.SetActive(true);
+        sparklesAnimator.Play("Heal Anim");
+        FindAnyObjectByType<AudioManager>().Play("Heal");
+    }
+
+    public void SetLastInputDevice(int device) {
+        lastInputDevice = (LastInputDevice) device;
+    }
+
+    public int GetLastInputDevice() {
+        return (int) lastInputDevice;
     }
 }

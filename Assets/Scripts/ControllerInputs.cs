@@ -241,7 +241,7 @@ public partial class @ControllerInputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f95613d4-ce1d-4db8-90a6-a0bec0deef53"",
-                    ""path"": ""<Gamepad>/start"",
+                    ""path"": ""<XInputController>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

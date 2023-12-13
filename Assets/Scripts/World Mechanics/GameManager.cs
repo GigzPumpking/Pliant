@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
     public float resetDelay = 1;
 
     public CheckPoint lastCheckPoint;
-
     public void LoseHealth(float amount) => SetHealth(health - amount);
 
     public void GainHealth(float amount) => SetHealth(health + amount);
@@ -101,12 +100,16 @@ public class GameManager : MonoBehaviour
 
     private void PlayBGSound()
     {
+        if (FindAnyObjectByType<AudioManager>() == null)
+            return;
         FindAnyObjectByType<AudioManager>().Play("Ambience");
         FindAnyObjectByType<AudioManager>().Play("Radio");
     }
 
     private void StopBGSound()
     {
+        if (FindAnyObjectByType<AudioManager>() == null)
+            return;
         FindAnyObjectByType<AudioManager>().Stop("Ambience");
         FindAnyObjectByType<AudioManager>().Stop("Radio");
     }
@@ -115,14 +118,12 @@ public class GameManager : MonoBehaviour
     {
         SetHealth(maxHealth);
         player.transform.position = lastCheckPoint.transform.position;
-        Debug.Log("Player Respawned");
 
         deathUI.SetActive(false);
     }
 
     private void ResetGame()
     {
-        Debug.Log("Game Restarted");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
     }
 
@@ -205,11 +206,6 @@ public class GameManager : MonoBehaviour
             healthImage.sprite = healtSprites[0];
             hState = HealthState.FULL;
         }
-
-        Debug.Log("hstage 1 " + hstage1);
-        Debug.Log("hstage 2 " + hstage2);
-        Debug.Log("hstage 3 " + hstage3);
-        Debug.Log("hstage 4 " + hstage4);
     }
 
     private void DamageHandler()
