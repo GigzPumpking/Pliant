@@ -139,6 +139,8 @@ public class GameManager : MonoBehaviour
 
     public void Retry()
     {
+        FindAnyObjectByType<AudioManager>().Play("Ambience");
+
         if (lastCheckPoint == null)
         {
             ResetGame();
@@ -154,6 +156,8 @@ public class GameManager : MonoBehaviour
 
     public void Quit()
     {
+        FindAnyObjectByType<AudioManager>().Play("Ambience");
+        
         deathUI.SetActive(false);
 
         StopBGSound();
