@@ -27868,12 +27868,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3836850178096644861, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: dialogueLines.Array.data[0]
-      value: Press Y to bring up the Transformation Menu.
+      value: 'Terry has two alternate forms: the Frog and the Bulldozer. WARNING:
+        Staying as the Frog or Bulldozer too long causes health deterioration.'
       objectReference: {fileID: 0}
     - target: {fileID: 3836850178096644861, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: dialogueLines.Array.data[1]
-      value: 'Terry has two alternate forms: the Frog and the Bulldozer. WARNING:
-        Staying as the Frog or Bulldozer too long causes health deterioration.'
+      value: Press Y button (or T key) to bring up the Transformation Menu.
       objectReference: {fileID: 0}
     - target: {fileID: 3836850178096644861, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: dialogueLines.Array.data[2]
@@ -119609,42 +119609,44 @@ CompositeCollider2D:
         Y: -240624992
       - X: -90000000
         Y: -240624992
-    - - X: -29375000
-        Y: -180624992
-      - X: -29493672
-        Y: -180387651
+    - - X: -30000000
+        Y: -180937493
+      - X: -30000000
+        Y: -180937504
+      - X: -20000361
+        Y: -175937673
       - X: -20000000
         Y: -175937504
-      - X: -19411758
-        Y: -175349254
+      - X: -10000361
+        Y: -170937673
       - X: -10000000
         Y: -170937504
-      - X: -9411758
-        Y: -170349254
+      - X: -361
+        Y: -165937673
       - X: 0
         Y: -165937504
-      - X: 588242
-        Y: -165349254
+      - X: 9999639
+        Y: -160937673
       - X: 10000000
         Y: -160937504
-      - X: 10588242
-        Y: -160349254
+      - X: 19999639
+        Y: -155937673
       - X: 20000000
         Y: -155937504
-      - X: 20588242
-        Y: -155349254
+      - X: 29999639
+        Y: -150937673
       - X: 30000000
         Y: -150937504
-      - X: 30588242
-        Y: -150349254
+      - X: 39999639
+        Y: -145937673
       - X: 40000000
         Y: -145937504
-      - X: 40588242
-        Y: -145349254
+      - X: 49999639
+        Y: -140937673
       - X: 50000000
         Y: -140937504
-      - X: 50588242
-        Y: -140349254
+      - X: 59999639
+        Y: -135937673
       - X: 60000000
         Y: -135937504
       - X: 69999880
@@ -120389,25 +120391,6 @@ CompositeCollider2D:
       - {x: -10.062484, y: -23.625008}
       - {x: -9.062494, y: -24.0625}
     - - {x: -4, y: -18.593699}
-      - {x: -2.937513, y: -18.062473}
-      - {x: -2.9493399, y: -18.038752}
-      - {x: -1.9999968, y: -17.593748}
-      - {x: -1.9411716, y: -17.534924}
-      - {x: -0.9999969, y: -17.093748}
-      - {x: -0.9411715, y: -17.034924}
-      - {x: 0.0000031, y: -16.593748}
-      - {x: 0.0588285, y: -16.534924}
-      - {x: 1.0000031, y: -16.093748}
-      - {x: 1.0588285, y: -16.034924}
-      - {x: 2.0000033, y: -15.593747}
-      - {x: 2.0588284, y: -15.534924}
-      - {x: 3.0000033, y: -15.093747}
-      - {x: 3.0588284, y: -15.034924}
-      - {x: 4.0000033, y: -14.593747}
-      - {x: 4.0588284, y: -14.534924}
-      - {x: 5.0000033, y: -14.093747}
-      - {x: 5.0588284, y: -14.034924}
-      - {x: 6.0000043, y: -13.593749}
       - {x: 7.062487, y: -13.062473}
       - {x: 7.052098, y: -13.041653}
       - {x: 7.0588274, y: -13.0349245}
@@ -120980,6 +120963,96 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   - first: {x: -21, y: -18, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -20, y: -18, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -19, y: -18, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -18, y: -18, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -17, y: -18, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -16, y: -18, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -15, y: -18, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -14, y: -18, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -13, y: -18, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -12, y: -18, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 4
@@ -122229,7 +122302,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 49b733bdfda5a45d49858bad3c3e1ca7, type: 2}
   - m_RefCount: 3
     m_Data: {fileID: 11400000, guid: 783b2a8d1be744b529e03e74a4ba5e16, type: 2}
-  - m_RefCount: 3
+  - m_RefCount: 12
     m_Data: {fileID: 11400000, guid: 5f6df230499b34dca87da982763634df, type: 2}
   - m_RefCount: 35
     m_Data: {fileID: 11400000, guid: 2ff422fba1504433090f62d6883720ae, type: 2}
@@ -122242,12 +122315,12 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: cd8a00ab8c9644c449810e6556ee77f8, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 21300000, guid: 6b19fa030e22a4aa7a4ebc2029911cf4, type: 3}
-  - m_RefCount: 3
+  - m_RefCount: 12
     m_Data: {fileID: 21300000, guid: 6b9080908d34f4ed4b111f8752045ecf, type: 3}
   - m_RefCount: 35
     m_Data: {fileID: 21300000, guid: 8b08bcd21cb8a42fba868f390b68099b, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 150
+  - m_RefCount: 159
     m_Data:
       e00: 1
       e01: 0
@@ -122266,7 +122339,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 150
+  - m_RefCount: 159
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -129900,8 +129973,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3836850178096644861, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: dialogueLines.Array.data[0]
-      value: Press B to interact with Text Guides (represented by red question marks)
-        and NPCs.
+      value: Press B button (or E key) to interact with Text Guides (represented
+        by red question marks) and NPCs.
       objectReference: {fileID: 0}
     - target: {fileID: 3836850178096644861, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: dialogueLines.Array.data[1]
@@ -136220,7 +136293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3836850178096644861, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: dialogueLines.Array.data[1]
-      value: Press A while moving (in Frog form) to jump.
+      value: Press A button (or SPACEBAR key) while moving (in Frog form) to jump.
       objectReference: {fileID: 0}
     - target: {fileID: 3836850178124477002, guid: 87131d08da2a34a4fb87248342ab606e, type: 3}
       propertyPath: m_LocalScale.x
