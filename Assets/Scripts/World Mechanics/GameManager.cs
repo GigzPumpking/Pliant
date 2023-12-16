@@ -100,18 +100,16 @@ public class GameManager : MonoBehaviour
 
     private void PlayBGSound()
     {
-        if (FindAnyObjectByType<AudioManager>() == null)
-            return;
-        FindAnyObjectByType<AudioManager>().Play("Ambience");
-        FindAnyObjectByType<AudioManager>().Play("Radio");
+        AudioManager.Instance.Play("Ambience");
+        AudioManager.Instance.Play("Radio");
     }
 
     private void StopBGSound()
     {
-        if (FindAnyObjectByType<AudioManager>() == null)
+        if (AudioManager.Instance == null)
             return;
-        FindAnyObjectByType<AudioManager>().Stop("Ambience");
-        FindAnyObjectByType<AudioManager>().Stop("Radio");
+        AudioManager.Instance.Stop("Ambience");
+        AudioManager.Instance.Stop("Radio");
     }
 
     private void Respawn()
@@ -139,7 +137,7 @@ public class GameManager : MonoBehaviour
 
     public void Retry()
     {
-        FindAnyObjectByType<AudioManager>().Play("Ambience");
+        AudioManager.Instance.Play("Ambience");
 
         if (lastCheckPoint == null)
         {
@@ -156,7 +154,7 @@ public class GameManager : MonoBehaviour
 
     public void Quit()
     {
-        FindAnyObjectByType<AudioManager>().Play("Ambience");
+        AudioManager.Instance.Play("Ambience");
         
         deathUI.SetActive(false);
 
