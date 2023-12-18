@@ -136715,6 +136715,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueBox
       objectReference: {fileID: 0}
+    - target: {fileID: 3337999609944160410, guid: 2caab1ea16eee41fbabd3c8481780450, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 25ab2a4a47a5f43dcbf3ffe88a08b188, type: 2}
+    - target: {fileID: 3337999609944160410, guid: 2caab1ea16eee41fbabd3c8481780450, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 5988567953867335964, guid: 25ab2a4a47a5f43dcbf3ffe88a08b188, type: 2}
+    - target: {fileID: 3337999609944160410, guid: 2caab1ea16eee41fbabd3c8481780450, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2caab1ea16eee41fbabd3c8481780450, type: 3}
 --- !u!1 &2068907592
