@@ -122718,6 +122718,74 @@ PrefabInstance:
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 997880529}
+    - target: {fileID: 646485913887754542, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 864
+      objectReference: {fileID: 0}
+    - target: {fileID: 646485913887754542, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 557
+      objectReference: {fileID: 0}
+    - target: {fileID: 646485913887754542, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 646485913887754542, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 646485913887754542, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 646485913887754542, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -66
+      objectReference: {fileID: 0}
+    - target: {fileID: 646485913887754542, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 154
+      objectReference: {fileID: 0}
+    - target: {fileID: 689148674277842954, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bf3e1f813c3c3433582def75acb6e5ea, type: 3}
+    - target: {fileID: 2641246750086931820, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2020
+      objectReference: {fileID: 0}
+    - target: {fileID: 2641246750086931820, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 915
+      objectReference: {fileID: 0}
+    - target: {fileID: 2641246750086931820, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2641246750086931820, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2641246750086931820, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2641246750086931820, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2641246750086931820, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 185
+      objectReference: {fileID: 0}
+    - target: {fileID: 3072901815987339878, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -139
+      objectReference: {fileID: 0}
+    - target: {fileID: 3072901815987339878, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -186
+      objectReference: {fileID: 0}
     - target: {fileID: 3448916494253803900, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
       propertyPath: playerScript
       value: 
@@ -122730,6 +122798,10 @@ PrefabInstance:
       propertyPath: keyboardControls
       value: 
       objectReference: {fileID: 21300000, guid: 3ac2397b7b93e44479612064c52cb6b8, type: 3}
+    - target: {fileID: 5195853691114803848, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6018095704931926775, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -122838,6 +122910,10 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 1822491603}
+    - target: {fileID: 7716213075965706524, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c6d7769cf046e449bbdae4e914a364e8, type: 3}
     - target: {fileID: 8681135853752580970, guid: a4f6aba70dabe674caacc31eee2e3d62, type: 3}
       propertyPath: m_IsActive
       value: 0
