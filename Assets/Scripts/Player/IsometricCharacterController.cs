@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class IsometricCharacterController : MonoBehaviour
 {
+    // Instance 
+    private static IsometricCharacterController instance;
+    public static IsometricCharacterController Instance { get { return instance; } }
+
     public GameManager gameManager;
     public PlayerColliderScript playerColliderScript;
 
@@ -89,6 +93,18 @@ public class IsometricCharacterController : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+            instance = this;
+        else
+        {
+            // move correct instance to this instance's location before destroying
+            instance.transform.position = this.transform.position;
+            Destroy(this.gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+
         rbody = GetComponent<Rigidbody2D>();
         sprite = transform.Find("Sprite");
         animator = sprite.GetComponent<Animator>();
@@ -489,5 +505,12 @@ public class IsometricCharacterController : MonoBehaviour
 
     private void LoadWinScene() {
         gameManager.EndPoint();
+    }
+
+    // if player is overlapping with tag "NextLevel", load next level
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.CompareTag("NextLevel")) {
+            gameManager.NextLevel();
+        }
     }
 }

@@ -4,25 +4,13 @@ using UnityEngine;
 
 public class RechargeStation : MonoBehaviour
 {
-    public GameObject GameManager;
-    public GameManager gm;
-    public IsometricCharacterController playerScript;
-
-    private void Awake()
-    {
-        if (GameManager == null)
-            GameManager = GameObject.FindWithTag("GM");
-
-        gm = GameManager.GetComponent<GameManager>();
-    }
-
     void OnTriggerEnter2D(Collider2D other) {
         // If the object is on player layer and the player is in the Terry form inform Game Manager to heal.
         if (other.gameObject.layer == 6 && 
-            other.GetComponentInParent<IsometricCharacterController>().transformation == Transformation.TERRY) 
+            IsometricCharacterController.Instance.transformation == Transformation.TERRY) 
         {
-            gm.GainHealth(gm.GetMaxHealth());
-            playerScript.HealAnim();
+            GameManager.Instance.GainHealth(GameManager.Instance.GetMaxHealth());
+            IsometricCharacterController.Instance.HealAnim();
         }
     }
 }
