@@ -40,8 +40,19 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(QuitTransition());
     }
 
+    void Update()
+    {
+        // if enter is pressed, play the transition animation
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Debug.Log("Enter pressed");
+            transition.SetTrigger("Start");
+        }
+    }
+
     IEnumerator LoadScene(string newScene)
     {
+        Debug.Log("Loading scene: " + newScene);
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionTimer);
@@ -51,6 +62,7 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator LoadScene(int newScene)
     {
+        Debug.Log("Loading scene: " + newScene);
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionTimer);

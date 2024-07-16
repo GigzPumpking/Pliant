@@ -17203,6 +17203,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2338351010634350396, guid: 11f58fc00eb63f44bba875ccd89b4a70, type: 3}
+      propertyPath: healthSprites.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2338351010634350396, guid: 11f58fc00eb63f44bba875ccd89b4a70, type: 3}
       propertyPath: healtSprites.Array.data[0]
       value: 
       objectReference: {fileID: 21300000, guid: bc7e2501d18554714bd31e50a10d60af, type: 3}
@@ -17221,19 +17225,19 @@ PrefabInstance:
     - target: {fileID: 2338351010634350396, guid: 11f58fc00eb63f44bba875ccd89b4a70, type: 3}
       propertyPath: healthSprites.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: bc7e2501d18554714bd31e50a10d60af, type: 3}
     - target: {fileID: 2338351010634350396, guid: 11f58fc00eb63f44bba875ccd89b4a70, type: 3}
       propertyPath: healthSprites.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: adfda1fd576a647edb6e682018989b66, type: 3}
     - target: {fileID: 2338351010634350396, guid: 11f58fc00eb63f44bba875ccd89b4a70, type: 3}
       propertyPath: healthSprites.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 267514af5d777446aa01d80917d970d2, type: 3}
     - target: {fileID: 2338351010634350396, guid: 11f58fc00eb63f44bba875ccd89b4a70, type: 3}
       propertyPath: healthSprites.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 99baa932d9fea4111b3d09795da59eb2, type: 3}
     - target: {fileID: 2338351010634350397, guid: 11f58fc00eb63f44bba875ccd89b4a70, type: 3}
       propertyPath: m_Name
       value: Game Manager

@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float damage = 2.5f;
     [SerializeField] private float damageTimer = 1;
     [SerializeField] private float damageWait = 1.5f;
-    [SerializeField] private Sprite[] healtSprites;
+    [SerializeField] private Sprite[] healthSprites;
     [SerializeField] private Image healthImage;
     [SerializeField] private bool isTerry = true;
     [SerializeField] private bool formDamage = false;
@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour
 
     private void ResetGame()
     {
+        SetHealth(maxHealth);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
     }
 
@@ -132,6 +133,8 @@ public class GameManager : MonoBehaviour
     {
         AudioManager.Instance.Play("Ambience");
 
+        dead = false;
+
         if (lastCheckPoint == null)
         {
             ResetGame();
@@ -139,8 +142,6 @@ public class GameManager : MonoBehaviour
         else
         {
             Respawn();
-
-            dead = false;
         }
 
     }
@@ -183,22 +184,22 @@ public class GameManager : MonoBehaviour
     {
         if( health <= hstage4)
         {
-            healthImage.sprite = healtSprites[3];
+            healthImage.sprite = healthSprites[3];
             hState = HealthState.QUART;
         }
         else if( health <= hstage3)
         {
-            healthImage.sprite = healtSprites[2];
+            healthImage.sprite = healthSprites[2];
             hState = HealthState.HALF;
         }
         else if( health <= hstage2)
         {
-            healthImage.sprite = healtSprites[1];
+            healthImage.sprite = healthSprites[1];
             hState = HealthState.THREEQUART;
         }
         else
         {
-            healthImage.sprite = healtSprites[0];
+            healthImage.sprite = healthSprites[0];
             hState = HealthState.FULL;
         }
     }
@@ -228,6 +229,7 @@ public class GameManager : MonoBehaviour
     }
     public void NextLevel()
     {
+        lastCheckPoint = null;
         SceneLoader.Instance.LoadNextScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

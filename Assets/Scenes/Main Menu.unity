@@ -430,8 +430,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd4cad4d69d86bd4e86f843697aa943d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loader: {fileID: 0}
-  audioSound: {fileID: 0}
   levelSceneName: 
 --- !u!114 &67838256
 MonoBehaviour:
@@ -1538,7 +1536,7 @@ PrefabInstance:
       objectReference: {fileID: 1458860445}
     - target: {fileID: 1432830833444550540, guid: 887e8c76e99a03844940c10e9f464323, type: 3}
       propertyPath: levelSceneName
-      value: Level
+      value: Lvl 1-1
       objectReference: {fileID: 0}
     - target: {fileID: 1432830833444550546, guid: 887e8c76e99a03844940c10e9f464323, type: 3}
       propertyPath: m_Name
