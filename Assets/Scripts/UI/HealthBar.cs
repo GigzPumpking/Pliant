@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     private Slider healthBar;
-    public GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +16,6 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthBar.value = gameManager.GetHealth();
+        healthBar.value = GameManager.Instance.GetHealth();
     }
 }

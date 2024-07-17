@@ -3,31 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 public class triggerDialogue : MonoBehaviour
 {
-    public Dialogue dialogue;
     public string[] dialogueLines;
-    public IsometricCharacterController playerScript;
     public GameObject interactButton;
 
     public Sprite keyboardSprite;
     public Sprite gamepadSprite;
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Player") && playerScript.transformation == Transformation.TERRY) {
-            dialogue.setSentences(dialogueLines);
-            playerScript.canTalk();
+        if (other.CompareTag("Player") && IsometricCharacterController.Instance.transformation == Transformation.TERRY) {
+            UIManager.Instance.dialogue().setSentences(dialogueLines);
+            IsometricCharacterController.Instance.canTalk();
             ShowInteractButton();
         }
     }
 
     void OnTriggerExit2D(Collider2D other) {
         if (other.CompareTag("Player")) {
-            playerScript.cannotTalk();
+            IsometricCharacterController.Instance.cannotTalk();
             interactButton.SetActive(false);
         }
     }
 
     void ShowInteractButton() {
-        if (playerScript.GetLastInputDevice() == 0) {
+        if (IsometricCharacterController.Instance.GetLastInputDevice() == 0) {
             interactButton.GetComponent<SpriteRenderer>().sprite = keyboardSprite;
         }
         else {
