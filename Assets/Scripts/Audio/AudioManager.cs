@@ -6,8 +6,6 @@ public class AudioManager : MonoBehaviour
 {
 
     public Sound[] sounds;
-
-    
     private static AudioManager instance;
     public static AudioManager Instance { get { return instance; } }
 
@@ -18,7 +16,7 @@ public class AudioManager : MonoBehaviour
             instance = this;
         else
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
             return;
         }
 

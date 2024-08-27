@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class WinTransition : MonoBehaviour
 {
-    public IsometricCharacterController playerScript;
-    // When player enters the trigger, load Win Scene
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
-            playerScript.Win();
+            IsometricCharacterController.Instance.Win();
         }
     }
 }

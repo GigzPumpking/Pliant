@@ -6,29 +6,20 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager instance;
+    public static GameManager Instance { get { return instance; } }
 
     [SerializeField] private float maxHealth = 100;
     [SerializeField] private float health;
     [SerializeField] private float damage = 2.5f;
     [SerializeField] private float damageTimer = 1;
     [SerializeField] private float damageWait = 1.5f;
-    [SerializeField] private GameObject player;
-    [SerializeField] private Sprite[] healtSprites;
+    [SerializeField] private Sprite[] healthSprites;
     [SerializeField] private Image healthImage;
     [SerializeField] private bool isTerry = true;
     [SerializeField] private bool formDamage = false;
 
     [SerializeField] private GameObject deathUI;
-
-    [SerializeField] private GameObject loader;
-
-    private SceneLoader sceneLoader;
-
-    private static GameManager instance;
-
-    private IsometricCharacterController playerScript;
-
-    private AudioManager am;
 
     private bool dead = false;
 
@@ -49,11 +40,13 @@ public class GameManager : MonoBehaviour
         if (instance == null)
             instance = this;
         else
-            Destroy(this);
+        {
+            Destroy(this.gameObject);
+            return;
+        }
 
-        sceneLoader = loader.GetComponent<SceneLoader>();
 
-        playerScript = player.GetComponent<IsometricCharacterController>();
+        DontDestroyOnLoad(this.gameObject);
 
         hstage1 = maxHealth;
         hstage2 = 3 * (maxHealth / 4);
@@ -76,12 +69,12 @@ public class GameManager : MonoBehaviour
             if (!dead)
             {
                 dead = true;
-                playerScript.Die();
+                IsometricCharacterController.Instance.Die();
                 //Invoke(nameof(Death), resetDelay);
             }
         }
 
-        if (playerScript.transformation != Transformation.TERRY)
+        if (IsometricCharacterController.Instance.transformation != Transformation.TERRY)
         {
             isTerry = false;
             if (!formDamage)
@@ -115,13 +108,14 @@ public class GameManager : MonoBehaviour
     private void Respawn()
     {
         SetHealth(maxHealth);
-        player.transform.position = lastCheckPoint.transform.position;
+        IsometricCharacterController.Instance.transform.position = lastCheckPoint.transform.position;
 
         deathUI.SetActive(false);
     }
 
     private void ResetGame()
     {
+        SetHealth(maxHealth);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
     }
 
@@ -132,12 +126,14 @@ public class GameManager : MonoBehaviour
     public void Death()
     {
         deathUI.SetActive(true);
-        playerScript.transformation = Transformation.TERRY;
+        IsometricCharacterController.Instance.transformation = Transformation.TERRY;
     }
 
     public void Retry()
     {
         AudioManager.Instance.Play("Ambience");
+
+        dead = false;
 
         if (lastCheckPoint == null)
         {
@@ -146,8 +142,6 @@ public class GameManager : MonoBehaviour
         else
         {
             Respawn();
-
-            dead = false;
         }
 
     }
@@ -190,22 +184,22 @@ public class GameManager : MonoBehaviour
     {
         if( health <= hstage4)
         {
-            healthImage.sprite = healtSprites[3];
+            healthImage.sprite = healthSprites[3];
             hState = HealthState.QUART;
         }
         else if( health <= hstage3)
         {
-            healthImage.sprite = healtSprites[2];
+            healthImage.sprite = healthSprites[2];
             hState = HealthState.HALF;
         }
         else if( health <= hstage2)
         {
-            healthImage.sprite = healtSprites[1];
+            healthImage.sprite = healthSprites[1];
             hState = HealthState.THREEQUART;
         }
         else
         {
-            healthImage.sprite = healtSprites[0];
+            healthImage.sprite = healthSprites[0];
             hState = HealthState.FULL;
         }
     }
@@ -231,7 +225,12 @@ public class GameManager : MonoBehaviour
     {
         StopBGSound();
 
-        sceneLoader.LoadNextScene("WinScene");
+        SceneLoader.Instance.LoadNextScene("WinScene");
+    }
+    public void NextLevel()
+    {
+        lastCheckPoint = null;
+        SceneLoader.Instance.LoadNextScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 }

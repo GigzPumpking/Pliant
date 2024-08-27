@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class IsometricCharacterController : MonoBehaviour
 {
-    public GameManager gameManager;
+    // Instance 
+    private static IsometricCharacterController instance;
+    public static IsometricCharacterController Instance { get { return instance; } }
     public PlayerColliderScript playerColliderScript;
 
     // Collision Variables
@@ -89,6 +91,18 @@ public class IsometricCharacterController : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+            instance = this;
+        else
+        {
+            // move correct instance to this instance's location before destroying
+            instance.transform.position = this.transform.position;
+            Destroy(this.gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+
         rbody = GetComponent<Rigidbody2D>();
         sprite = transform.Find("Sprite");
         animator = sprite.GetComponent<Animator>();
@@ -119,7 +133,7 @@ public class IsometricCharacterController : MonoBehaviour
             if (!fall) JumpHandler();
             else FallHandler();
         } else {
-            if (gameManager.GetHealth() > 0) {
+            if (GameManager.Instance.GetHealth() > 0) {
                 MoveHandler();
                 AnimationHandler();
             }
@@ -299,7 +313,7 @@ public class IsometricCharacterController : MonoBehaviour
             case Transformation.TERRY:
                 if (isMoving) {
                     if (direction == Direction.DOWN) {
-                        switch(gameManager.hState) {
+                        switch(GameManager.Instance.hState) {
                             case HealthState.FULL:
                                 animator.Play(runDirections[0]);
                                 break;
@@ -315,7 +329,7 @@ public class IsometricCharacterController : MonoBehaviour
                         }
                     }
                     else {
-                        switch(gameManager.hState) {
+                        switch(GameManager.Instance.hState) {
                             case HealthState.FULL:
                                 animator.Play(runDirections[4]);
                                 break;
@@ -336,7 +350,7 @@ public class IsometricCharacterController : MonoBehaviour
                 }
                 else {
                     if (direction == Direction.DOWN) {
-                        switch(gameManager.hState) {
+                        switch(GameManager.Instance.hState) {
                             case HealthState.FULL:
                                 animator.Play(staticDirections[0]);
                                 break;
@@ -352,7 +366,7 @@ public class IsometricCharacterController : MonoBehaviour
                         }
                     }
                     else {
-                        switch(gameManager.hState) {
+                        switch(GameManager.Instance.hState) {
                         case HealthState.FULL:
                             animator.Play(staticDirections[4]);
                             break;
@@ -441,7 +455,7 @@ public class IsometricCharacterController : MonoBehaviour
     }
 
     private void DeathScreen() {
-        gameManager.Death();
+        GameManager.Instance.Death();
     }
 
     public void canTalk() {
@@ -453,7 +467,7 @@ public class IsometricCharacterController : MonoBehaviour
     }
 
     public void Interact() {
-        if (transformation == Transformation.TERRY && gameManager.GetHealth() > 0 && dialogue.validSentences() && !dialogue.isActive() && couldTalk) {
+        if (transformation == Transformation.TERRY && GameManager.Instance.GetHealth() > 0 && dialogue.validSentences() && !dialogue.isActive() && couldTalk) {
             dialogue.Appear();
         }
     }
@@ -488,6 +502,13 @@ public class IsometricCharacterController : MonoBehaviour
     }
 
     private void LoadWinScene() {
-        gameManager.EndPoint();
+        GameManager.Instance.EndPoint();
+    }
+
+    // if player is overlapping with tag "NextLevel", load next level
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.CompareTag("NextLevel")) {
+            GameManager.Instance.NextLevel();
+        }
     }
 }

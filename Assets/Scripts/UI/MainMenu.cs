@@ -5,42 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject loader;
-    [SerializeField] private GameObject auidoSound;
-
     [SerializeField] private string levelSceneName;
-
-    private SceneLoader sceneLoader;
-    private MainMenuAudio audioPlayer;
-
-    private void Awake()
-    {
-        sceneLoader = loader.GetComponent<SceneLoader>();
-        audioPlayer = auidoSound.GetComponent<MainMenuAudio>();
-    }
 
     private void Start()
     {
-        FindAnyObjectByType<AudioManager>().Play("Main Menu BGM");
-        FindAnyObjectByType<AudioManager>().Play("Main Menu Ambience");
+        AudioManager.Instance.Play("Main Menu BGM");
+        AudioManager.Instance.Play("Main Menu Ambience");
     }
 
     public void PlayGame()
     {
-        FindAnyObjectByType<AudioManager>().Stop("Main Menu BGM");
-        FindAnyObjectByType<AudioManager>().Stop("Main Menu Ambience");
-        FindAnyObjectByType<AudioManager>().Play("Main Menu Play");
-        sceneLoader.LoadNextScene(levelSceneName);
+        AudioManager.Instance.Stop("Main Menu BGM");
+        AudioManager.Instance.Stop("Main Menu Ambience");
+        AudioManager.Instance.Play("Main Menu Play");
+        SceneLoader.Instance.LoadNextScene(levelSceneName);
     }
 
     public void PlayCrumpleSound()
     {
-        FindAnyObjectByType<AudioManager>().Play("Crumple");
+        AudioManager.Instance.Play("Crumple");
     }
 
     public void QuitGame()
     {
         PlayCrumpleSound();
-        sceneLoader.QuitFade();
+        SceneLoader.Instance.QuitFade();
     }
 }

@@ -20,9 +20,7 @@ public class FormManager : MonoBehaviour
 {
     [SerializeField] CharacterForm characterForm; //database of the forms the character will cycle through in the menu
     [SerializeField] SpriteRenderer formSprite; //the actual sprite for the given form
-    [SerializeField] GameManager gameManager;
     [SerializeField] GameObject thoughtBubble;
-    [SerializeField] GameObject player;
     private GameObject smoke;
     private Animator smokeAnimator;
 
@@ -30,15 +28,13 @@ public class FormManager : MonoBehaviour
     public Image nextSprite; //the icon for the transformation menu icon of next to select
     public Image prevSprite; //the icon for the transformation menu icon of previous select
     public PlayerColliderScript playerColliderScript;
-    [SerializeField] IsometricCharacterController playerScript;
 
     private int selectedForm = 0, nextForm = 0, prevForm = 0; //indexes for the selected, next, and previous forms
 
     // Start is called before the first frame update
     void Start()
     {
-        playerScript = player.GetComponent<IsometricCharacterController>();
-        smoke = player.transform.Find("Smoke").gameObject;
+        smoke = IsometricCharacterController.Instance.transform.Find("Smoke").gameObject;
         smokeAnimator = smoke.GetComponent<Animator>();
         // If the player had a previous selected previous load that form otherwise restart at the first form.
         if (!PlayerPrefs.HasKey("selectedForm"))
@@ -145,12 +141,13 @@ public class FormManager : MonoBehaviour
     {
         // Set get form variable based off current form index
         Form form = characterForm.GetForm(selectedForm);
+        Debug.Log("Selected Form: " + selectedForm);
 
         //Set sprite and transformation corresponding to form information.
         formSprite.sprite = form.formSprite;
 
-        if (player.GetComponent<IsometricCharacterController>().transformation != form.transformation) {
-            playerScript.Smoke();
+        if (IsometricCharacterController.Instance.transformation != form.transformation) {
+            IsometricCharacterController.Instance.Smoke();
 
             switch(form.transformation) {
                 case Transformation.TERRY:
@@ -165,8 +162,8 @@ public class FormManager : MonoBehaviour
             }
         }
 
-        if (!playerScript.onRamp || form.transformation != Transformation.BULLDOZER) {
-            playerScript.transformation = form.transformation;
+        if (!IsometricCharacterController.Instance.onRamp || form.transformation != Transformation.BULLDOZER) {
+            IsometricCharacterController.Instance.transformation = form.transformation;
         } else {
             Debug.Log("Player cannot transform into Bulldozer while on ramp");
         }

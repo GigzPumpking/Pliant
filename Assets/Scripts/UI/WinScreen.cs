@@ -5,17 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class WinScreen : MonoBehaviour
 {
-    [SerializeField] private GameObject loader;
-
-    private SceneLoader sceneLoader;
-
-    private void Awake()
+    // On wake up, remove player
+    void Awake()
     {
-        sceneLoader = loader.GetComponent<SceneLoader>();
+        if (GameManager.Instance != null) {
+            Destroy(GameManager.Instance.gameObject);
+        }
+
+        if (AudioManager.Instance != null) {
+            Destroy(AudioManager.Instance.gameObject);
+        }
+
+        if (IsometricCharacterController.Instance != null) {
+            Destroy(IsometricCharacterController.Instance.gameObject);
+        }
+
+        if (UIManager.Instance != null) {
+            Destroy(UIManager.Instance.gameObject);
+        }
     }
 
     public void Transition()
     {
-        sceneLoader.LoadNextScene("Main Menu");
+        SceneLoader.Instance.LoadNextScene("Main Menu");
     }
 }

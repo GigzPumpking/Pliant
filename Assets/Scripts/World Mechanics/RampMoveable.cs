@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RampMoveable : MonoBehaviour
 {
-    public IsometricCharacterController playerScript;
     private Rigidbody2D rbody;
     private Transform colliderWalkable;
     private Transform colliderPushable;
@@ -20,7 +19,7 @@ public class RampMoveable : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (playerScript.transformation == Transformation.BULLDOZER) {
+        if (IsometricCharacterController.Instance.transformation == Transformation.BULLDOZER) {
             rbody.constraints = RigidbodyConstraints2D.FreezeRotation;
             pushableState();
         } else {
